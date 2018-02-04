@@ -171,4 +171,121 @@
     </div>
 
 </body>
+<script>
+
+// PREDICT 1:
+var message = "y";
+for (var i = 1; i < 10; i++){
+
+console.log(message);
+}
+
+// it Console logs y 9 times 
+
+// PREDICT 2:
+var bool = false;
+if (bool) {
+console.log(bool)
+} else {
+console.log(false)
+}
+
+// Console logs false
+
+// PREDICT 3:
+var arr = [321, 765, [1,2,3] ];
+console.log(arr[0]);
+console.log(arr[2][0]);
+
+// Console logs 321 & 1
+
+// PREDICT 4:
+var arr = [];
+var x = 10;
+arr.push(1);
+if(x>1){
+arr.push(x)
+}
+console.log(arr);
+
+// console logs the arr [1, 10]
+
+
+
+// PREDICT 5:
+var x = [‘John’, ‘Poala’, ‘Donovan’, ‘PJ’];
+console.log(x[1])
+console.log(x[2])
+
+// this will give Error because the array elements arent strings
+
+// ALGORITHM CHALLENGE
+
+// CHALLENGE 1:
+
+// Print all values from 100-255
+function printUp(){
+    for (var i = 100; i < 256; i++){
+        console.log(i);
+    }
+}
+printUp();
+
+
+
+// CHALLENGE 2:
+
+// // Print all values of the array
+function printArray(){
+        arr = [1,2,3,4,5,6,7,8,9,0];
+
+    for (var i = 0; i < arr.length; i++){
+        console.log(i);
+    }
+}
+printArray();
+
+
+
+// CHALLENGE 3:
+// // Print only the negative values of the array
+function printNegatives(){
+var arr = [-1,-2,3,4,-5,-6];
+    for (var i = 0; i < arr.length; i++){
+        if (arr[i] < 0){
+            console.log(arr[i]);
+        }
+}}
+
+printNegatives();
+
+
+
+// CHALLENGE 4:
+// // Print only the odd numbers from 256 - 555
+function printOdd(){
+        for (var i = 256; i < 556; i++){
+        if (i%2){
+            console.log(i);
+        }
+        
+}
+}
+printOdd();
+
+
+
+// BONUS CHALLENGE 5:
+// // Print the min and max value of an array
+function minMax(arr){
+var arr = [8,9,10,11,10,9,8];
+var min = Math.min.apply(null, arr);
+var max = Math.max.apply(null, arr);
+console.log(min);
+console.log(max);
+}
+minMax();
+
+
+</script>
 </html>
