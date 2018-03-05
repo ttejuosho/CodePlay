@@ -276,7 +276,7 @@ printOdd();
 
 
 // BONUS CHALLENGE 5:
-// // Print the min and max value of an array
+// Print the min and max value of an array
 function minMax(arr){
 var arr = [8,9,10,11,10,9,8];
 var min = Math.min.apply(null, arr);
@@ -285,6 +285,67 @@ console.log(min);
 console.log(max);
 }
 minMax();
+
+
+// <!--POP FRONT  -->
+function popFront(array){
+    if (array.length === 0){
+        return null;
+    }
+    var firstValue = array[0];
+   
+ for (var index = 0; index < array.length; index++){
+     array[index] = array[index + 1];
+ }
+
+ array.length--;
+ return firstValue;
+}
+var result = popFront(results);
+console.log('result is ', result);
+console.log("array is ", results)
+
+
+// <!-- INSERT AT -->
+function insertAt (){
+    if (position < 0) { position = 0 }
+    if (position >array.length) { position = array.length;}
+
+    for (var index = array.length; index > position; index++){
+        array[index] = array[index - 1];
+    }
+    console.log('position insert ', array);
+
+
+    array[position] = value;
+
+    return array;
+ }
+
+ results = insertAt(results, 2, 'Coding');
+
+ console.log('insert results', results);
+
+// ÷÷÷÷÷÷÷÷÷REmoveAt÷÷÷÷÷÷÷
+
+function removeAt(array, position){
+    if (position < 0 || position > array.length){
+        return null;
+    }
+
+    var result = array[position];
+    for (var index = position + 1; index < array.length; index++){
+        array[index - 1] = array[index];
+    }
+
+    console.log('remove ', array);
+    array.pop();
+    return result;
+}
+
+result = removeAt(results, 2);
+console.log('removed at ', results);
+
 
 
 </script>
