@@ -347,6 +347,41 @@ result = removeAt(results, 2);
 console.log('removed at ', results);
 
 
+// =======================================================
+console.log("=======================================")
+var factorialArray = [1];
+function fasterFactorial(num){
+    var pre = Date.now();
+    var post;
+    var total = 1;
 
+    if(num < 0){
+        return null;
+    }    
+
+    for(var i=factorialArray.length; i<=num; i++){
+        console.log("Adding factorial of ", i);
+        factorialArray[i] = factorialArray[i-1] * i;
+    }
+
+    post = Date.now();
+    console.log("Time: ", post-pre);
+    return factorialArray[num];
+}
+console.log("function fasterFactorial(1)");
+console.log(fasterFactorial(1));
+console.log(factorialArray);
+console.log("function fasterFactorial(3)");
+console.log(fasterFactorial(3));
+console.log(factorialArray);
+console.log("function fasterFactorial(6)");
+console.log(fasterFactorial(6));
+console.log(factorialArray);
+console.log("function fasterFactorial(9)");
+console.log(fasterFactorial(9));
+console.log(factorialArray);
+console.log("function fasterFactorial(10)");
+console.log(fasterFactorial(10));
+console.log(factorialArray);
 </script>
 </html>
