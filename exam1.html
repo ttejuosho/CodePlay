@@ -117,49 +117,6 @@
     </div>
     <div class="title"><h1>This is the Header</h1></div>
 
-    <div class="white">
-        <div class="yellow"></div>
-        <div class="yellow"></div>
-        <div class="yellow"></div>
-        <div class="purple"></div>
-    </div>
-
-    <div class="cards">
-        <div class="in-cards">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</div>
-        <div class="in-cards">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal </div>
-        <div class="in-cards">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </div>
-        <div class="in-cards">It is a long established fact that a reader will be distracted by the readable.</div>
-        <div class="in-cards">It is a long established fact that a reader will</div>
-    </div>
-
-    <div class="minibox">
-        <div class="left">
-
-          
-                <div class="mini"></div>
-                <div class="mini"></div>
-                <div class="mini"></div>
-                <div class="mini"></div>
-            
-
-            
-                <div class="mini"></div>
-                <div class="mini"></div>
-                <div class="mini"></div>
-                <div class="mini"></div>
-           
-
-        </div>
-
-        <div class="right"></div>
-
-    </div>
-
-    <div class="inboxing">
-        <div class="inbox">
-                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable >It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable >It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable >It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable 
-        </div>
-    </div>
 
     <div class="header">
         <div class="link">Link</div>
@@ -349,14 +306,104 @@
 
 // console.log(arr);
 
-function primeCheck (num){
-    if (num%){
-        return false
+// factorial
+
+// var answer = 1;
+
+// function factorial(num){
+
+//     for (var i = 1; i <= num; i++){
+//     answer = i * answer;
+// }
+
+// console.log("Factorial of "+ num + " is ", answer);
+// }
+
+// factorial(9);
+
+
+// Arrays to Map
+// Given two arrays, create an associative array (map) containing keys of the first, and values of the second. For 
+// arr1 = ["abc", 3, "yo"] and 
+// arr2 = [42, "wassup", true], 
+// return {"abc": 42, 3: "wassup", "yo": true}. 
+
+// var Scores = {};
+// var arr1 =  [64, 95, 34, 52, 76];
+// var arr2 = ["Tayo", "Bayo", "Layo", "Fosayo", "Ayo"];
+
+// for (var i = 0; i < arr1.length; i++){
+//     Scores[arr2[i]]=arr1[i];
+// }
+
+// console.log(Scores);
+
+
+// InvertHash
+// Create invertHash(assocArr) that converts a hash’s keys to values and values to corresponding keys. 
+// Example: 
+// given {"name": "Zaphod", "numHeads": 2}, 
+// return {"Zaphod": "name", 2: "numHeads"}. 
+// You will need to learn and use a JavaScript for ... in here!
+
+
+// var obj1 = {"name": "Zaphod", "numHeads": 2};
+// var newObj = {};
+
+// function invertHash(obj1){
+//     for ( value in obj1){
+//     newObj[obj1[value]] = value;
+// }
+
+// console.log(newObj)
+// }
+
+// invertHash(obj1);
+
+
+// // .myJoin method (arr) => return string
+// // Given an array of strings, return a string
+// // Given [‘a’,’b’,’c’]
+// // Return ‘abc’
+
+// var str = "";
+
+// var arr1 = [23,45,23,74,667,434,334,355,900];
+// var arr2 = ["Tayo", "Bayo", "Layo", "Fisayo", "Ayo", "Dayo", "Fikayo", "Sayo", "Mayo"];
+
+// function myJoin(arr){
+//     for (var i=0; i < arr.length; i++){
+//         str = str + arr[i];
+//     }
+//     console.log(str);
+// }
+
+// myJoin(arr2);
+
+
+// .mySplit method (str) => return array
+// Given ‘abc’
+// Return [‘a’,’b’,’c’]
+
+function neat (){
+    if (num = 34){
+        num2 = num*9;
+        return num2;
     }
+    num=1;
+    num++;
+
+    neat();
 }
 
+beat();
 
+function beat (){
+    neat()
+    num3= num2*12;
+    console.log(num3);
 
+}
 // var array = [64, 95, 344, 524, 706];
 // array.sort();
 // console.log(array);
