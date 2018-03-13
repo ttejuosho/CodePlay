@@ -385,25 +385,40 @@
 // Given ‘abc’
 // Return [‘a’,’b’,’c’]
 
-function neat (){
-    if (num = 34){
-        num2 = num*9;
-        return num2;
-    }
-    num=1;
-    num++;
+// function neat (){
+//     if (num = 34){
+//         num2 = num*9;
+//         return num2;
+//     }
+//     num=1;
+//     num++;
+//     neat();
+// }
 
-    neat();
-}
+// beat();
 
-beat();
+// function beat (){
+//     neat()
+//     num3= num2*12;
+//     console.log(num3);
+// }
 
-function beat (){
-    neat()
-    num3= num2*12;
-    console.log(num3);
+var alphabets26 = 'abcdefghijklmnopqrstuvwxyz';
+       var input = "abcdefghijklmnopqrstuvwxyz";
+       input = input.toLowerCase();
+       var icount = 0;
+       for (var i = 0; i < alphabets26.length; i++) {
+           var letter = alphabets26[i];
+           if (input.indexOf(letter) > -1)
+               icount++;
+       }
+       if (icount == 26)
+           return true;
 
-}
+       else
+           return false;
+
+
 // var array = [64, 95, 344, 524, 706];
 // array.sort();
 // console.log(array);
