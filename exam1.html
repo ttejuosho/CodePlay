@@ -385,9 +385,6 @@
 // Given ‘abc’
 // Return [‘a’,’b’,’c’]
 
-
-// REcursion
-
 // function neat (){
 //     if (num = 34){
 //         num2 = num*9;
@@ -395,7 +392,6 @@
 //     }
 //     num=1;
 //     num++;
-
 //     neat();
 // }
 
@@ -405,41 +401,23 @@
 //     neat()
 //     num3= num2*12;
 //     console.log(num3);
-
 // }
 
+var alphabets26 = 'abcdefghijklmnopqrstuvwxyz';
+       var input = "abcdefghijklmnopqrstuvwxyz";
+       input = input.toLowerCase();
+       var icount = 0;
+       for (var i = 0; i < alphabets26.length; i++) {
+           var letter = alphabets26[i];
+           if (input.indexOf(letter) > -1)
+               icount++;
+       }
+       if (icount == 26)
+           return true;
 
-// write a function that takes a string and returns a boolean whether it is a pangram or not. 
-// pangram = sentence that contains every letter in the alphabet.
-// ["T", "h" .... ]e quick brown fox jumped over the lazy dog."]
-// "A"
-var alphabets ="abcdefghijklmnopqrstuvwxyz";
-    var myString = "qwertyuiopasdfghjklmnbvcxz";
+       else
+           return false;
 
-let isPangram = (myString) => {
-    // here
-  
-  myString = myString.toLowerCase();
- //  the count number 
-   	var number = 0;
-        
-        for(var j = 0; j < alphabets.length; j++) {
-          var letter = alphabets[j];
-        	
-          // if found count up
-        if(myString.indexOf(letter) > -1 )
-                
-                { number++ ;
-                }
-          
-				if (number == 26 ){
-        
-          console.log("me");
-        }
-    }
-}
-
-isPangram(myString);
 
 // var array = [64, 95, 344, 524, 706];
 // array.sort();
