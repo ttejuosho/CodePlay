@@ -385,25 +385,62 @@
 // Given ‘abc’
 // Return [‘a’,’b’,’c’]
 
-function neat (){
-    if (num = 34){
-        num2 = num*9;
-        return num2;
+
+// REcursion
+
+// function neat (){
+//     if (num = 34){
+//         num2 = num*9;
+//         return num2;
+//     }
+//     num=1;
+//     num++;
+
+//     neat();
+// }
+
+// beat();
+
+// function beat (){
+//     neat()
+//     num3= num2*12;
+//     console.log(num3);
+
+// }
+
+
+// write a function that takes a string and returns a boolean whether it is a pangram or not. 
+// pangram = sentence that contains every letter in the alphabet.
+// ["T", "h" .... ]e quick brown fox jumped over the lazy dog."]
+// "A"
+var alphabets ="abcdefghijklmnopqrstuvwxyz";
+    var myString = "qwertyuiopasdfghjklmnbvcxz";
+
+let isPangram = (myString) => {
+    // here
+  
+  myString = myString.toLowerCase();
+ //  the count number 
+   	var number = 0;
+        
+        for(var j = 0; j < alphabets.length; j++) {
+          var letter = alphabets[j];
+        	
+          // if found count up
+        if(myString.indexOf(letter) > -1 )
+                
+                { number++ ;
+                }
+          
+				if (number == 26 ){
+        
+          console.log("me");
+        }
     }
-    num=1;
-    num++;
-
-    neat();
 }
 
-beat();
+isPangram(myString);
 
-function beat (){
-    neat()
-    num3= num2*12;
-    console.log(num3);
-
-}
 // var array = [64, 95, 344, 524, 706];
 // array.sort();
 // console.log(array);
