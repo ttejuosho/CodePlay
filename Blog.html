@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Taiwo's Blog</title>      
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
     <h1>Welcome to My Blog</h1>
-<img src="http://piping-designer.com/images/admin_stuff/PLACEHOLDER-SQUARE-image-300x300-300x300.jpg" alt="Profile Pic"/>
+<img src="http://piping-designer.com/images/admin_stuff/PLACEHOLDER-SQUARE-image-300x300-300x300.jpg" alt="Profile Pic" data-toggle="tooltip" data-placement="right" title="A 300 x 300 Image will be displayed here"/>
+
 <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
 
 <table>
@@ -67,11 +72,16 @@
     <input type="checkbox" name="contact">
     <label for="referral">Referral</label></p>
 
-    <input type="submit" value="Submit">
-
+    <button type="button" class="btn btn-secondary" value="Submit" data-toggle="tooltip" data-placement="top" title="Click to Submit">Submit</button>
+<br>
+<br>
 </body>
 
 <script>
+
+    $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 
 // var message = "1";
 // for (var i = 0; i < 5; i++){
