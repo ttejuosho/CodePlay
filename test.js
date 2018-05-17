@@ -53,18 +53,18 @@
 // }
 
 // timeConverter(1524992455434);
-var XMLHttpRequest = require("xhr2");
+// var XMLHttpRequest = require("xhr2");
 
 
-var queryURL = "http://it-recruitment.mintel.com/testing/test_data.json";
-var my_JSON_object;
-var http_request = new XMLHttpRequest();
-http_request.open("GET", queryURL, true);
-http_request.responseType = "json";
-http_request.onreadystatechange = function () {
-  var done = 4, ok = 200;
-  if (http_request.readyState === done && http_request.status === ok) {
-    my_JSON_object = http_request.response;
+// var queryURL = "http://it-recruitment.mintel.com/testing/test_data.json";
+// var my_JSON_object;
+// var http_request = new XMLHttpRequest();
+// http_request.open("GET", queryURL, true);
+// http_request.responseType = "json";
+// http_request.onreadystatechange = function () {
+//   var done = 4, ok = 200;
+//   if (http_request.readyState === done && http_request.status === ok) {
+//     my_JSON_object = http_request.response;
 
 // Answer 8
     // var unique = 0;
@@ -81,19 +81,19 @@ http_request.onreadystatechange = function () {
     // console.log("Number of Statuses: " + unique);
 
 // Answer 9
-    var userIdArray = [];
-    for (var i=0; i < my_JSON_object.length; i++){
-        var currentUser = my_JSON_object[i].status;
-        userIdArray.push(currentUser);
-    }
+    // var userIdArray = [];
+    // for (var i=0; i < my_JSON_object.length; i++){
+    //     var currentUser = my_JSON_object[i].status;
+    //     userIdArray.push(currentUser);
+    // }
 
-    result = {};
-    for(var i = 0; i < userIdArray.length; ++i) {
-        if(!result[userIdArray[i]])
-            result[userIdArray[i]] = 0;
-        ++result[userIdArray[i]];       
-    }
-    console.log(result);
+    // result = {};
+    // for(var i = 0; i < userIdArray.length; ++i) {
+    //     if(!result[userIdArray[i]])
+    //         result[userIdArray[i]] = 0;
+    //     ++result[userIdArray[i]];       
+    // }
+    // console.log(result);
 
 // Answer 10
     
@@ -160,6 +160,21 @@ http_request.onreadystatechange = function () {
     
 // }
 
-  }
-};
-http_request.send(null);
+//   }
+// };
+// http_request.send(null);
+
+function counter(){
+    for (var i = 0; i <=100; i++){
+        if (i%3 === 0 && i%5 === 0){
+            console.log("Go");
+        } else if (i%5 === 0){
+            console.log("Taiwo");
+        } else if(i%3 === 0){
+            console.log("Go Taiwo");
+        } else {console.log(i)}
+    }
+}
+
+counter();
+
