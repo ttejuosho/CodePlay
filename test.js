@@ -164,17 +164,77 @@
 // };
 // http_request.send(null);
 
-function counter(){
-    for (var i = 0; i <=100; i++){
-        if (i%3 === 0 && i%5 === 0){
-            console.log("Go");
-        } else if (i%5 === 0){
-            console.log("Taiwo");
-        } else if(i%3 === 0){
-            console.log("Go Taiwo");
-        } else {console.log(i)}
+// function counter(){
+//     for (var i = 0; i <= 100; i++){
+//         if (i%3 === 0 && i%5 === 0){
+//             console.log("Go");
+//         } else if (i%5 === 0){
+//             console.log("Taiwo");
+//         } else if(i%3 === 0){
+//             console.log("Go Taiwo");
+//         } else {console.log(i)}
+//     }
+// }
+
+// counter();
+
+// function getRandom()
+// {
+//     tdy = new Date();
+//     var bigN=tdy.getSeconds()*tdy.getTime();
+//     bigN *= Math.sqrt(tdy.getMinutes());
+//     var randN = (bigN % 4) + 1;
+//     console.log( Math.floor(randN));
+// }
+
+// getRandom();
+
+// var x = 3;
+// var y = 0;
+
+// function testY() {
+//     y++;
+//     console.log("true");
+// }
+
+// if (x>=3 && testY()) { y++; }
+// if (x<3 || testY()) { y++; }
+// if (x<3 && testY()) { y++; }
+// if (x>=3 || testY()) { y++; }
+
+// var z = y;
+// console.log(z);
+
+// Add all elements in an Array
+
+let arr0 = [31,36,68,49,73,20,34,15,65,60,78,49,83];
+let arr1 = [73,20,34,15,60,78,34,83,44,90,61,85,44];
+let total = 0;
+function adder(arr){
+    for( let i = 0; i < arr.length; i++){
+        total = total + arr[i];
     }
+    console.log(total);
 }
 
-counter();
+// adder(arr0);
 
+let aPoints = 0;
+let bPoints = 0;
+let equal = 0;
+
+// This function compares elements in 2 arrays and increases 2 var for each Array
+function compareElementsInArray (arr0,arr1){
+   for(let i = 0; i < arr0.length; i++){
+        if (arr0[i] < arr1[i]){
+            aPoints++ ;
+        } else if (arr0[i] > arr1[i]){
+            bPoints++ ;
+        } else {
+            equal++ ;
+        }
+   }
+   console.log(aPoints, bPoints, equal);
+}
+
+compareElementsInArray (arr0,arr1);
