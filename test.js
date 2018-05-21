@@ -207,34 +207,102 @@
 
 // Add all elements in an Array
 
-let arr0 = [31,36,68,49,73,20,34,15,65,60,78,49,83];
-let arr1 = [73,20,34,15,60,78,34,83,44,90,61,85,44];
-let total = 0;
-function adder(arr){
-    for( let i = 0; i < arr.length; i++){
-        total = total + arr[i];
-    }
-    console.log(total);
-}
+
+// let total = 0;
+// function adder(arr){
+//     for( let i = 0; i < arr.length; i++){
+//         total = total + arr[i];
+//     }
+//     console.log(total);
+// }
 
 // adder(arr0);
 
-let aPoints = 0;
-let bPoints = 0;
-let equal = 0;
+// let aPoints = 0;
+// let bPoints = 0;
+// let equal = 0;
 
-// This function compares elements in 2 arrays and increases 2 var for each Array
-function compareElementsInArray (arr0,arr1){
-   for(let i = 0; i < arr0.length; i++){
-        if (arr0[i] < arr1[i]){
-            aPoints++ ;
-        } else if (arr0[i] > arr1[i]){
-            bPoints++ ;
-        } else {
-            equal++ ;
+// // This function compares elements in 2 arrays and increases 2 var for each Array
+// function compareElementsInArray (arr0,arr1){
+//    for(let i = 0; i < arr0.length; i++){
+//         if (arr0[i] < arr1[i]){
+//             aPoints++ ;
+//         } else if (arr0[i] > arr1[i]){
+//             bPoints++ ;
+//         } else {
+//             equal++ ;
+//         }
+//    }
+//    console.log(aPoints, bPoints, equal);
+// }
+
+// compareElementsInArray (arr0,arr1);
+
+let arr = [];
+let arr0 = [31,36,68,49,73,20,34,15,65,60,78,49,83];
+let arr1 = [73,20,34,15,85,45,89,58,22,76,37,67,28];
+let arr2 = [49,73,20,34,33,45,93,58,47,63,78,74,91];
+let arr3 = ['Cabbage', 'Turnip', 'Quince', 'Pineapples', 'Mango', 'Radish', 'Lemon', 'Carrot', 'Peach', 'Watermelon'];
+let arr4 = ['cabbage', 'Banana', 'Olive', 'Prune', 'Turnip', 'Radish', 'Avocado', 'Apple', 'Carrot', 'Kiwifruit'];
+let arrX = arr1.map( x => x * 5);
+let arrY = arr4.map( x => x.toUpperCase());
+
+let Big = {
+    this:aPoints = 0,
+    this:bPoints = 0,
+    this:equal = 0,
+    this:unequal = 0,
+    this:total = 0,
+    this:percentMatch = 0,
+    this:iterationCounter = 0,
+    adder: function (arr){
+        for( let i = 0; i < arr.length; i++){
+            total = total + arr[i];
         }
-   }
-   console.log(aPoints, bPoints, equal);
+        console.log(total);
+    },
+    compareElementsInArray : function (arr0,arr1){
+        for(let i = 0; i < arr0.length; i++){
+             if (arr0[i] < arr1[i]){
+                 aPoints++ ;
+             } else if (arr0[i] > arr1[i]){
+                 bPoints++ ;
+             } else {
+                 equal++ ;
+             }
+        }
+        console.log(aPoints, bPoints, equal);
+     },
+     matchElementsInArray : function (arr0,arr1){
+        for(let i = 0; i < arr0.length; i++){
+            for (let j = 0; j < arr1.length; j++){
+                if (arr0[i] === arr1[j]){
+                    equal++ ;
+                 } else {
+                     unequal++ ;
+                 }
+            } 
+        }
+        percentMatch = ((equal/arr1.length)*100).toFixed(1);
+        console.log(equal + " elements found", percentMatch +"% Match");
+     },
+     goTaiwo: function(){
+        for (var i = 1; i <= 100; i++){
+            if (i%3 === 0 && i%5 === 0){
+                arr.push("Go");
+                console.log("Go");
+            } else if (i%5 === 0){
+                arr.push("Taiwo");
+            } else if(i%3 === 0){
+                arr.push("Go Taiwo");
+            } else { arr.push(i) }
+        }
+        console.log(arr);
+    }
 }
 
-compareElementsInArray (arr0,arr1);
+
+// Big.compareElementsInArray(arr2,arr1);
+// Big.adder(arr2);
+// Big.matchElementsInArray(arrY,arrX);
+Big.goTaiwo();
