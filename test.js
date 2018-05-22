@@ -239,11 +239,11 @@
 // compareElementsInArray (arr0,arr1);
 
 let arr = [];
-let arr0 = [31,36,68,49,73,20,34,15,65,60,78,49,83];
-let arr1 = [73,20,34,15,85,45,89,58,22,76,37,67,28];
+let arr0 = [31,36,83,49,73,20,91,18,65,60,78,40,68];
+let arr1 = [73,19,34,25,81,45,92,58,22,76,37,67,48];
 let arr2 = [49,73,20,34,33,45,93,58,47,63,78,74,91];
 let arr3 = ['Cabbage', 'Turnip', 'Quince', 'Pineapples', 'Mango', 'Radish', 'Lemon', 'Carrot', 'Peach', 'Watermelon'];
-let arr4 = ['cabbage', 'Banana', 'Olive', 'Prune', 'Turnip', 'Radish', 'Avocado', 'Apple', 'Carrot', 'Kiwifruit'];
+let arr4 = ['cabbage', 'Banana', 'Olive', 'Prune', 'Turnip', 'Mango', 'Radish', 'Avocado', 'Apple', 'Carrot', 'Kiwifruit'];
 let arrX = arr1.map( x => x * 5);
 let arrY = arr4.map( x => x.toUpperCase());
 
@@ -298,11 +298,61 @@ let Big = {
             } else { arr.push(i) }
         }
         console.log(arr);
+    },
+    findMinMax: function(arr0){
+        let min = arr0[0];
+        let max = arr0[0];
+        for(let i = 0; i < arr0.length; i++){
+            if (arr0[i] < min){
+                min = arr0[i];
+            }  else if (arr0[i] > max){
+                max = arr0[i];
+            }
+        }
+        console.log(min, max);
+    },
+    calculateSalary: function(hourlyRate,hoursPerWeek){
+        let salary = (hourlyRate*hoursPerWeek*48).toFixed(2);
+        
+        if (salary < 9325){
+            taxRate = 0.1;
+        } else if (salary > 9325 && salary < 37950){
+            taxRate = 0.15;
+        } else if (salary > 37950 && salary < 91900){
+            taxRate = 0.25;
+        } else if (salary > 91900 && salary < 191650){
+            taxRate = 0.28;
+        } else if (salary > 191650 && salary < 416700){
+            taxRate = 0.33;
+        }  else if (salary > 416700 && salary < 418400){
+            taxRate = 0.35;
+        } else {
+            taxRate = 0.396;
+        }
+
+        let tax = (taxRate*salary).toFixed(2);
+        let afterTaxSalary = salary - tax;
+        let taxRatePercent = (taxRate*100).toFixed(2);
+        
+        if (hoursPerWeek >= 40){
+            console.log(
+                `If you earn $ ${hourlyRate}/hour and you work Full Time,
+                Your Yearly Salary will be approximately ${salary}
+                At a tax rate of ${taxRatePercent}%, youll get approximately ${afterTaxSalary}`);
+        }
+        if (hoursPerWeek < 40){
+            console.log(
+                `If you earn $ ${hourlyRate}/hour and you work Part Time,
+                Your Yearly Salary will be approximately ${salary}
+                At a tax rate of ${taxRatePercent}%, youll get approximately ${afterTaxSalary}`);
+            }
     }
 }
 
 
 // Big.compareElementsInArray(arr2,arr1);
 // Big.adder(arr2);
-// Big.matchElementsInArray(arrY,arrX);
-Big.goTaiwo();
+// Big.matchElementsInArray(arr3,arr4);
+// Big.goTaiwo();
+// Big.findMinMax(arr0);
+Big.calculateSalary(60,50);
