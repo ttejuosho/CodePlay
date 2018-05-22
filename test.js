@@ -312,39 +312,47 @@ let Big = {
         console.log(min, max);
     },
     calculateSalary: function(hourlyRate,hoursPerWeek){
-        let salary = (hourlyRate*hoursPerWeek*48).toFixed(2);
+        let weeklyPay = (hourlyRate*hoursPerWeek).toFixed(2);
+        let biWeeklyPay = (weeklyPay*2).toFixed(2);
+        let monthlyPay = (biWeeklyPay*2).toFixed(2);
+        let annualPay = (monthlyPay*12).toFixed(2);
         
-        if (salary < 9325){
+        if (annualPay < 9325){
             taxRate = 0.1;
-        } else if (salary > 9325 && salary < 37950){
+        } else if (annualPay > 9325 && annualPay < 37950){
             taxRate = 0.15;
-        } else if (salary > 37950 && salary < 91900){
+        } else if (annualPay > 37950 && annualPay < 91900){
             taxRate = 0.25;
-        } else if (salary > 91900 && salary < 191650){
+        } else if (annualPay > 91900 && annualPay < 191650){
             taxRate = 0.28;
-        } else if (salary > 191650 && salary < 416700){
+        } else if (annualPay > 191650 && annualPay < 416700){
             taxRate = 0.33;
-        }  else if (salary > 416700 && salary < 418400){
+        }  else if (annualPay > 416700 && annualPay < 418400){
             taxRate = 0.35;
         } else {
             taxRate = 0.396;
         }
 
-        let tax = (taxRate*salary).toFixed(2);
-        let afterTaxSalary = salary - tax;
+        let tax = (taxRate*annualPay).toFixed(2);
+        let afterTaxAnnualPay = annualPay - tax;
         let taxRatePercent = (taxRate*100).toFixed(2);
         
         if (hoursPerWeek >= 40){
-            console.log(
-                `If you earn $ ${hourlyRate}/hour and you work Full Time,
-                Your Yearly Salary will be approximately ${salary}
-                At a tax rate of ${taxRatePercent}%, youll get approximately ${afterTaxSalary}`);
+            console.log(`
+    If you earn $${hourlyRate}/hour and you work Full Time,
+    Your bi-weekly pay will be approximately $${biWeeklyPay}
+    Your monthly pay will be approximately $${monthlyPay}
+    Your Yearly annualPay will be approximately $${annualPay}
+    At a tax rate of ${taxRatePercent}%, youll get approximately $${afterTaxAnnualPay}
+                `);
         }
         if (hoursPerWeek < 40){
-            console.log(
-                `If you earn $ ${hourlyRate}/hour and you work Part Time,
-                Your Yearly Salary will be approximately ${salary}
-                At a tax rate of ${taxRatePercent}%, youll get approximately ${afterTaxSalary}`);
+            console.log(`
+    If you earn $${hourlyRate}/hour and you work Part Time,
+    Your bi-weekly pay will be approximately $${biWeeklyPay}
+    Your Yearly annualPay will be approximately $${annualPay}
+    At a tax rate of ${taxRatePercent}%, youll get approximately $${afterTaxAnnualPay}
+                `);
             }
     }
 }
@@ -355,4 +363,4 @@ let Big = {
 // Big.matchElementsInArray(arr3,arr4);
 // Big.goTaiwo();
 // Big.findMinMax(arr0);
-Big.calculateSalary(60,50);
+Big.calculateSalary(8,50);
