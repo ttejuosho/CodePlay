@@ -255,6 +255,12 @@ let Big = {
     this:total = 0,
     this:percentMatch = 0,
     this:iterationCounter = 0,
+    this:hoursWorked = 0,
+    this:hourlyRate = 0,
+    this:overtimeHours = (hoursWorked - 40),
+    this:overTimePay = overtimeHours*hourlyRate*1.5,
+    this:weeklyFTPay = hourlyRate*40,
+    this:weeklyPay = weeklyFTPay + overTimePay,
     adder: function (arr){
         for( let i = 0; i < arr.length; i++){
             total = total + arr[i];
@@ -321,7 +327,8 @@ let Big = {
         let biWeeklyPay = (weeklyPay*2).toFixed(2);
         let monthlyPay = (biWeeklyPay*2).toFixed(2);
         let annualPay = (weeklyFTPay*52).toFixed(2);
-        
+
+        // Choose Tax Brackets based on Annual Pay to calculate Taxes
         if (annualPay < 9325){
             taxRate = 0.1;
         } else if (annualPay > 9325 && annualPay < 37950){
@@ -347,7 +354,6 @@ let Big = {
         if (hoursWorked >= 40){
             console.log(`
     If you earn $${hourlyRate}/hour and you work Full Time,
-    Your bi-weekly pay will be approximately $${biWeeklyPay}
     Bi-weekly pay: $${biWeeklyPay}, annual Pay: $${annualPay}
     At a tax rate of ${taxRatePercent}%, 
     youll get approximately $${biWeeklyPayAfterTax} every 2 weeks 
@@ -372,4 +378,4 @@ let Big = {
 // Big.matchElementsInArray(arr3,arr4);
 // Big.goTaiwo();
 // Big.findMinMax(arr0);
-Big.calculateSalary(21.83,125.92);
+Big.calculateSalary(21.83,42);
