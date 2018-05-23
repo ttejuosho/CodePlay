@@ -320,7 +320,7 @@ let Big = {
            
         let biWeeklyPay = (weeklyPay*2).toFixed(2);
         let monthlyPay = (biWeeklyPay*2).toFixed(2);
-        let annualPay = (monthlyPay*12).toFixed(2);
+        let annualPay = (weeklyFTPay*52).toFixed(2);
         
         if (annualPay < 9325){
             taxRate = 0.1;
@@ -372,4 +372,4 @@ let Big = {
 // Big.matchElementsInArray(arr3,arr4);
 // Big.goTaiwo();
 // Big.findMinMax(arr0);
-Big.calculateSalary(21.83,40);
+Big.calculateSalary(21.83,125.92);
