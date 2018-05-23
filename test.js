@@ -311,8 +311,13 @@ let Big = {
         }
         console.log(min, max);
     },
-    calculateSalary: function(hourlyRate,hoursPerWeek){
-        let weeklyPay = (hourlyRate*hoursPerWeek).toFixed(2);
+    calculateSalary: function(hourlyRate,hoursWorked){
+        
+        let overtimeHours = (hoursWorked - 40);
+        let overTimePay = overtimeHours*hourlyRate*1.5;
+        let weeklyFTPay = hourlyRate*40;
+        let weeklyPay = weeklyFTPay + overTimePay;
+           
         let biWeeklyPay = (weeklyPay*2).toFixed(2);
         let monthlyPay = (biWeeklyPay*2).toFixed(2);
         let annualPay = (monthlyPay*12).toFixed(2);
@@ -334,23 +339,21 @@ let Big = {
         }
 
         let tax = (taxRate*annualPay).toFixed(2);
-        let afterTaxAnnualPay = annualPay - tax;
+        let afterTaxAnnualPay = (annualPay - tax).toFixed(2);
         let taxRatePercent = (taxRate*100).toFixed(2);
-        
-        if (hoursPerWeek >= 40){
+
+        if (hoursWorked >= 40){
             console.log(`
     If you earn $${hourlyRate}/hour and you work Full Time,
     Your bi-weekly pay will be approximately $${biWeeklyPay}
-    Your monthly pay will be approximately $${monthlyPay}
-    Your Yearly annualPay will be approximately $${annualPay}
+    Bi-weekly pay: $${biWeeklyPay}, annual Pay: $${annualPay}
     At a tax rate of ${taxRatePercent}%, youll get approximately $${afterTaxAnnualPay}
                 `);
         }
-        if (hoursPerWeek < 40){
+        if (hoursWorked < 40){
             console.log(`
     If you earn $${hourlyRate}/hour and you work Part Time,
-    Your bi-weekly pay will be approximately $${biWeeklyPay}
-    Your Yearly annualPay will be approximately $${annualPay}
+    Bi-weekly pay: $${biWeeklyPay}, annual Pay: $${annualPay}
     At a tax rate of ${taxRatePercent}%, youll get approximately $${afterTaxAnnualPay}
                 `);
             }
@@ -363,4 +366,4 @@ let Big = {
 // Big.matchElementsInArray(arr3,arr4);
 // Big.goTaiwo();
 // Big.findMinMax(arr0);
-Big.calculateSalary(8,50);
+Big.calculateSalary(21.83,40);
