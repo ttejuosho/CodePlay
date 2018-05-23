@@ -261,6 +261,13 @@ let Big = {
     this:overTimePay = overtimeHours*hourlyRate*1.5,
     this:weeklyFTPay = hourlyRate*40,
     this:weeklyPay = weeklyFTPay + overTimePay,
+    this:overtimeHours = (hoursWorked - 40),
+    this:overTimePay = overtimeHours*hourlyRate*1.5,
+    this:weeklyFTPay = hourlyRate*40,
+    this:weeklyPay = weeklyFTPay + overTimePay,
+    this:biWeeklyPay = (weeklyPay*2).toFixed(2),
+    this:monthlyPay = (biWeeklyPay*2).toFixed(2),
+    this:annualPay = (weeklyFTPay*52).toFixed(2),
     adder: function (arr){
         for( let i = 0; i < arr.length; i++){
             total = total + arr[i];
@@ -319,14 +326,7 @@ let Big = {
     },
     calculateSalary: function(hourlyRate,hoursWorked){
         
-        let overtimeHours = (hoursWorked - 40);
-        let overTimePay = overtimeHours*hourlyRate*1.5;
-        let weeklyFTPay = hourlyRate*40;
-        let weeklyPay = weeklyFTPay + overTimePay;
-           
-        let biWeeklyPay = (weeklyPay*2).toFixed(2);
-        let monthlyPay = (biWeeklyPay*2).toFixed(2);
-        let annualPay = (weeklyFTPay*52).toFixed(2);
+        
 
         // Choose Tax Brackets based on Annual Pay to calculate Taxes
         if (annualPay < 9325){
