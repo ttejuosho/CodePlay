@@ -338,8 +338,10 @@ let Big = {
             taxRate = 0.396;
         }
 
-        let tax = (taxRate*annualPay).toFixed(2);
-        let afterTaxAnnualPay = (annualPay - tax).toFixed(2);
+        let annualTax = (taxRate*annualPay).toFixed(2);
+        let biWeeklyTax = (biWeeklyPay*taxRate).toFixed(2);
+        let annualPayAfterTax = (annualPay - annualTax).toFixed(2);
+        let biWeeklyPayAfterTax = (biWeeklyPay - biWeeklyTax).toFixed(2);
         let taxRatePercent = (taxRate*100).toFixed(2);
 
         if (hoursWorked >= 40){
@@ -347,14 +349,18 @@ let Big = {
     If you earn $${hourlyRate}/hour and you work Full Time,
     Your bi-weekly pay will be approximately $${biWeeklyPay}
     Bi-weekly pay: $${biWeeklyPay}, annual Pay: $${annualPay}
-    At a tax rate of ${taxRatePercent}%, youll get approximately $${afterTaxAnnualPay}
+    At a tax rate of ${taxRatePercent}%, 
+    youll get approximately $${biWeeklyPayAfterTax} every 2 weeks 
+    and youll make $${annualPayAfterTax} yearly.
                 `);
         }
         if (hoursWorked < 40){
             console.log(`
     If you earn $${hourlyRate}/hour and you work Part Time,
     Bi-weekly pay: $${biWeeklyPay}, annual Pay: $${annualPay}
-    At a tax rate of ${taxRatePercent}%, youll get approximately $${afterTaxAnnualPay}
+    At a tax rate of ${taxRatePercent}%, 
+    youll get approximately $${biWeeklyPayAfterTax} every 2 weeks 
+    and youll make $${annualPayAfterTax} yearly.
                 `);
             }
     }
