@@ -239,11 +239,11 @@
 // compareElementsInArray (arr0,arr1);
 
 let arr = [];
-let arr0 = [31,36,68,49,73,20,34,15,65,60,78,49,83];
-let arr1 = [73,20,34,15,85,45,89,58,22,76,37,67,28];
+let arr0 = [31,36,83,49,73,20,91,18,65,60,78,40,68];
+let arr1 = [73,19,34,25,81,45,92,58,22,76,37,67,48];
 let arr2 = [49,73,20,34,33,45,93,58,47,63,78,74,91];
 let arr3 = ['Cabbage', 'Turnip', 'Quince', 'Pineapples', 'Mango', 'Radish', 'Lemon', 'Carrot', 'Peach', 'Watermelon'];
-let arr4 = ['cabbage', 'Banana', 'Olive', 'Prune', 'Turnip', 'Radish', 'Avocado', 'Apple', 'Carrot', 'Kiwifruit'];
+let arr4 = ['cabbage', 'Banana', 'Olive', 'Prune', 'Turnip', 'Mango', 'Radish', 'Avocado', 'Apple', 'Carrot', 'Kiwifruit'];
 let arrX = arr1.map( x => x * 5);
 let arrY = arr4.map( x => x.toUpperCase());
 
@@ -255,6 +255,12 @@ let Big = {
     this:total = 0,
     this:percentMatch = 0,
     this:iterationCounter = 0,
+    this:hoursWorked = 0,
+    this:hourlyRate = 0,
+    this:overtimeHours = (hoursWorked - 40),
+    this:overTimePay = overtimeHours*hourlyRate*1.5,
+    this:weeklyFTPay = hourlyRate*40,
+    this:weeklyPay = weeklyFTPay + overTimePay,
     adder: function (arr){
         for( let i = 0; i < arr.length; i++){
             total = total + arr[i];
@@ -298,23 +304,78 @@ let Big = {
             } else { arr.push(i) }
         }
         console.log(arr);
+    },
+    findMinMax: function(arr0){
+        let min = arr0[0];
+        let max = arr0[0];
+        for(let i = 0; i < arr0.length; i++){
+            if (arr0[i] < min){
+                min = arr0[i];
+            }  else if (arr0[i] > max){
+                max = arr0[i];
+            }
+        }
+        console.log(min, max);
+    },
+    calculateSalary: function(hourlyRate,hoursWorked){
+        
+        let overtimeHours = (hoursWorked - 40);
+        let overTimePay = overtimeHours*hourlyRate*1.5;
+        let weeklyFTPay = hourlyRate*40;
+        let weeklyPay = weeklyFTPay + overTimePay;
+           
+        let biWeeklyPay = (weeklyPay*2).toFixed(2);
+        let monthlyPay = (biWeeklyPay*2).toFixed(2);
+        let annualPay = (weeklyFTPay*52).toFixed(2);
+
+        // Choose Tax Brackets based on Annual Pay to calculate Taxes
+        if (annualPay < 9325){
+            taxRate = 0.1;
+        } else if (annualPay > 9325 && annualPay < 37950){
+            taxRate = 0.15;
+        } else if (annualPay > 37950 && annualPay < 91900){
+            taxRate = 0.25;
+        } else if (annualPay > 91900 && annualPay < 191650){
+            taxRate = 0.28;
+        } else if (annualPay > 191650 && annualPay < 416700){
+            taxRate = 0.33;
+        }  else if (annualPay > 416700 && annualPay < 418400){
+            taxRate = 0.35;
+        } else {
+            taxRate = 0.396;
+        }
+
+        let annualTax = (taxRate*annualPay).toFixed(2);
+        let biWeeklyTax = (biWeeklyPay*taxRate).toFixed(2);
+        let annualPayAfterTax = (annualPay - annualTax).toFixed(2);
+        let biWeeklyPayAfterTax = (biWeeklyPay - biWeeklyTax).toFixed(2);
+        let taxRatePercent = (taxRate*100).toFixed(2);
+
+        if (hoursWorked >= 40){
+            console.log(`
+    If you earn $${hourlyRate}/hour and you work Full Time,
+    Bi-weekly pay: $${biWeeklyPay}, annual Pay: $${annualPay}
+    At a tax rate of ${taxRatePercent}%, 
+    youll get approximately $${biWeeklyPayAfterTax} every 2 weeks 
+    and youll make $${annualPayAfterTax} yearly.
+                `);
+        }
+        if (hoursWorked < 40){
+            console.log(`
+    If you earn $${hourlyRate}/hour and you work Part Time,
+    Bi-weekly pay: $${biWeeklyPay}, annual Pay: $${annualPay}
+    At a tax rate of ${taxRatePercent}%, 
+    youll get approximately $${biWeeklyPayAfterTax} every 2 weeks 
+    and youll make $${annualPayAfterTax} yearly.
+                `);
+            }
     }
 }
 
 
 // Big.compareElementsInArray(arr2,arr1);
 // Big.adder(arr2);
-// Big.matchElementsInArray(arrY,arrX);
+// Big.matchElementsInArray(arr3,arr4);
 // Big.goTaiwo();
-
-function removeLetter(str, char) {
-    let reversedArray = [];
-    let splitted = str.split("");
-    for (var i = splitted.length; i--; i >=0 ){
-        if (splitted[i] != char){
-            reversedArray.push(splitted[i]);   
-    }  
-}
-    console.log(reversedArray.join(""));
-}
-removeLetter(arr3[0], "a");
+// Big.findMinMax(arr0);
+Big.calculateSalary(21.83,42);
