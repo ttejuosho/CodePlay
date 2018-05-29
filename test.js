@@ -305,4 +305,16 @@ let Big = {
 // Big.compareElementsInArray(arr2,arr1);
 // Big.adder(arr2);
 // Big.matchElementsInArray(arrY,arrX);
-Big.goTaiwo();
+// Big.goTaiwo();
+
+function removeLetter(str, char) {
+    let reversedArray = [];
+    let splitted = str.split("");
+    for (var i = splitted.length; i--; i >=0 ){
+        if (splitted[i] != char){
+            reversedArray.push(splitted[i]);   
+    }  
+}
+    console.log(reversedArray.join(""));
+}
+removeLetter(arr3[0], "a");
