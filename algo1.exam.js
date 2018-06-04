@@ -19,8 +19,28 @@ user = {
     first_name: "Taiwo",
     last_name: "Tejuosho",
     email: "ttejuosho@aol.com",
-    mac_operating_systems: ["Maverick", "Yosemite", "EL Capitan", "Sierra", "High Sierra"]
+    mac_operating_systems: ["Maverick", "Yosemite", "EL Capitan", "Sierra", "High Sierra"],
+    devSkills: "HTML, CSS, JavaScript, JQuery, Handle Bars, Python, MySQL, PostgreSQL, MongoDB, React Js, Meteor Js, React Native, .NET, C#, C++, C, Java, J2EE, Node Js, Angular 2, Angular 4, Bootstrap, Materialize, SQL Server, LESS, SASS, Microsoft Azure, Amazon Web Services, TypeScript, Ruby, Rails, Maven, Jenkins,Spring MVC, Microservices, ASP.NET, Kotlin, Android Studio, Docker, Git, Redux, DevOps, Salesforce, Wordpress, Cold Fusion, Vue Js, Ember Js",
+    myDevSkills: "HTML, CSS, JavaScript, JQuery, Handle Bars, MySQL, MongoDB, Bootstrap, Materialize, Node Js, Android Studio, Java, Git, React Js"
 };
+
+let myPoints = 0;
+let skillsArray = user.devSkills.toLowerCase().split(", ");
+let mySkillsArray = user.myDevSkills.toLowerCase().split(", ");
+
+function devSkillsArray(arr0, arr1){
+    for (var i = 0; i < arr0.length; i++){
+        for (var j = 0; j < arr1.length; j++){
+            if (arr1[j] === arr0[i]){
+                myPoints++;
+            }
+        }
+    }
+    console.log(myPoints + " skills found");
+    console.log("You have "+ ((myPoints/skillsArray.length)*100).toFixed(2) + "%" + " of the skills needed for this job.");
+}
+
+devSkillsArray(skillsArray, mySkillsArray);
 
 // ========================================================================================
 // Given a string (str), return the string in reverse.
@@ -136,7 +156,7 @@ function invertHash(obj) {
     console.log(invertHashObject);
 }
 
-invertHash(user);
+// invertHash(user);
 // ========================================================================================
 // ========================================================================================
 

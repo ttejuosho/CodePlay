@@ -246,6 +246,11 @@ let arr3 = ['Cabbage', 'Turnip', 'Quince', 'Pineapples', 'Mango', 'Radish', 'Lem
 let arr4 = ['cabbage', 'Banana', 'Olive', 'Prune', 'Turnip', 'Mango', 'Radish', 'Avocado', 'Apple', 'Carrot', 'Kiwifruit'];
 let arrX = arr1.map( x => x * 5);
 let arrY = arr4.map( x => x.toUpperCase());
+let paragraph = "Coding, dojo, academy, introduction, to, algorithm";
+
+let paraArray = paragraph.toLowerCase().split(", ");
+console.log(paraArray);
+
 
 let Big = {
     this:aPoints = 0,
@@ -378,4 +383,4 @@ let Big = {
 // Big.matchElementsInArray(arr3,arr4);
 // Big.goTaiwo();
 // Big.findMinMax(arr0);
-Big.calculateSalary(21.83,42);
+// Big.calculateSalary(21.83,42);
