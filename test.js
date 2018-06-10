@@ -378,4 +378,6 @@ let Big = {
 // Big.matchElementsInArray(arr3,arr4);
 // Big.goTaiwo();
 // Big.findMinMax(arr0);
-Big.calculateSalary(21.83,42);
+// Big.calculateSalary(21.83,42);
+
+
