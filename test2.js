@@ -1,6 +1,6 @@
 $(document).ready(function(){
     console.log("SYSTEM READY");
-
+    $("#results").hide();
     function calculateSalary(hourlyRate, hoursWorked){
         let overtimeHours = (hoursWorked - 40);
         let overTimePay = (overtimeHours*hourlyRate*1.5);
@@ -33,7 +33,7 @@ $(document).ready(function(){
     let annualTax = (taxRate*annualPay).toFixed(2);
     let biWeeklyTax = (biWeeklyPay*taxRate).toFixed(2);
     let annualPayAfterTax = (annualPay - annualTax).toFixed(2);
-    let biWeeklyPayAfterTax = (biWeeklyPay - biWeeklyTax).toFixed(2);   
+    let biWeeklyPayAfterTax = (biWeeklyPay - biWeeklyTax).toFixed(2); 
     let taxRatePercent = (taxRate*100).toFixed(2);
 
 
@@ -63,6 +63,7 @@ $(document).ready(function(){
 
 
 $("#magic").on("click", function(){
+    $("#results").show();
     // Save input values in variables
     let hoursWorked = $("#hoursWorked").val();
     let hourlyRate = $("#hourlyRate").val();
