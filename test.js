@@ -238,6 +238,7 @@
 
 // compareElementsInArray (arr0,arr1);
 
+
 let arr = [];
 let arr0 = [31,36,83,49,73,20,91,18,65,60,78,40,68];
 let arr1 = [73,19,34,25,81,45,92,58,22,76,37,67,48];
@@ -246,6 +247,7 @@ let arr3 = ['Cabbage', 'Turnip', 'Quince', 'Pineapples', 'Mango', 'Radish', 'Lem
 let arr4 = ['cabbage', 'Banana', 'Olive', 'Prune', 'Turnip', 'Mango', 'Radish', 'Avocado', 'Apple', 'Carrot', 'Kiwifruit'];
 let arrX = arr1.map( x => x * 5);
 let arrY = arr4.map( x => x.toUpperCase());
+
 
 let Big = {
     this:aPoints = 0,
@@ -257,6 +259,7 @@ let Big = {
     this:iterationCounter = 0,
     this:hoursWorked = 0,
     this:hourlyRate = 0,
+    this:taxRate = 0,
     this:overtimeHours = (hoursWorked - 40),
     this:overTimePay = overtimeHours*hourlyRate*1.5,
     this:weeklyFTPay = hourlyRate*40,
@@ -378,4 +381,6 @@ let Big = {
 // Big.matchElementsInArray(arr3,arr4);
 // Big.goTaiwo();
 // Big.findMinMax(arr0);
-// Big.calculateSalary(21.83,42);
+Big.calculateSalary(21.83,42);
+
+

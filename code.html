@@ -6,22 +6,22 @@
     <title>Algo_Sol</title>    
 </head>
 <body>
-<div class="container">
+
   <button class="ac-category"  data-target="iosWidgets">iOS</button>
   <button class="ac-category"  data-target="macWidgets">macOS</button>
 
-<div id="divs" class="iosWidgets">
+<div class="container">
+<div id="jive-widgetframe_1269476" class="iosWidgets">
   <h1>Top Issues [iOS]</h1>
 </div>
-<div id="divs" class="iosWidgets">
+<div id="jive-widgetframe_1269478" class="iosWidgets">
   <h1>Recent Content [iOS]</h1>
 </div>
-
 
 <div id="jive-widgetframe_1269477" class="macWidgets">
 <h1>Top Issues macOS</h1>
 </div>
-<div id="jive-widgetframe_1269477" class="macWidgets">
+<div id="jive-widgetframe_1269479" class="macWidgets">
   <h1>Recent Content macOS</h1>
 </div>
 
@@ -35,25 +35,28 @@ crossorigin="anonymous"></script>
 <script>
 
 
-
-
-$(".divs").each(function(){
-     $(this).hide();
-    if($(this).attr('id') === 'iosWidgets') {
-        $(this).show();
-    }
-});
+$(".macWidgets").hide();
 
 $('.ac-category').on( "click", function(e) {
-    e.preventDefault();
-    var id = $(this).attr('data-target'); 
-    $(".divs").each(function(){
-        $(this).hide();
-        if($(this).attr('id') === id) {
-            $(this).show();
-        }
-    });
+  
+  var id = $(this).attr("data-target");
+  if (id === "macWidgets"){
+    $(".macWidgets").show();
+    $(".iosWidgets").hide();
+  } else {
+    $(".macWidgets").hide();
+    $(".iosWidgets").show();
+  }
+  
 });
+
+let iosAndMacButtons = document.getElementsByClassName("ac-category");
+let iosWidgets = document.getElementsByClassName("iosWidgets");
+let macWidgets = document.getElementsByClassName("macWidgets");
+
+document.getElementsByClassName("ac-category").onclick = function(){
+  console.log("lklk");
+}
 
 // var queryURL = "http://it-recruitment.mintel.com/testing/test_data.json";
 //     $.ajax({
