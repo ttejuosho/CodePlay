@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    console.log("READY");
+    console.log("SYSTEM READY");
 
     function calculateSalary(hourlyRate, hoursWorked){
         let overtimeHours = (hoursWorked - 40);
