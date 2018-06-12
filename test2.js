@@ -12,7 +12,6 @@ $(document).ready(function(){
         let taxRate = 0;
 
 
-        
     // Choose Tax Brackets based on Annual Pay to calculate Taxes
     if (annualPay < 9325){
         taxRate = 0.1;
@@ -35,7 +34,6 @@ $(document).ready(function(){
     let annualPayAfterTax = (annualPay - annualTax).toFixed(2);
     let biWeeklyPayAfterTax = (biWeeklyPay - biWeeklyTax).toFixed(2); 
     let taxRatePercent = (taxRate*100).toFixed(2);
-
 
     if (hoursWorked >= 40){
         $("#results").html(`
@@ -61,7 +59,6 @@ $(document).ready(function(){
 
     }
 
-
 $("#magic").on("click", function(){
     $("#results").show();
     // Save input values in variables
@@ -76,8 +73,6 @@ $("#magic").on("click", function(){
     $("#hourlyRate").val("");
 
 });
-
-
 
 
 });
