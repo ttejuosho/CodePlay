@@ -29,73 +29,51 @@ $(document).ready(function(){
         taxRate = 0.396;
     }
 
+    let workStatus = "Full Time";
     let annualTax = (taxRate*annualPay).toFixed(2);
     let biWeeklyTax = (biWeeklyPay*taxRate).toFixed(2);
     let annualPayAfterTax = (annualPay - annualTax).toFixed(2);
     let biWeeklyPayAfterTax = (biWeeklyPay - biWeeklyTax).toFixed(2); 
     let taxRatePercent = (taxRate*100).toFixed(2);
 
-    if (hoursWorked >= 40){
-        $("#results").html(`
-            If you earn $${hourlyRate}/hour and you work Full Time (${hoursWorked}),<br> 
-            Bi-weekly pay: $${biWeeklyPay}, <br>
-            Monthly Pay: $${monthlyPay}, <br>  
-            At a tax rate of ${taxRatePercent}%, <br> 
-            You'll get approximately $${biWeeklyPayAfterTax} every 2 weeks <br> 
-            Annual Pay: $${annualPay}<br>
-            And you'll get $${annualPayAfterTax} yearly after tax.
-            `);
-    }
-    if (hoursWorked < 40){
-        $("#results").html(`
-            If you earn $${hourlyRate}/hour and you work Part Time (${hoursWorked}),<br> 
-            Bi-weekly pay: $${biWeeklyPay}, <br>  
-            Monthly Pay: $${monthlyPay}, <br>  
-            At a tax rate of ${taxRatePercent}%, <br> 
-            You'll get approximately $${biWeeklyPayAfterTax} every 2 weeks <br> 
-            Annual Pay: $${annualPay}<br>
-            And you'll get $${annualPayAfterTax} yearly after tax.
-                    `);
-        }
+    // set work status in report
+    if (hoursWorked < 40){  workStatus = "Part Time" }
 
+    // Render result to web page
+    $("#results").html(`
+        If you earn $${hourlyRate}/hour and you work ${workStatus} (${hoursWorked} hours),<br> 
+        Bi-weekly pay: $${biWeeklyPay}, <br>
+        Monthly Pay: $${monthlyPay}, <br>  
+        At a tax rate of ${taxRatePercent}%, <br> 
+        You'll get approximately $${biWeeklyPayAfterTax} every 2 weeks <br> 
+        Annual Pay: $${annualPay}<br>
+        And you'll get $${annualPayAfterTax} yearly after tax.
+        `);
     }
 
-$("#magic").on("click", function(){
+    // Add listener to calculate button to calculate and render results
+    $("#magic").on("click", function(){
 
-    // Save input values in variables
-    let hoursWorked = $("#hoursWorked").val();
-    let hourlyRate = $("#hourlyRate").val();
+        // Save input values in variables
+        let hoursWorked = $("#hoursWorked").val();
+        let hourlyRate = $("#hourlyRate").val();
 
+        if (hourlyRate === ""){
+            $("#hourlyRate").toggleClass("animated shake");
+        } 
+        else if (hoursWorked === ""){
+            $("#hoursWorked").toggleClass("animated shake");
 
-    // if ( $("#hourlyRate").hasClass('animated shake') ) {
-    //     $("#hourlyRate").removeClass('animated shake');
-    // } 
-    // else {
-    //     $("#hourlyRate").addClass("animated shake");
-    // }
+        } else {
+        $("#results").show();
 
-    // if ( $("#hoursWorked").hasClass('animated shake') ) {
-    //     $("#hoursWorked").removeClass('animated shake');
-    // } 
-    // else {
-    //     $("#hoursWorked").addClass("animated shake");
-    // }
+        // Call function to calculate income
+        calculateSalary(hourlyRate, hoursWorked);
 
-    if (hourlyRate === ""){
-        $("#hourlyRate").toggleClass("animated shake");
-    } 
-    else if (hoursWorked === ""){
-        $("#hoursWorked").toggleClass("animated shake");
-
-    } else {
-    $("#results").show();
-    // Call function to calculate income
-    calculateSalary(hourlyRate, hoursWorked);
-
-    // Clear form fields
-    $("#hoursWorked").val("");
-    $("#hourlyRate").val("");
-   }
+        // Clear form fields
+        $("#hoursWorked").val("");
+        $("#hourlyRate").val("");
+    }
 
 });
 

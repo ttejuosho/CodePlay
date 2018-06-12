@@ -1,0 +1,5 @@
+@media (max-width: 767px) {
+    .pageTitle {
+      font-size: 4rem !important; 
+    }
+}
