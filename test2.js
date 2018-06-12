@@ -37,7 +37,7 @@ $(document).ready(function(){
 
     if (hoursWorked >= 40){
         $("#results").html(`
-            If you earn $${hourlyRate}/hour and you work Full Time,<br> 
+            If you earn $${hourlyRate}/hour and you work Full Time (${hoursWorked}),<br> 
             Bi-weekly pay: $${biWeeklyPay}, <br>  
             At a tax rate of ${taxRatePercent}%, <br> 
             You'll get approximately $${biWeeklyPayAfterTax} every 2 weeks <br> 
@@ -47,7 +47,7 @@ $(document).ready(function(){
     }
     if (hoursWorked < 40){
         $("#results").html(`
-            If you earn $${hourlyRate}/hour and you work Part Time,<br> 
+            If you earn $${hourlyRate}/hour and you work Part Time (${hoursWorked}),<br> 
             Bi-weekly pay: $${biWeeklyPay}, <br>  
             At a tax rate of ${taxRatePercent}%, <br> 
             You'll get approximately $${biWeeklyPayAfterTax} every 2 weeks <br> 
@@ -56,23 +56,47 @@ $(document).ready(function(){
                     `);
         }
 
-
     }
 
 $("#magic").on("click", function(){
-    $("#results").show();
+
     // Save input values in variables
     let hoursWorked = $("#hoursWorked").val();
     let hourlyRate = $("#hourlyRate").val();
 
+
+    // if ( $("#hourlyRate").hasClass('animated shake') ) {
+    //     $("#hourlyRate").removeClass('animated shake');
+    // } 
+    // else {
+    //     $("#hourlyRate").addClass("animated shake");
+    // }
+
+    // if ( $("#hoursWorked").hasClass('animated shake') ) {
+    //     $("#hoursWorked").removeClass('animated shake');
+    // } 
+    // else {
+    //     $("#hoursWorked").addClass("animated shake");
+    // }
+
+    if (hourlyRate === ""){
+        $("#hourlyRate").toggleClass("animated shake");
+    } 
+    else if (hoursWorked === ""){
+        $("#hoursWorked").toggleClass("animated shake");
+
+    } else {
+    $("#results").show();
     // Call function to calculate income
     calculateSalary(hourlyRate, hoursWorked);
 
     // Clear form fields
     $("#hoursWorked").val("");
     $("#hourlyRate").val("");
+   }
 
 });
+
 
 
 });

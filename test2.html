@@ -4,37 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Pay Calc</title> 
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"> -->
     <link rel="stylesheet" href="animate.css">
 </head>
 <body>
-    <div class="container fadeInDown">
+    <div class="container">
         <center><h2>₦₦₦ Calculate Your Pay!! ₦₦₦</h2></center>
         <div class="jumbotron">
                 
             <form>
-                <div class="row">
+                <!-- <div class="row"> -->
                 <div class="col">
                     <label>Hourly Rate</label>
                     <input type="text" class="form-control" placeholder="Hourly Pay" id="hourlyRate">
                 </div>
+            <!-- </div> -->
+
+                <!-- <div class="row"> -->
                 <div class="col">
                         <label>Hours worked per week</label>
                     <input type="text" class="form-control" placeholder="Work Hours" id="hoursWorked">
                 </div>
+                <!-- </div> -->
+
                 </div>
             </form>
+
+         
             <br>
             <div class="row justify-content-center">
             <button id="magic" type="button" class="btn btn-outline-secondary align-items-center">Calculate</button>
             </div>
             
-        </div>
+       
         <small id="appInfo" class="form-text text-muted">PayCalc v1.3</small>
         <small id="appInfo" class="form-text text-muted">Now with tax deductions & overtime pay</small>
-        <div id="results" class="jumbotron fadeInDown">
-
-        </div>
+        <div id="results" class="jumbotron animated fadeInDown"></div>
     </div>
 
 
