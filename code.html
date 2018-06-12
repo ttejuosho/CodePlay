@@ -7,10 +7,11 @@
 </head>
 <body>
 
-  <button class="ac-category"  data-target="iosWidgets">iOS</button>
-  <button class="ac-category"  data-target="macWidgets">macOS</button>
+  <button id="jive-widgetframe-header_1269470" class="ac-category"  data-target="iosWidgets">Everything iOS</button>
+  <button id="jive-widgetframe-header_1269471" class="ac-category"  data-target="macWidgets">Everything macOS</button>
 
 <div class="container">
+
 <div id="jive-widgetframe_1269476" class="iosWidgets">
   <h1>Top Issues [iOS]</h1>
 </div>
@@ -26,7 +27,9 @@
 </div>
 
 </div>
+
 </body>
+
 <script
 src="https://code.jquery.com/jquery-3.3.1.js"
 integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -34,29 +37,47 @@ crossorigin="anonymous"></script>
 
 <script>
 
+// Hiding all Mac Widgets by default
+$("#jive-widgetframe_1269477").hide();
+$("#jive-widgetframe_1269479").hide();
 
-$(".macWidgets").hide();
+// Saving the iOS & macOS widget containers in a variable
+let iOSWidgetContainer = $('#jive-widgetframe-header_1269470');
+let macOSWidgetContainer = $('#jive-widgetframe-header_1269471');
 
-$('.ac-category').on( "click", function(e) {
-  
+
+// these functions shows and hide the approriate widgets by their ID
+
+function showIosWidgets(){
+  var id = $(this).attr("data-target");
+    if (id === "iosWidgets"){
+    $(".iosWidgets").show();
+    $(".macWidgets").hide();
+}}
+
+function showMacWidgets(){
   var id = $(this).attr("data-target");
   if (id === "macWidgets"){
-    $(".macWidgets").show();
-    $(".iosWidgets").hide();
-  } else {
-    $(".macWidgets").hide();
-    $(".iosWidgets").show();
-  }
-  
-});
+  $(".macWidgets").show();
+  $(".iosWidgets").hide();
+}}
 
-let iosAndMacButtons = document.getElementsByClassName("ac-category");
-let iosWidgets = document.getElementsByClassName("iosWidgets");
-let macWidgets = document.getElementsByClassName("macWidgets");
+// Setting up a listener on the iOS and MacOS icons to show widgets for whichever is clicked on
+iOSWidgetContainer.on( "click", showIosWidgets);
+macOSWidgetContainer.on( "click", showMacWidgets);
 
-document.getElementsByClassName("ac-category").onclick = function(){
-  console.log("lklk");
-}
+// let showIosWidgets = document.getElementById("kkk");
+// let showMacWidgets = document.getElementById("kkkk");
+// let iosWidgets = document.getElementByClassName("iosWidgets");
+// let macWidgets = document.getElementByClassName("macWidgets");
+
+// showIosWidgets.addEventListener("click", showWidgets);
+// showMacWidgets.addEventListener("click", showWidgets);
+
+
+
+
+
 
 // var queryURL = "http://it-recruitment.mintel.com/testing/test_data.json";
 //     $.ajax({
