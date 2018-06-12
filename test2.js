@@ -50,6 +50,7 @@ $(document).ready(function(){
         $("#results").html(`
             If you earn $${hourlyRate}/hour and you work Part Time (${hoursWorked}),<br> 
             Bi-weekly pay: $${biWeeklyPay}, <br>  
+            Monthly Pay: $${monthlyPay}, <br>  
             At a tax rate of ${taxRatePercent}%, <br> 
             You'll get approximately $${biWeeklyPayAfterTax} every 2 weeks <br> 
             Annual Pay: $${annualPay}<br>
