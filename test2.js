@@ -1,5 +1,7 @@
 $(document).ready(function(){
     console.log("SYSTEM READY");
+    let entryForm = $('#deductionsDiv');
+
     $("#results").hide();
     function calculateSalary(hourlyRate, hoursWorked){
         let overtimeHours = (hoursWorked - 40);
@@ -32,9 +34,10 @@ $(document).ready(function(){
     let workStatus = "Full Time";
     let annualTax = (taxRate*annualPay).toFixed(2);
     let biWeeklyTax = (biWeeklyPay*taxRate).toFixed(2);
-    let annualPayAfterTax = (annualPay - annualTax).toFixed(2);
+    let annualPayAfterTax = (annualPay - annualTax).toFixed(2).toLocaleString();
     let biWeeklyPayAfterTax = (biWeeklyPay - biWeeklyTax).toFixed(2); 
     let taxRatePercent = (taxRate*100).toFixed(2);
+    let number = 233487876.87;
 
     // set work status in report
     if (hoursWorked < 40){  workStatus = "Part Time" }
@@ -42,7 +45,7 @@ $(document).ready(function(){
     // Render result to web page
     $("#results").html(`
         If you earn $${hourlyRate}/hour and you work ${workStatus} (${hoursWorked} hours),<br> 
-        Bi-weekly pay: $${biWeeklyPay}, <br>
+        Bi-Weekly pay: $${biWeeklyPay}, <br>
         Monthly Pay: $${monthlyPay}, <br>  
         At a tax rate of ${taxRatePercent}%, <br> 
         You'll get approximately $${biWeeklyPayAfterTax} every 2 weeks <br> 
@@ -57,6 +60,8 @@ $(document).ready(function(){
         // Save input values in variables
         let hoursWorked = $("#hoursWorked").val();
         let hourlyRate = $("#hourlyRate").val();
+        let deduction = $('.deduction').val();
+        console.log(deduction);
 
         if (hourlyRate === ""){
             $("#hourlyRate").toggleClass("animated shake");
@@ -73,9 +78,33 @@ $(document).ready(function(){
         // Clear form fields
         $("#hoursWorked").val("");
         $("#hourlyRate").val("");
+        $('.deduction').val("");
     }
 
 });
+
+
+$(".addInputBox").on("click", function (){
+    let newInputDiv = $('<div>').addClass('col');
+
+    let beforeTaxCheckDiv = $('<div>').addClass('form-check');
+    let afterTaxCheckDiv = $('<div>').addClass('form-check');
+
+    let beforeTaxLabel = $('<label>').addClass('label', 'form-check-label Before Tax');
+    let afterTaxLabel = $('<label>').addClass('label', 'form-check-label After Tax');
+
+    let deductionInput = $('<input>').addClass('form-control deduction').attr('placeholder', 'Enter Deduction %');
+    let beforeTaxInput = $('<input>').addClass('form-check-input beforeTax').attr('type', 'checkbox');
+    let afterTaxInput = $('<input>').addClass('form-check-input afterTax').attr('type', 'checkbox');
+
+    let beforeTaxCheckBox = beforeTaxCheckDiv.append(beforeTaxInput).append(beforeTaxLabel);
+    let afterTaxCheckBox = afterTaxCheckDiv.append(afterTaxInput).append(afterTaxLabel);
+    let newFieldBox = newInputDiv.append(deductionInput);
+
+    entryForm.append(newFieldBox);
+    entryForm.append(newInputDiv).append(beforeTaxCheckBox);
+    entryForm.append(newInputDiv).append(afterTaxCheckBox);
+})
 
 
 
