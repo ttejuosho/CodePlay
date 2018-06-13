@@ -34,7 +34,7 @@ $(document).ready(function(){
     let workStatus = "Full Time";
     let annualTax = (taxRate*annualPay).toFixed(2);
     let biWeeklyTax = (biWeeklyPay*taxRate).toFixed(2);
-    let annualPayAfterTax = (annualPay - annualTax).toFixed(2).toLocaleString();
+    let annualPayAfterTax = (annualPay - annualTax).toFixed(2);
     let biWeeklyPayAfterTax = (biWeeklyPay - biWeeklyTax).toFixed(2); 
     let taxRatePercent = (taxRate*100).toFixed(2);
     let number = 233487876.87;
@@ -90,20 +90,25 @@ $(".addInputBox").on("click", function (){
     let beforeTaxCheckDiv = $('<div>').addClass('form-check');
     let afterTaxCheckDiv = $('<div>').addClass('form-check');
 
-    let beforeTaxLabel = $('<label>').addClass('label', 'form-check-label Before Tax');
-    let afterTaxLabel = $('<label>').addClass('label', 'form-check-label After Tax');
+    let beforeTaxLabel = $('<label>').addClass('form-check-label').text('Before Tax');
+    let afterTaxLabel = $('<label>').addClass('form-check-label').text('After Tax');
 
     let deductionInput = $('<input>').addClass('form-control deduction').attr('placeholder', 'Enter Deduction %');
     let beforeTaxInput = $('<input>').addClass('form-check-input beforeTax').attr('type', 'checkbox');
     let afterTaxInput = $('<input>').addClass('form-check-input afterTax').attr('type', 'checkbox');
 
     let beforeTaxCheckBox = beforeTaxCheckDiv.append(beforeTaxInput).append(beforeTaxLabel);
+    
     let afterTaxCheckBox = afterTaxCheckDiv.append(afterTaxInput).append(afterTaxLabel);
     let newFieldBox = newInputDiv.append(deductionInput);
 
+    
+    newInputDiv.append(beforeTaxCheckBox);
+    newInputDiv.append(afterTaxCheckBox);
+
     entryForm.append(newFieldBox);
-    entryForm.append(newInputDiv).append(beforeTaxCheckBox);
-    entryForm.append(newInputDiv).append(afterTaxCheckBox);
+    
+    // entryForm.append(newInputDiv).append(afterTaxCheckBox);
 })
 
 
