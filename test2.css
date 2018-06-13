@@ -7,8 +7,13 @@
 
 body{
   font-family: 'WhitneySSm-Book';
+  line-height: 1.8;
+  padding-top: 10px;
 }
 
+label{
+  margin-bottom: 0rem;
+}
 
 @media (max-width: 767px) {
     .pageTitle {
