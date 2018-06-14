@@ -2,6 +2,8 @@ $(document).ready(function(){
     console.log("SYSTEM READY");
 
     $("#results").hide();
+    $(".alert").hide();
+
     function calculateSalary(hourlyRate, hoursWorked, allowanceClaimed){
         let overtimeHours = (hoursWorked - 40);
         let overTimePay = (overtimeHours*hourlyRate*1.5);
@@ -39,7 +41,6 @@ $(document).ready(function(){
             weeklyTax = (taxableIncome*0.37) + 2898.10;
     }
 
-
     console.log(weeklyTax);
     let weeklyPayAfterTax = (weeklyPay - weeklyTax).toFixed(2);
     let biWeeklyPayAfterTax = (weeklyPayAfterTax*2).toFixed(2);
@@ -49,13 +50,6 @@ $(document).ready(function(){
     let monthlyTax = (biWeeklyTax*2).toFixed(2);
     let annualTax = (monthlyTax*12).toFixed(2);
     let workStatus = "Full Time";
-
-    
-    // let annualTax = (taxRate*annualPay).toFixed(2);
-    // let biWeeklyTax = (biWeeklyPay*taxRate).toFixed(2);
-    // let annualPayAfterTax = (annualPay - annualTax).toFixed(2);
-    // let biWeeklyPayAfterTax = (biWeeklyPay - biWeeklyTax).toFixed(2); 
-    // let taxRatePercent = (taxRate*100).toFixed(2);
 
     // set work status in report
     if (hoursWorked < 40){  workStatus = "Part Time" }
@@ -71,35 +65,43 @@ $(document).ready(function(){
         `);
     }
 
+    // End of function ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
     // Add listener to calculate button to calculate and render results
     $("#magic").on("click", function(){
 
         // Save input values in variables
         let hoursWorked = $("#hoursWorked").val();
         let hourlyRate = $("#hourlyRate").val();
+        let single = $('input[name="inlineRadioOptions"]:checked').val();
+        let married = $('input[name="inlineRadioOptions"]:checked').val();
         let allowanceClaimed = $('#allowanceClaimed').val();
         let deduction = $('.deduction').val();
 
-
+// Form Validation
         if (hourlyRate === ""){
             $("#hourlyRate").toggleClass("animated shake");
         } 
         else if (hoursWorked === ""){
             $("#hoursWorked").toggleClass("animated shake");
-
+        }  else if (allowanceClaimed === ""){
+            $("#allowanceClaimed").toggleClass("animated shake");
+        }  else if (single == undefined && married == undefined){
+            $(".alert").show();
         } else {
-        $("#results").show();
+                $(".alert").hide();
+                $("#results").show();
 
-        // Call function to calculate income
-        calculateSalary(hourlyRate, hoursWorked, allowanceClaimed);
-        console.log(deduction);
-        
-        // Clear form fields
-        $("#hoursWorked").val("");
-        $("#hourlyRate").val("");
-        $('#allowanceClaimed').val("");
-        $('.deduction').val("");
-    }
+                // Call function to calculate income
+                calculateSalary(hourlyRate, hoursWorked, allowanceClaimed);
+                // console.log(deduction);
+                
+                // Clear form fields
+                $("#hoursWorked").val("");
+                $("#hourlyRate").val("");
+                $('#allowanceClaimed').val("");
+                $('.deduction').val("");
+            }
 
 });
 
@@ -107,18 +109,20 @@ $(document).ready(function(){
 $(".addInputBox").on("click", function (){
     let entryForm = $('#deductionsDiv');
     let newInputDiv = $('<div>').addClass('col');
-    let beforeTaxCheckDiv = $('<div>').addClass('form-check');
-    let afterTaxCheckDiv = $('<div>').addClass('form-check');
+    let beforeTaxCheckDiv = $('<div>').addClass('form-check form-check-inline');
+    let afterTaxCheckDiv = $('<div>').addClass('form-check form-check-inline');
     let beforeTaxLabel = $('<label>').addClass('form-check-label').text('Before Tax');
     let afterTaxLabel = $('<label>').addClass('form-check-label').text('After Tax');
     let deductionInput = $('<input>').addClass('form-control deduction').attr('placeholder', 'Enter Deduction %');
-    let beforeTaxInput = $('<input>').addClass('form-check-input beforeTax disabled').attr('type', 'checkbox');
-    let afterTaxInput = $('<input>').addClass('form-check-input afterTax').attr('type', 'checkbox');
+    let beforeTaxInput = $('<input>').addClass('form-check-input beforeTax').attr('type', 'radio').attr('name', 'beforeAfterTax');
+    let afterTaxInput = $('<input>').addClass('form-check-input afterTax').attr('type', 'radio').attr('name', 'beforeAfterTax');
     let beforeTaxCheckBox = beforeTaxCheckDiv.append(beforeTaxInput).append(beforeTaxLabel);  
     let afterTaxCheckBox = afterTaxCheckDiv.append(afterTaxInput).append(afterTaxLabel);
-    let newFieldBox = newInputDiv.append(deductionInput);  
+    let newFieldBox = newInputDiv.append(deductionInput);
+    let removeDeductionButton = $('<button>').addClass('removeDeduction btn btn-outline-danger btn-sm').text("x");
     newInputDiv.append(beforeTaxCheckBox);
     newInputDiv.append(afterTaxCheckBox);
+    newInputDiv.append(removeDeductionButton);
     entryForm.append(newFieldBox);
 })
 });

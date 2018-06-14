@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Pay Calc</title>     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" href="animate.css">
     <link rel="stylesheet" href="test2.css">
 </head>
@@ -12,6 +12,7 @@
     <div class="container">
         <center class="pageTitle"><h2>₦₦₦ Calculate Your Pay!! ₦₦₦</h2></center>
         <div class="jumbotron">   
+                <div class="alert alert-danger" role="alert">Single or Married nko</div>
             <form>
                 <div class="col">
                     <label>Hourly Rate</label>
@@ -24,18 +25,29 @@
                 <div class="col">
                     <label>Allowance Claimed</label>
                     <input type="text" class="form-control" placeholder="Enter number of allowance(s) claimed" id="allowanceClaimed">
-                    <br>
+                    
+                </div>
+                <div class="col">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="maritalStatus" value="option1">
+                        <label class="form-check-label" for="single">Single</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="maritalStatus" value="option2">
+                        <label class="form-check-label" for="married">Married</label>
+                      </div>
+                 
                 </div>
                 <div id="deductionsDiv"></div>            
             </form>          
                 <div class="col"> 
-                    <p class="addInputBox"><a>Add deductions</a></p> 
+                    <span class="addInputBox"><button class="btn btn-outline-success">Add Deductions +</button></span>
                 </div>           
             <br>
             <div class="row justify-content-center">
             <button id="magic" type="button" class="btn btn-outline-secondary align-items-center">Calculate</button>
             </div>   
-        <small id="appInfo" class="form-text text-muted">PayCalc v1.4</small>
+        <small id="appInfo" class="form-text text-muted">PayCalc v1.5</small>
         <small id="appInfo" class="form-text text-muted">Now with tax deductions & overtime pay</small>
         <div id="results" class="jumbotron animated fadeIn"></div>
     </div>

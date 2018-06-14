@@ -13,6 +13,16 @@ label{
   margin-bottom: 0rem;
 }
 
+.col{
+  padding: 2px;
+}
+
+.btn-sm {
+  padding: .2rem .9rem !important;
+  line-height: 0.8 !important;
+  border-radius: .2rem !important;
+}
+
 @media (max-width: 767px) {
     .pageTitle {
       font-size: 4rem !important; 
