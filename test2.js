@@ -6,7 +6,7 @@ $(document).ready(function(){
             var setBodyScale = function() {
                 var scaleSource = $body.width(),
                     scaleFactor = 0.2,                     
-                    maxScale = 100,
+                    maxScale = 600,
                     minScale = 10; //Tweak these values to taste
 
                 var fontSize = scaleSource * scaleFactor; //Multiply the width of the body by the scaling factor:
@@ -90,7 +90,7 @@ $(document).ready(function(){
     //         weeklyTax = (taxableIncome*0.37) + 3103.57;
     // }
 
-    console.log(weeklyTax);
+    // console.log(weeklyTax);
     let weeklyPayAfterTax = (weeklyPay - weeklyTax).toFixed(2);
     let biWeeklyPayAfterTax = (weeklyPayAfterTax*2).toFixed(2);
     let monthlyPayAfterTax = (biWeeklyPayAfterTax*2).toFixed(2);
@@ -122,11 +122,12 @@ $(document).ready(function(){
         // Save input values in variables
         let hoursWorked = $("#hoursWorked").val();
         let hourlyRate = $("#hourlyRate").val();
-        let single = $('input[name="inlineRadioOptions"]:checked').val();
-        let married = $('input[name="inlineRadioOptions"]:checked').val();
+        let single = $('input[name="maritalStatus"]:checked').val();
+        let married = $('input[name="maritalStatus"]:checked').val();
         let allowanceClaimed = $('#allowanceClaimed').val();
         let deduction = $('.deduction').val();
 
+        
 // Form Validation
         if (hourlyRate === ""){
             $("#hourlyRate").toggleClass("animated shake");
@@ -135,22 +136,24 @@ $(document).ready(function(){
             $("#hoursWorked").toggleClass("animated shake");
         }  else if (allowanceClaimed === ""){
             $("#allowanceClaimed").toggleClass("animated shake");
-        }  else if (single == undefined && married == undefined){
+        }  else if (single === undefined && married === undefined){
             $(".alert").show();
-        } else {
-                $(".alert").hide();
-                $("#results").show();
+        } else 
+        
+        {
+            $(".alert").hide();
+            $("#results").show();
 
-                // Call function to calculate income
-                calculateSalary(hourlyRate, hoursWorked, allowanceClaimed);
-                // console.log(deduction);
-                
-                // Clear form fields
-                $("#hoursWorked").val("");
-                $("#hourlyRate").val("");
-                $('#allowanceClaimed').val("");
-                $('.deduction').val("");
-            }
+            // Call function to calculate income
+            calculateSalary(hourlyRate, hoursWorked, allowanceClaimed);
+            // console.log(deduction);
+            
+            // Clear form fields
+            $("#hoursWorked").val("");
+            $("#hourlyRate").val("");
+            $('#allowanceClaimed').val("");
+            $('.deduction').val("");
+        }
 
 });
 
