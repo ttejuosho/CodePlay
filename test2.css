@@ -9,6 +9,11 @@ body{
   padding-top: 10px;
 }
 
+h2 {
+  font-weight: 700 !important;
+  font-size: 3rem !important;
+}
+
 label{
   margin-bottom: 0rem;
 }
