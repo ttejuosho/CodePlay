@@ -23,8 +23,14 @@ label{
   border-radius: .2rem !important;
 }
 
-@media (max-width: 767px) {
+@media (min-width: 767px) {
     .pageTitle {
       font-size: 4rem !important; 
     }
+}
+
+@media (min-width: 576px){
+  .container{
+    max-width: 540px;
+  }
 }
