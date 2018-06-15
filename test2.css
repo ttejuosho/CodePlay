@@ -9,11 +9,6 @@ body{
   padding-top: 10px;
 }
 
-h2 {
-  font-weight: 700 !important;
-  font-size: 3rem !important;
-}
-
 label{
   margin-bottom: 0rem;
 }
@@ -26,16 +21,4 @@ label{
   padding: .2rem .9rem !important;
   line-height: 0.8 !important;
   border-radius: .2rem !important;
-}
-
-@media (min-width: 767px) {
-    .pageTitle {
-      font-size: 4rem !important; 
-    }
-}
-
-@media (min-width: 576px){
-  .container{
-    max-width: 540px;
-  }
 }

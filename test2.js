@@ -1,6 +1,31 @@
 $(document).ready(function(){
     console.log("SYSTEM READY");
 
+    var $body = $('body'); //Cache this for performance
+
+            var setBodyScale = function() {
+                var scaleSource = $body.width(),
+                    scaleFactor = 0.2,                     
+                    maxScale = 100,
+                    minScale = 10; //Tweak these values to taste
+
+                var fontSize = scaleSource * scaleFactor; //Multiply the width of the body by the scaling factor:
+
+                if (fontSize > maxScale) fontSize = maxScale;
+                if (fontSize < minScale) fontSize = minScale; //Enforce the minimum and maximums
+
+                $('body').css('font-size', fontSize + '%');
+            }
+
+            $(window).resize(function(){
+                setBodyScale();
+            });
+
+            //Fire it when the page first loads:
+            setBodyScale();
+
+
+
     $("#results").hide();
     $(".alert").hide();
 
@@ -40,6 +65,30 @@ $(document).ready(function(){
         let taxableIncome = (amtSubjectToWithholding - 9687);
             weeklyTax = (taxableIncome*0.37) + 2898.10;
     }
+
+    // Choose Tax Brackets based on Annual Pay to calculate Taxes
+    // if ( amtSubjectToWithholding > 222 && amtSubjectToWithholding < 588 ){
+    //     let taxableIncome = (amtSubjectToWithholding - 222);
+    //         weeklyTax = (taxableIncome*0.1);
+    // } else if ( amtSubjectToWithholding > 588  && amtSubjectToWithholding < 1711 ){
+    //     let taxableIncome = (amtSubjectToWithholding - 588);
+    //         weeklyTax = (taxableIncome*0.12) + 36.60;
+    // } else if ( amtSubjectToWithholding > 1711  && amtSubjectToWithholding < 3395 ){
+    //     let taxableIncome = (amtSubjectToWithholding - 1711);
+    //         weeklyTax = (taxableIncome*0.22) + 171.36;
+    // } else if ( amtSubjectToWithholding > 3395  && amtSubjectToWithholding < 6280 ){
+    //     let taxableIncome = (amtSubjectToWithholding - 3395);
+    //         weeklyTax = (taxableIncome*0.24) + 541.84;
+    // } else if ( amtSubjectToWithholding > 6280  && amtSubjectToWithholding < 7914 ){
+    //     let taxableIncome = (amtSubjectToWithholding - 6280);
+    //         weeklyTax = (taxableIncome*0.32) + 1234.24;
+    // }  else if ( amtSubjectToWithholding > 7914  && amtSubjectToWithholding < 11761 ){
+    //     let taxableIncome = (amtSubjectToWithholding - 7914);
+    //         weeklyTax = (taxableIncome*0.35) + 1757.12;
+    // } else {
+    //     let taxableIncome = (amtSubjectToWithholding - 11761);
+    //         weeklyTax = (taxableIncome*0.37) + 3103.57;
+    // }
 
     console.log(weeklyTax);
     let weeklyPayAfterTax = (weeklyPay - weeklyTax).toFixed(2);
