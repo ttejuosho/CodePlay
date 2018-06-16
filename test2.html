@@ -18,10 +18,28 @@
                     <label>Hourly Rate</label>
                     <input type="text" class="form-control" placeholder="Hourly Pay" id="hourlyRate">
                 </div>
+
+               
+
                 <div class="col">
-                    <label>Hours worked per week</label>
+                    <label>Hours Worked</label>
                     <input type="text" class="form-control" placeholder="Work Hours" id="hoursWorked">
                 </div>
+
+                <div class="col">
+                    <label>Select Pay Period</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="payPeriod" value="weekly" checked>
+                        <label class="form-check-label" for="weekly">Weekly</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="payPeriod" value="biWeekly">
+                        <label class="form-check-label" for="biWeekly">Bi-Weekly</label>
+                    </div>
+                </div>
+
+             
+                
                 <div class="col">
                     <label>Allowance Claimed</label>
                     <input type="text" class="form-control" placeholder="Enter number of allowance(s) claimed" id="allowanceClaimed">
@@ -29,7 +47,7 @@
                 </div>
                 <div class="col">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="maritalStatus" value="single">
+                        <input class="form-check-input" type="radio" name="maritalStatus" value="single" checked>
                         <label class="form-check-label" for="single">Single</label>
                       </div>
                       <div class="form-check form-check-inline">

@@ -7,6 +7,11 @@ body{
   font-family: 'WhitneySSm-Book';
   line-height: 1.8;
   padding-top: 10px;
+  margin: 0 auto;
+}
+
+label{
+  margin-right: .5rem;
 }
 
 .col{
@@ -19,9 +24,9 @@ body{
   border-radius: .2rem !important;
 }
 
-@media (min-width: 675px){
+/* @media (min-width: 675px){
   body{ font-size: 2.5rem;
         max-width: 650px; }
-  h2{ font-size: 3rem !important; }
+  h2{ font-size: 2.5rem !important; }
 
-}
+} */

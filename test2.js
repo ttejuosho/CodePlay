@@ -36,7 +36,7 @@ $(document).ready(function(){
         let totalAllowance = (allowanceClaimed*79.8).toFixed(2);
         let amtSubjectToWithholding = (weeklyPay - totalAllowance).toFixed(2);
         let biWeeklyPay = (weeklyPay*2).toFixed(2);
-        let monthlyPay = (biWeeklyPay*2).toFixed(2);
+        let monthlyPay = (weeklyFTPay*4).toFixed(2);
         let annualPay = (weeklyFTPay*52).toFixed(2);
         let weeklyWithheldTax = 0;
         console.log(maritalStatus, "with " , allowanceClaimed, "Allowance Claimed");
@@ -118,7 +118,7 @@ if ( maritalStatus === "single" ){
         Monthly Gross Pay: $${monthlyPay}, <br>  
         You'll get approximately $${biWeeklyPayAfterTax} every 2 weeks <br> 
         Annual Pay: $${annualPay}<br>
-        And you'll get $${annualPayAfterTax} yearly after tax.
+        Annual Pay After Tax: $${annualPayAfterTax}.
         `);
     }
 
