@@ -24,8 +24,6 @@ $(document).ready(function(){
             //Fire it when the page first loads:
             setBodyScale();
 
-
-
     $("#results").hide();
     $(".alert").hide();
 
@@ -41,12 +39,12 @@ $(document).ready(function(){
         let monthlyPay = (biWeeklyPay*2).toFixed(2);
         let annualPay = (weeklyFTPay*52).toFixed(2);
         let weeklyWithheldTax = 0;
-        console.log(maritalStatus, "with " , allowanceClaimed, " Allowance Claimed");
+        console.log(maritalStatus, "with " , allowanceClaimed, "Allowance Claimed");
        
         
 if ( maritalStatus === "single" ){
 
-    // Choose Tax Brackets based on Annual Pay to calculate Taxes
+    // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Singles
     if ( amtSubjectToWithholding > 71 && amtSubjectToWithholding < 254 ){
         let taxableIncome = (amtSubjectToWithholding - 71);
             weeklyWithheldTax = taxableIncome*0.1;
@@ -74,7 +72,7 @@ if ( maritalStatus === "single" ){
 
 } else if ( maritalStatus === "married") { 
 
-    // Choose Tax Brackets based on Annual Pay to calculate Taxes
+    // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Married
     if ( amtSubjectToWithholding > 222 && amtSubjectToWithholding < 588 ){
         let taxableIncome = (amtSubjectToWithholding - 222);
             weeklyWithheldTax = (taxableIncome*0.1);
