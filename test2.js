@@ -28,7 +28,7 @@ $(document).ready(function(){
     $(".alert").hide();
 
     function calculateSalary(hourlyRate, hoursWorked, allowanceClaimed, maritalStatus){
-        let payPeriod = $('input[name="payPeriod"]:checked');
+        let payPeriod = $('input[name="payPeriod"]:checked').val();
 
         if (payPeriod === 'weekly'){ 
             let overtimeHours = (hoursWorked - 40);
