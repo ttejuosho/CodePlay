@@ -28,10 +28,18 @@ $(document).ready(function(){
     $(".alert").hide();
 
     function calculateSalary(hourlyRate, hoursWorked, allowanceClaimed, maritalStatus){
-        
-        let overtimeHours = (hoursWorked - 40);
-        let overTimePay = (overtimeHours*hourlyRate*1.5);
-        let weeklyFTPay = (hourlyRate*40);
+        let payPeriod = $('input[name="payPeriod"]:checked');
+
+        if (payPeriod === 'weekly'){ 
+            let overtimeHours = (hoursWorked - 40);
+            let weeklyFTPay = (hourlyRate*40);
+         } else {
+             overtimeHours = (hoursWorked - 80);
+             weeklyFTPay = (hourlyRate*80);
+         }
+        console.log(payPeriod);
+         
+        let overTimePay = (overtimeHours*hourlyRate*1.5);   
         let weeklyPay = (weeklyFTPay + overTimePay);
         let totalAllowance = (allowanceClaimed*79.8).toFixed(2);
         let amtSubjectToWithholding = (weeklyPay - totalAllowance).toFixed(2);

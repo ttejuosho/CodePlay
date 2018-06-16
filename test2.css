@@ -24,6 +24,9 @@ label{
   border-radius: .2rem !important;
 }
 
+.appInfo{
+  font-size: 0.8rem !important;
+}
 /* @media (min-width: 675px){
   body{ font-size: 2.5rem;
         max-width: 650px; }
