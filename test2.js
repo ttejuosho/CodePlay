@@ -27,27 +27,34 @@ $(document).ready(function(){
     $("#results").hide();
     $(".alert").hide();
 
-    function calculateSalary(hourlyRate, hoursWorked, allowanceClaimed, maritalStatus){
+    function calculateSalary(hourlyRate, hoursWorked){
         let payPeriod = $('input[name="payPeriod"]:checked').val();
+        let maritalStatus = $('input[name="maritalStatus"]:checked').val();
+        let allowanceClaimed = $('#allowanceClaimed').val();
+        let overtimeHours;
 
-        if (payPeriod === 'weekly'){ 
-            let overtimeHours = (hoursWorked - 40);
-            let weeklyFTPay = (hourlyRate*40);
+        if ( payPeriod === 'weekly' ){ 
+            overtimeHours = (hoursWorked - 40);
          } else {
-             overtimeHours = (hoursWorked - 80);
-             weeklyFTPay = (hourlyRate*80);
+            overtimeHours = (hoursWorked - 80);  
          }
-        console.log(payPeriod);
-         
-        let overTimePay = (overtimeHours*hourlyRate*1.5);   
+
+        let weeklyFTPay = (hourlyRate*40).toFixed(2);
+        let overTimePay = (overtimeHours*hourlyRate*1.5);
+        let biWeeklyFTPay = (weeklyFTPay*2).toFixed(2);  
         let weeklyPay = (weeklyFTPay + overTimePay);
-        let totalAllowance = (allowanceClaimed*79.8).toFixed(2);
-        let amtSubjectToWithholding = (weeklyPay - totalAllowance).toFixed(2);
         let biWeeklyPay = (weeklyPay*2).toFixed(2);
-        let monthlyPay = (weeklyFTPay*4).toFixed(2);
-        let annualPay = (weeklyFTPay*52).toFixed(2);
+        let monthlyPay = (biWeeklyFTPay*2).toFixed(2);
+        let totalAllowance = (allowanceClaimed*79.8).toFixed(2);
+        let amtSubjectToWithholding = (biWeeklyPay - totalAllowance).toFixed(2);
+        let annualPay = (monthlyPay*12).toFixed(2);
         let weeklyWithheldTax = 0;
+        
         console.log(maritalStatus, "with " , allowanceClaimed, "Allowance Claimed");
+        console.log(payPeriod, "Pay Period");
+        console.log(weeklyPay, weeklyFTPay, biWeeklyFTPay, biWeeklyPay);
+        console.log(overtimeHours, overTimePay);
+        console.log(monthlyPay, annualPay);
        
         
 if ( maritalStatus === "single" ){
@@ -115,7 +122,8 @@ if ( maritalStatus === "single" ){
     let annualTax = (monthlyTax*12).toFixed(2);
     let workStatus = "Full Time";
 
-    console.log(weeklyWithheldTax, "wwt");
+    console.log(weeklyWithheldTax, "WWT");
+    console.log(biWeeklyTax, "BWT");
     // set work status in report
     if (hoursWorked < 40){  workStatus = "Part Time" }
 
@@ -138,8 +146,6 @@ if ( maritalStatus === "single" ){
         // Save input values in variables
         let hoursWorked = $("#hoursWorked").val();
         let hourlyRate = $("#hourlyRate").val();
-        let allowanceClaimed = $('#allowanceClaimed').val();
-        let maritalStatus = $('input[name="maritalStatus"]:checked').val();
         let deduction = $('.deduction').val();
 
         
@@ -150,7 +156,7 @@ if ( maritalStatus === "single" ){
             $("#hoursWorked").toggleClass("animated shake");
         }  else if (allowanceClaimed === ""){
             $("#allowanceClaimed").toggleClass("animated shake");
-        }  else if ( maritalStatus === undefined ){
+        }  else if ( maritalStatus = undefined ){
             $(".alert").show();
         }  else 
         
@@ -159,7 +165,7 @@ if ( maritalStatus === "single" ){
             $("#results").show();
 
             // Call function to calculate income
-            calculateSalary(hourlyRate, hoursWorked, allowanceClaimed, maritalStatus);
+            calculateSalary(hourlyRate, hoursWorked);
             // console.log(deduction);
             
             // Clear form fields
