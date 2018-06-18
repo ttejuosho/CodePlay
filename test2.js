@@ -50,7 +50,7 @@ $(document).ready(function(){
         let annualPay = (monthlyPay*12).toFixed(2);
         let weeklyWithheldTax = 0;
         
-        console.log(maritalStatus, "with " , allowanceClaimed, "Allowance Claimed");
+        console.log(maritalStatus, "with" , allowanceClaimed, "Allowance Claimed");
         console.log(payPeriod, "Pay Period");
         console.log(weeklyPay, weeklyFTPay, biWeeklyFTPay, biWeeklyPay);
         console.log(overtimeHours, overTimePay);
