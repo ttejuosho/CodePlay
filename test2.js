@@ -113,7 +113,7 @@ if ( maritalStatus === "single" ){
     
 }
     // console.log(weeklyWithheldTax);
-    let weeklyPayAfterTax = (weeklyPay - weeklyWithheldTax).toFixed(2);
+    let weeklyPayAfterTax = (weeklyPay - weeklyWithheldTax);
     let biWeeklyPayAfterTax = (weeklyPayAfterTax*2).toFixed(2);
     let monthlyPayAfterTax = (biWeeklyPayAfterTax*2).toFixed(2);
     let annualPayAfterTax = (monthlyPayAfterTax*12).toFixed(2);
