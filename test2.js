@@ -27,40 +27,56 @@ $(document).ready(function(){
     $("#results").hide();
     $(".alert").hide();
 
-    function calculateSalary(hourlyRate, hoursWorked){
+    function calculateSalary(hourlyRate, hoursWorked, deductionPercent){
+        let workStatus = "Full Time";
         let payPeriod = $('input[name="payPeriod"]:checked').val();
         let maritalStatus = $('input[name="maritalStatus"]:checked').val();
         let allowanceClaimed = $('#allowanceClaimed').val();
-        let beforeAfterTax = $('input[name="beforeAfterTax"]:checked').val();
-        let overtimeHours;
-
-        if ( payPeriod === 'weekly' ){ 
-            overtimeHours = (hoursWorked - 40);
-         } else {
-            overtimeHours = (hoursWorked - 80);  
-         }
-
+        let overtimeHours = (hoursWorked - 80);
+        let deductionInput = $('input[name="beforeAfterTax"]:checked').val();
+        
+        
+        if ( payPeriod === 'weekly' ){ overtimeHours = (hoursWorked - 40); }
         let weeklyFTPay = hourlyRate*40;
-        let overTimePay = (overtimeHours*hourlyRate)*1.5;
-        let biWeeklyFTPay = weeklyFTPay*2;  
-        let weeklyPay = weeklyFTPay + overTimePay;
-        let biWeeklyPay = (weeklyPay*2).toFixed(2);
+        let overTimePay = overtimeHours*hourlyRate*1.5;
+        let biWeeklyFTPay = weeklyFTPay*2;
+        let weeklyPayBeforeDeduction = weeklyFTPay + overTimePay;
+        let deductions = weeklyPayBeforeDeduction*(deductionPercent/100);
+
+        if ( deductionInput === undefined )
+            { deductions = 0 } 
+        else if (deductionInput === "After Tax") {
+            let weeklyPayAfterTax = weeklyPay - weeklyWithheldTax;
+            deductions = weeklyPayAfterTax*(deductionPercent/100);          
+        }
+        
+
+ 
+
+        
+        
+        let weeklyPay = (weeklyPayBeforeDeduction - deductions);
+        
+        console.log(deductionInput);
+        console.log(weeklyPayBeforeDeduction, deductions);
+
+
+        let biWeeklyPay = (weeklyPayBeforeDeduction*2).toFixed(2);
         let monthlyPay = (biWeeklyFTPay*2).toFixed(2);
         let totalAllowance = (allowanceClaimed*79.8).toFixed(2);
         let amtSubjectToWithholding = (biWeeklyPay - totalAllowance);
         let annualPay = (monthlyPay*12).toFixed(2);
         let weeklyWithheldTax = 0;
         
+
+        console.log(weeklyPay, weeklyFTPay, biWeeklyFTPay, biWeeklyPay);
+        console.log(hourlyRate, overtimeHours, overTimePay);
+        console.log(monthlyPay, annualPay);
         console.log(maritalStatus, "with" , allowanceClaimed, "Allowance Claimed");
         console.log(payPeriod, "Pay Period");
-        console.log(weeklyPay, weeklyFTPay, biWeeklyFTPay, biWeeklyPay);
-        console.log(overtimeHours, overTimePay);
-        console.log(monthlyPay, annualPay);
-        console.log(beforeAfterTax);
        
         
 if ( maritalStatus === "single" ){
-
     // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Singles
     if ( amtSubjectToWithholding > 71 && amtSubjectToWithholding < 254 ){
         let taxableIncome = (amtSubjectToWithholding - 71);
@@ -88,7 +104,6 @@ if ( maritalStatus === "single" ){
     }
 
 } else if ( maritalStatus === "married") { 
-
     // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Married
     if ( amtSubjectToWithholding > 222 && amtSubjectToWithholding < 588 ){
         let taxableIncome = (amtSubjectToWithholding - 222);
@@ -115,22 +130,19 @@ if ( maritalStatus === "single" ){
     
 }
 
-    // if (beforeAfterTax === "Before Tax"){
-
-    // }
-
-    let weeklyPayAfterTax = (weeklyPay - weeklyWithheldTax);
-    let biWeeklyPayAfterTax = (weeklyPayAfterTax*2).toFixed(2);
-    let monthlyPayAfterTax = (biWeeklyPayAfterTax*2).toFixed(2);
-    let annualPayAfterTax = (monthlyPayAfterTax*12).toFixed(2);
-    let biWeeklyTax = (weeklyWithheldTax*2).toFixed(2);
-    let monthlyTax = (biWeeklyTax*2).toFixed(2);
-    let annualTax = (monthlyTax*12).toFixed(2);
-    let workStatus = "Full Time";
-
-    console.log(weeklyWithheldTax, "WWT");
-    console.log(biWeeklyTax, "BWT");
-
+        let weeklyPayAfterTax = weeklyPay - weeklyWithheldTax;
+            weeklyPayAfterTax = weeklyPayAfterTax - deductions;
+        let biWeeklyPayAfterTax = (weeklyPayAfterTax*2).toFixed(2);
+        let monthlyPayAfterTax = (biWeeklyPayAfterTax*2).toFixed(2);
+        let annualPayAfterTax = (monthlyPayAfterTax*12).toFixed(2);
+        let biWeeklyTax = (weeklyWithheldTax*2).toFixed(2);
+        let monthlyTax = (biWeeklyTax*2).toFixed(2);
+        let annualTax = (monthlyTax*12).toFixed(2);
+        console.log(deductions, deductionPercent, weeklyPayAfterTax);
+        console.log(maritalStatus, weeklyWithheldTax, "WWT");
+        console.log(biWeeklyTax, "BWT");
+        console.log('=======================================================================');
+        console.log('=======================================================================');
     // set work status in report
     if (hoursWorked < 40){  workStatus = "Part Time" }
 
@@ -145,15 +157,16 @@ if ( maritalStatus === "single" ){
         `);
     }
 
-    // End of function ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// End of CalcSalary Function ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    // Add listener to calculate button to calculate and render results
+
+// Add listener to calculate button to calculate and render results
     $("#magic").on("click", function(){
-
         // Save input values in variables
         let hoursWorked = $("#hoursWorked").val();
         let hourlyRate = $("#hourlyRate").val();
-        let deduction = $('.deduction').val();
+        let deductionPercent = $('.deduction').val();
+        
 
         
 // Form Validation
@@ -172,8 +185,8 @@ if ( maritalStatus === "single" ){
             $("#results").show();
 
             // Call function to calculate income
-            calculateSalary(hourlyRate, hoursWorked);
-            console.log("Deduction of", deduction+"%");
+            calculateSalary(hourlyRate, hoursWorked, deductionPercent);
+            // console.log("Deduction of", deductionPercent + "%");
             
             // Clear form fields
             $("#hoursWorked").val("");
@@ -192,12 +205,12 @@ $(".addInputBox").on("click", function (){
     let afterTaxCheckDiv = $('<div>').addClass('form-check form-check-inline');
     let beforeTaxLabel = $('<label>').addClass('form-check-label').text('Before Tax');
     let afterTaxLabel = $('<label>').addClass('form-check-label').text('After Tax');
-    let deductionInput = $('<input>').addClass('form-control deduction').attr('placeholder', 'Enter Deduction %');
+    let deductionBox = $('<input>').addClass('form-control deduction').attr('placeholder', 'Enter Deduction %');
     let beforeTaxInput = $('<input>').addClass('form-check-input beforeTax').attr('type', 'radio').attr('name', 'beforeAfterTax').attr('value', 'Before Tax');
-    let afterTaxInput = $('<input>').addClass('form-check-input afterTax').attr('type', 'radio').attr('name', 'beforeAfterTax').attr('value', 'After Tax');
+    let afterTaxInput = $('<input checked>').addClass('form-check-input afterTax').attr('type', 'radio').attr('name', 'beforeAfterTax').attr('value', 'After Tax');
     let beforeTaxCheckBox = beforeTaxCheckDiv.append(beforeTaxInput).append(beforeTaxLabel);  
     let afterTaxCheckBox = afterTaxCheckDiv.append(afterTaxInput).append(afterTaxLabel);
-    let newFieldBox = newInputDiv.append(deductionInput);
+    let newFieldBox = newInputDiv.append(deductionBox);
     let removeDeductionButton = $('<button>').addClass('removeDeduction btn btn-outline-danger btn-sm').text("x");
     newInputDiv.append(beforeTaxCheckBox);
     newInputDiv.append(afterTaxCheckBox);
