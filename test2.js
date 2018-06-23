@@ -154,7 +154,8 @@ if ( maritalStatus === "single" ){
         // Round to 2 Decimal Places
         biWeeklyFTPay = biWeeklyFTPay.toFixed(2);
         overTimePay = overTimePay.toFixed(2);
-
+        let numeroUNO = numeral(biWeeklyFTPay).format('0,0');
+        console.log(numeroUNO);
     // Render result to web page
     $("#results").html(`
         <table class="table table-striped">
@@ -178,31 +179,31 @@ if ( maritalStatus === "single" ){
     </tr>
     <tr>
     <td>Full Time Pay</td>
-    <td>$${biWeeklyFTPay}</td>
+    <td>$${numeral(biWeeklyFTPay).format('0,0')}</td>
     </tr>
     <tr>
     <td>Overtime Pay</td>
-    <td>$${overTimePay}</td>
+    <td>$${numeral(overTimePay).format('0,0')}</td>
   </tr>
   <tr>
   <td>Gross Pay</td>
-  <td>$${biWeeklyPay}</td>
+  <td>$${numeral(biWeeklyPay).format('0,0')}</td>
 </tr>
 <tr>
 <td>Tax Deductions</td>
-<td>$${biWeeklyTax}</td>
+<td>$${numeral(biWeeklyTax).format('0,0')}</td>
 </tr>
 <tr>
 <td>After Tax Pay</td>
-<td>$${biWeeklyPayAfterTax}</td>
+<td>$${numeral(biWeeklyPayAfterTax).format('0,0')}</td>
 </tr>
 <tr>
 <td>Total Deductions</td>
-<td>$${biWeeklyDeduction}</td>
+<td>$${numeral(biWeeklyDeduction).format('0,0')}</td>
 </tr>
 <tr>
 <td>Annual Income</td>
-<td>$${annualPay}</td>
+<td>$${numeral(annualPay).format('0,0')}</td>
 </tr>
   </tbody>
 </table>
