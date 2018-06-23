@@ -39,7 +39,7 @@ $(document).ready(function(){
         if ( payPeriod === 'weekly' ){ overtimeHours = (hoursWorked - 40); }
         let weeklyFTPay = hourlyRate*40;
         let overTimePay = overtimeHours*hourlyRate*1.5;
-        let biWeeklyFTPay = weeklyFTPay*2;
+        let biWeeklyFTPay = (weeklyFTPay*2);
         let payBeforeDeduction = weeklyFTPay + overTimePay;
         let deductions = payBeforeDeduction*(deductionPercent/100);
 
@@ -47,10 +47,7 @@ $(document).ready(function(){
             { deductions = 0 }
   
         let weeklyPay = (payBeforeDeduction - deductions);
-        
-        console.log(deductionInput);
-        console.log(payBeforeDeduction, deductions);
-        let biWeeklyPay = (payBeforeDeduction*2).toFixed(2);
+        let biWeeklyPay = ((weeklyFTPay*2) + overTimePay).toFixed(2);
         let monthlyPay = (weeklyFTPay*4).toFixed(2);
         let totalAllowance = (allowanceClaimed*79.8).toFixed(2);
         let amtSubjectToWithholding = (biWeeklyPay - totalAllowance);
@@ -112,10 +109,7 @@ if ( maritalStatus === "single" ){
         
     }
 
-        let weeklyPayAfterTax = weeklyPay - weeklyWithheldTax;
-        
-
-
+    let weeklyPayAfterTax = weeklyPay - weeklyWithheldTax;
 
     if (deductionInput === "After Tax") {
         deductions = weeklyPayAfterTax*(deductionPercent/100);
@@ -131,7 +125,8 @@ if ( maritalStatus === "single" ){
         // let annualPayAfterTax = (monthlyPayAfterTax*12).toFixed(2);
         // let annualTax = (monthlyTax*12).toFixed(2);
 
-
+        console.log(deductionInput);
+        console.log(payBeforeDeduction, deductions);
         console.log(payPeriod, "Pay Period");
         console.log(maritalStatus, "with" , allowanceClaimed, "Allowance Claimed");
         console.log("Huurly Rate: "+ hourlyRate);
@@ -152,34 +147,63 @@ if ( maritalStatus === "single" ){
         console.log("Bi-Weekly Pay After Tax ", biWeeklyPayAfterTax);
         console.log('=======================================================================');
         console.log('=======================================================================');
+
     // set work status in report
     if (hoursWorked < 40){  workStatus = "Part Time" }
 
+        // Round to 2 Decimal Places
+        biWeeklyFTPay = biWeeklyFTPay.toFixed(2);
+        overTimePay = overTimePay.toFixed(2);
+
     // Render result to web page
     $("#results").html(`
-        If you earn $${hourlyRate}/hour and you work ${workStatus} (${hoursWorked} hours),<br> 
-        Bi-Weekly Gross Pay: $${biWeeklyPay}, <br>
-        Monthly Gross Pay: $${monthlyPay}, <br>  
-        You'll get approximately $${biWeeklyPayAfterTax} every 2 weeks <br> 
-        Annual Pay: $${annualPay}<br>
         <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Income Analysis</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
+      <td>Hourly Rate</td>
+      <td>$${hourlyRate}</td>
     </tr>
     <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
+      <td>Hours Worked</td>
+      <td>${hoursWorked}</td>
     </tr>
+    <tr>
+        <td>Work Status</td>
+        <td>${workStatus}</td>
+    </tr>
+    <tr>
+    <td>Full Time Pay</td>
+    <td>$${biWeeklyFTPay}</td>
+    </tr>
+    <tr>
+    <td>Overtime Pay</td>
+    <td>$${overTimePay}</td>
+  </tr>
+  <tr>
+  <td>Gross Pay</td>
+  <td>$${biWeeklyPay}</td>
+</tr>
+<tr>
+<td>Tax Deductions</td>
+<td>$${biWeeklyTax}</td>
+</tr>
+<tr>
+<td>After Tax Pay</td>
+<td>$${biWeeklyPayAfterTax}</td>
+</tr>
+<tr>
+<td>Total Deductions</td>
+<td>$${biWeeklyDeduction}</td>
+</tr>
+<tr>
+<td>Annual Income</td>
+<td>$${annualPay}</td>
+</tr>
   </tbody>
 </table>
         `);
