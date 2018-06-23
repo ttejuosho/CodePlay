@@ -40,42 +40,24 @@ $(document).ready(function(){
         let weeklyFTPay = hourlyRate*40;
         let overTimePay = overtimeHours*hourlyRate*1.5;
         let biWeeklyFTPay = weeklyFTPay*2;
-        let weeklyPayBeforeDeduction = weeklyFTPay + overTimePay;
-        let deductions = weeklyPayBeforeDeduction*(deductionPercent/100);
+        let payBeforeDeduction = weeklyFTPay + overTimePay;
+        let deductions = payBeforeDeduction*(deductionPercent/100);
 
         if ( deductionInput === undefined )
-            { deductions = 0 } 
-        else if (deductionInput === "After Tax") {
-            let weeklyPayAfterTax = weeklyPay - weeklyWithheldTax;
-            deductions = weeklyPayAfterTax*(deductionPercent/100);          
-        }
-        
-
- 
-
-        
-        
-        let weeklyPay = (weeklyPayBeforeDeduction - deductions);
+            { deductions = 0 }
+  
+        let weeklyPay = (payBeforeDeduction - deductions);
         
         console.log(deductionInput);
-        console.log(weeklyPayBeforeDeduction, deductions);
-
-
-        let biWeeklyPay = (weeklyPayBeforeDeduction*2).toFixed(2);
-        let monthlyPay = (biWeeklyFTPay*2).toFixed(2);
+        console.log(payBeforeDeduction, deductions);
+        let biWeeklyPay = (payBeforeDeduction*2).toFixed(2);
+        let monthlyPay = (weeklyFTPay*4).toFixed(2);
         let totalAllowance = (allowanceClaimed*79.8).toFixed(2);
         let amtSubjectToWithholding = (biWeeklyPay - totalAllowance);
-        let annualPay = (monthlyPay*12).toFixed(2);
+        let annualPay = (weeklyFTPay*52).toFixed(2);
         let weeklyWithheldTax = 0;
         
 
-        console.log(weeklyPay, weeklyFTPay, biWeeklyFTPay, biWeeklyPay);
-        console.log(hourlyRate, overtimeHours, overTimePay);
-        console.log(monthlyPay, annualPay);
-        console.log(maritalStatus, "with" , allowanceClaimed, "Allowance Claimed");
-        console.log(payPeriod, "Pay Period");
-       
-        
 if ( maritalStatus === "single" ){
     // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Singles
     if ( amtSubjectToWithholding > 71 && amtSubjectToWithholding < 254 ){
@@ -103,44 +85,71 @@ if ( maritalStatus === "single" ){
             weeklyWithheldTax = 0;
     }
 
-} else if ( maritalStatus === "married") { 
-    // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Married
-    if ( amtSubjectToWithholding > 222 && amtSubjectToWithholding < 588 ){
-        let taxableIncome = (amtSubjectToWithholding - 222);
-            weeklyWithheldTax = (taxableIncome*0.1);
-    } else if ( amtSubjectToWithholding > 588  && amtSubjectToWithholding < 1711 ){
-        let taxableIncome = (amtSubjectToWithholding - 588);
-            weeklyWithheldTax = (taxableIncome*0.12) + 36.60;
-    } else if ( amtSubjectToWithholding > 1711  && amtSubjectToWithholding < 3395 ){
-        let taxableIncome = (amtSubjectToWithholding - 1711);
-            weeklyWithheldTax = (taxableIncome*0.22) + 171.36;
-    } else if ( amtSubjectToWithholding > 3395  && amtSubjectToWithholding < 6280 ){
-        let taxableIncome = (amtSubjectToWithholding - 3395);
-            weeklyWithheldTax = (taxableIncome*0.24) + 541.84;
-    } else if ( amtSubjectToWithholding > 6280  && amtSubjectToWithholding < 7914 ){
-        let taxableIncome = (amtSubjectToWithholding - 6280);
-            weeklyWithheldTax = (taxableIncome*0.32) + 1234.24;
-    } else if ( amtSubjectToWithholding > 7914  && amtSubjectToWithholding < 11761 ){
-        let taxableIncome = (amtSubjectToWithholding - 7914);
-            weeklyWithheldTax = (taxableIncome*0.35) + 1757.12;
-    } else if ( amtSubjectToWithholding > 11761 ) {
-        let taxableIncome = (amtSubjectToWithholding - 11761);
-            weeklyWithheldTax = (taxableIncome*0.37) + 3103.57;
-    } else { weeklyWithheldTax = 0; }
-    
-}
+    } else if ( maritalStatus === "married") { 
+        // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Married
+        if ( amtSubjectToWithholding > 222 && amtSubjectToWithholding < 588 ){
+            let taxableIncome = (amtSubjectToWithholding - 222);
+                weeklyWithheldTax = (taxableIncome*0.1);
+        } else if ( amtSubjectToWithholding > 588  && amtSubjectToWithholding < 1711 ){
+            let taxableIncome = (amtSubjectToWithholding - 588);
+                weeklyWithheldTax = (taxableIncome*0.12) + 36.60;
+        } else if ( amtSubjectToWithholding > 1711  && amtSubjectToWithholding < 3395 ){
+            let taxableIncome = (amtSubjectToWithholding - 1711);
+                weeklyWithheldTax = (taxableIncome*0.22) + 171.36;
+        } else if ( amtSubjectToWithholding > 3395  && amtSubjectToWithholding < 6280 ){
+            let taxableIncome = (amtSubjectToWithholding - 3395);
+                weeklyWithheldTax = (taxableIncome*0.24) + 541.84;
+        } else if ( amtSubjectToWithholding > 6280  && amtSubjectToWithholding < 7914 ){
+            let taxableIncome = (amtSubjectToWithholding - 6280);
+                weeklyWithheldTax = (taxableIncome*0.32) + 1234.24;
+        } else if ( amtSubjectToWithholding > 7914  && amtSubjectToWithholding < 11761 ){
+            let taxableIncome = (amtSubjectToWithholding - 7914);
+                weeklyWithheldTax = (taxableIncome*0.35) + 1757.12;
+        } else if ( amtSubjectToWithholding > 11761 ) {
+            let taxableIncome = (amtSubjectToWithholding - 11761);
+                weeklyWithheldTax = (taxableIncome*0.37) + 3103.57;
+        } else { weeklyWithheldTax = 0; }
+        
+    }
 
         let weeklyPayAfterTax = weeklyPay - weeklyWithheldTax;
-            weeklyPayAfterTax = weeklyPayAfterTax - deductions;
-        let biWeeklyPayAfterTax = (weeklyPayAfterTax*2).toFixed(2);
-        let monthlyPayAfterTax = (biWeeklyPayAfterTax*2).toFixed(2);
-        let annualPayAfterTax = (monthlyPayAfterTax*12).toFixed(2);
-        let biWeeklyTax = (weeklyWithheldTax*2).toFixed(2);
-        let monthlyTax = (biWeeklyTax*2).toFixed(2);
-        let annualTax = (monthlyTax*12).toFixed(2);
-        console.log(deductions, deductionPercent, weeklyPayAfterTax);
-        console.log(maritalStatus, weeklyWithheldTax, "WWT");
-        console.log(biWeeklyTax, "BWT");
+        
+
+
+
+    if (deductionInput === "After Tax") {
+        deductions = weeklyPayAfterTax*(deductionPercent/100);
+        weeklyPayAfterTax = weeklyPayAfterTax - deductions;
+    }
+
+    let biWeeklyPayAfterTax = (weeklyPayAfterTax*2).toFixed(2);
+    let biWeeklyTax = (weeklyWithheldTax*2).toFixed(2);
+    let biWeeklyDeduction = (deductions*2).toFixed(2);
+
+        // let monthlyTax = (biWeeklyTax*2).toFixed(2);
+        // let monthlyPayAfterTax = (biWeeklyPayAfterTax*2).toFixed(2);
+        // let annualPayAfterTax = (monthlyPayAfterTax*12).toFixed(2);
+        // let annualTax = (monthlyTax*12).toFixed(2);
+
+
+        console.log(payPeriod, "Pay Period");
+        console.log(maritalStatus, "with" , allowanceClaimed, "Allowance Claimed");
+        console.log("Huurly Rate: "+ hourlyRate);
+        console.log("Hours Worked: "+ hoursWorked);
+        console.log("Overtime Hours: "+ overtimeHours);
+        console.log("Overtime Pay: "+ overTimePay);
+        console.log("Weekly FT Pay: "+ weeklyFTPay);
+        console.log("BiWeekly FT Pay: "+ biWeeklyFTPay);
+        console.log("BiWeekly Pay: "+ biWeeklyPay);
+        console.log("Weekly Pay: "+ weeklyPay);
+        console.log("Monthly Pay: "+ monthlyPay);
+        console.log("Annual Pay: " + annualPay);
+        console.log(deductions, deductionPercent, "Deduction & Deduction %");
+        console.log("Total Deduction: ", biWeeklyDeduction);
+        console.log("Weekly Withheld Tax ", weeklyWithheldTax);
+        console.log("BiWeekly Tax: ", biWeeklyTax);
+        console.log("Weekly Pay After Tax ", weeklyPayAfterTax);
+        console.log("Bi-Weekly Pay After Tax ", biWeeklyPayAfterTax);
         console.log('=======================================================================');
         console.log('=======================================================================');
     // set work status in report
@@ -153,7 +162,26 @@ if ( maritalStatus === "single" ){
         Monthly Gross Pay: $${monthlyPay}, <br>  
         You'll get approximately $${biWeeklyPayAfterTax} every 2 weeks <br> 
         Annual Pay: $${annualPay}<br>
-        Annual Pay After Tax: $${annualPayAfterTax}.
+        <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Income Analysis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+    </tr>
+  </tbody>
+</table>
         `);
     }
 
@@ -166,9 +194,7 @@ if ( maritalStatus === "single" ){
         let hoursWorked = $("#hoursWorked").val();
         let hourlyRate = $("#hourlyRate").val();
         let deductionPercent = $('.deduction').val();
-        
-
-        
+           
 // Form Validation
         if (hourlyRate === ""){
             $("#hourlyRate").toggleClass("animated shake");
