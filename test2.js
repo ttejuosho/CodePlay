@@ -178,31 +178,31 @@ if ( maritalStatus === "single" ){
     </tr>
     <tr>
     <td>Full Time Pay</td>
-    <td>$${numeral(biWeeklyFTPay).format('$0,0.00')}</td>
+    <td>${numeral(biWeeklyFTPay).format('$0,0.00')}</td>
     </tr>
     <tr>
     <td>Overtime Pay</td>
-    <td>$${numeral(overTimePay).format('$0,0.00')}</td>
+    <td>${numeral(overTimePay).format('$0,0.00')}</td>
   </tr>
   <tr>
   <td>Gross Pay</td>
-  <td>$${numeral(biWeeklyPay).format('$0,0.00')}</td>
+  <td>${numeral(biWeeklyPay).format('$0,0.00')}</td>
 </tr>
 <tr>
 <td>Tax Deductions</td>
-<td>$${numeral(biWeeklyTax).format('$0,0.00')}</td>
+<td>${numeral(biWeeklyTax).format('$0,0.00')}</td>
 </tr>
 <tr>
 <td>After Tax Pay</td>
-<td>$${numeral(biWeeklyPayAfterTax).format('$0,0.00')}</td>
+<td>${numeral(biWeeklyPayAfterTax).format('$0,0.00')}</td>
 </tr>
 <tr>
 <td>Total Deductions</td>
-<td>$${numeral(biWeeklyDeduction).format('$0,0.00')}</td>
+<td>${numeral(biWeeklyDeduction).format('$0,0.00')}</td>
 </tr>
 <tr>
 <td>Annual Income</td>
-<td>$${numeral(annualPay).format('$0,0.00')}</td>
+<td>${numeral(annualPay).format('$0,0.00')}</td>
 </tr>
   </tbody>
 </table>
