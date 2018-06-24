@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    console.log("SYSTEM READY");
 
     var $body = $("body"); //Cache this for performance
 
@@ -145,6 +144,7 @@ $(document).ready(function() {
         if (deductionInput === "After Tax") {
             deductions = weeklyPayAfterTax * (deductionPercent / 100);
             weeklyPayAfterTax = weeklyPayAfterTax - deductions;
+            console.log("Bi-Weekly Pay After Tax ", biWeeklyPayAfterTax);
         }
 
         let biWeeklyPayAfterTax = (weeklyPayAfterTax * 2).toFixed(2);

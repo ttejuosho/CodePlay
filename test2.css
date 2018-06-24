@@ -35,3 +35,6 @@ label{
   border-radius: 50%;
   display: inline-block;
 }
+#appName{
+  margin-top: 3rem !important;
+}
