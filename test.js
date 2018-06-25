@@ -381,6 +381,27 @@ let Big = {
 // Big.matchElementsInArray(arr3,arr4);
 // Big.goTaiwo();
 // Big.findMinMax(arr0);
-Big.calculateSalary(21.83,42);
+// Big.calculateSalary(21.83,42);
+var ct = 0;
 
+let aliyahFunction = () => {
+    for (let element of arr0){
+      ct += element;
+    }
+    console.log(ct);
+}
 
+// aliyahFunction();
+
+var toyota = new Map();
+toyota.set('Camry', '$23,500');
+toyota.set('Corolla', '$31,250');
+toyota.set('Highlander', '$35,000');
+toyota.set('Avalon', '$18,950');
+toyota.set('Rav-4', '$36,450');
+
+console.log(toyota.get('Rav-4'));
+
+for (let [key, value] of toyota){
+    console.log(key, " costs ", value);
+}
