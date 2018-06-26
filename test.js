@@ -412,32 +412,12 @@ function IncomeAnalyzer (hourlyRate, hoursWorked, allowanceClaimed, maritalStatu
     this.allowanceClaimed = allowanceClaimed,
     this.payPeriod = ['Weekly', 'Bi-Weekly'],
     this.maritalStatus = ['single', 'married'],
-    this.calcSalary = () => {
-        let weeklyFTPay = hourlyRate * 40;
-        if (payPeriod === 'Weekly'){
-            var overtimeHours = hoursWorked - 40;
-        } else {
-            overtimeHours = hoursWorked - 80;
-        }      
-        let overtimePay = overtimeHours * hourlyRate * 1.5;
-        let weeklyPay = weeklyFTPay + overtimePay;
-        let biWeeklyPay = (weeklyPay*2).toFixed(2);
-        console.log(biWeeklyPay);
-        return biWeeklyPay;
-    },
-    this.calcTaxable = function(){
-        let totalAllowance = (allowanceClaimed * 79.8).toFixed(2);
-        let amtSubjectToWithholding = biWeeklyPay - totalAllowance;
-            console.log (amtSubjectToWithholding);
-            return amtSubjectToWithholding;          
-    },
     this.calcDeduction = (deductionRate, deductionPoint, weeklyPay) =>{
         if (deductionPoint === undefined) {
             var deductions = 0;
         } else{
             deductions = weeklyPay * (deductionRate / 100);
         }
-        console.log(deductions);
         return deductions;
     },
     this.calcTax = function(amtSubjectToWithholding){
@@ -544,9 +524,7 @@ function IncomeAnalyzer (hourlyRate, hoursWorked, allowanceClaimed, maritalStatu
     }
 }
 
-var payCalc = new IncomeAnalyzer(21.83,49.12,1,'married','Weekly');
+// var payCalc = new IncomeAnalyzer(21.83,49.12,1,'married','Weekly');
 
 // payCalc.calcTax();
 // payCalc.calcDeduction(5, 'Before Tax', 9340);
-payCalc.calcSalary();
-payCalc.calcTaxable();

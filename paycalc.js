@@ -34,7 +34,7 @@ $(document).ready(function() {
         let overtimeHours = hoursWorked - 80;
         let deductionInput = $('input[name="beforeAfterTax"]:checked').val();
 
-        if (payPeriod === "weekly") {
+        if (payPeriod === "Weekly") {
             overtimeHours = hoursWorked - 40;
         }
         let weeklyFTPay = hourlyRate * 40;
@@ -55,7 +55,7 @@ $(document).ready(function() {
         let annualPay = (weeklyFTPay * 52).toFixed(2);
         let weeklyWithheldTax = 0;
 
-        if (maritalStatus === "single") {
+        if (maritalStatus === "Single") {
             // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Singles
             if (amtSubjectToWithholding > 71 && amtSubjectToWithholding < 254) {
                 let taxableIncome = amtSubjectToWithholding - 71;
@@ -96,7 +96,7 @@ $(document).ready(function() {
             } else {
                 weeklyWithheldTax = 0;
             }
-        } else if (maritalStatus === "married") {
+        } else if (maritalStatus === "Married") {
             // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Married
             if (amtSubjectToWithholding > 222 && amtSubjectToWithholding < 588) {
                 let taxableIncome = amtSubjectToWithholding - 222;
