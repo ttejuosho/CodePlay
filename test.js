@@ -400,8 +400,153 @@ toyota.set('Highlander', '$35,000');
 toyota.set('Avalon', '$18,950');
 toyota.set('Rav-4', '$36,450');
 
-console.log(toyota.get('Rav-4'));
+// console.log(toyota.get('Rav-4'));
 
-for (let [key, value] of toyota){
-    console.log(key, " costs ", value);
+// for (let [key, value] of toyota){
+//     console.log(key, " costs ", value);
+// }
+
+function IncomeAnalyzer (hourlyRate, hoursWorked, allowanceClaimed, maritalStatus, payPeriod) {
+    this.hourlyRate = hourlyRate,
+    this.hoursWorked = hoursWorked,
+    this.allowanceClaimed = allowanceClaimed,
+    this.payPeriod = ['Weekly', 'Bi-Weekly'],
+    this.maritalStatus = ['single', 'married'],
+    this.calcSalary = () => {
+        let weeklyFTPay = hourlyRate * 40;
+        if (payPeriod === 'Weekly'){
+            var overtimeHours = hoursWorked - 40;
+        } else {
+            overtimeHours = hoursWorked - 80;
+        }      
+        let overtimePay = overtimeHours * hourlyRate * 1.5;
+        let weeklyPay = weeklyFTPay + overtimePay;
+        let biWeeklyPay = (weeklyPay*2).toFixed(2);
+        console.log(biWeeklyPay);
+        return biWeeklyPay;
+    },
+    this.calcTaxable = function(){
+        let totalAllowance = (allowanceClaimed * 79.8).toFixed(2);
+        let amtSubjectToWithholding = biWeeklyPay - totalAllowance;
+            console.log (amtSubjectToWithholding);
+            return amtSubjectToWithholding;          
+    },
+    this.calcDeduction = (deductionRate, deductionPoint, weeklyPay) =>{
+        if (deductionPoint === undefined) {
+            var deductions = 0;
+        } else{
+            deductions = weeklyPay * (deductionRate / 100);
+        }
+        console.log(deductions);
+        return deductions;
+    },
+    this.calcTax = function(amtSubjectToWithholding){
+        if (maritalStatus === payCalc.maritalStatus[0]) {
+            // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Singles
+            if (amtSubjectToWithholding > 71 && 
+                amtSubjectToWithholding < 254) {
+                let taxableIncome = amtSubjectToWithholding - 71;
+                weeklyWithheldTax = taxableIncome * 0.1;
+                return weeklyWithheldTax;
+            } else if (
+                amtSubjectToWithholding > 254 &&
+                amtSubjectToWithholding < 815
+            ) {
+                let taxableIncome = amtSubjectToWithholding - 254;
+                weeklyWithheldTax = taxableIncome * 0.12 + 18.3;
+                return weeklyWithheldTax;
+            } else if (
+                amtSubjectToWithholding > 815 &&
+                amtSubjectToWithholding < 1658
+            ) {
+                let taxableIncome = amtSubjectToWithholding - 815;
+                weeklyWithheldTax = taxableIncome * 0.22 + 85.62;
+                return weeklyWithheldTax;
+            } else if (
+                amtSubjectToWithholding > 1658 &&
+                amtSubjectToWithholding < 3100
+            ) {
+                let taxableIncome = amtSubjectToWithholding - 1658;
+                weeklyWithheldTax = taxableIncome * 0.24 + 271.08;
+                return weeklyWithheldTax;
+            } else if (
+                amtSubjectToWithholding > 3100 &&
+                amtSubjectToWithholding < 3917
+            ) {
+                let taxableIncome = amtSubjectToWithholding - 3100;
+                weeklyWithheldTax = taxableIncome * 0.32 + 617.16;
+                return weeklyWithheldTax;
+            } else if (
+                amtSubjectToWithholding > 3917 &&
+                amtSubjectToWithholding < 9687
+            ) {
+                let taxableIncome = amtSubjectToWithholding - 3917;
+                weeklyWithheldTax = taxableIncome * 0.35 + 878.6;
+                return weeklyWithheldTax;
+            } else if (amtSubjectToWithholding > 9687) {
+                let taxableIncome = amtSubjectToWithholding - 9687;
+                weeklyWithheldTax = taxableIncome * 0.37 + 2898.1;
+                return weeklyWithheldTax;
+            } else {
+                weeklyWithheldTax = 0;
+                return weeklyWithheldTax;
+            }
+        } else if (maritalStatus === payCalc.maritalStatus[1]) {
+            // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Married
+            if (amtSubjectToWithholding > 222 && amtSubjectToWithholding < 588) {
+                let taxableIncome = amtSubjectToWithholding - 222;
+                weeklyWithheldTax = taxableIncome * 0.1;
+                return weeklyWithheldTax;
+            } else if (
+                amtSubjectToWithholding > 588 &&
+                amtSubjectToWithholding < 1711
+            ) {
+                let taxableIncome = amtSubjectToWithholding - 588;
+                weeklyWithheldTax = taxableIncome * 0.12 + 36.6;
+                return weeklyWithheldTax;
+            } else if (
+                amtSubjectToWithholding > 1711 &&
+                amtSubjectToWithholding < 3395
+            ) {
+                let taxableIncome = amtSubjectToWithholding - 1711;
+                weeklyWithheldTax = taxableIncome * 0.22 + 171.36;
+                return weeklyWithheldTax;
+            } else if (
+                amtSubjectToWithholding > 3395 &&
+                amtSubjectToWithholding < 6280
+            ) {
+                let taxableIncome = amtSubjectToWithholding - 3395;
+                weeklyWithheldTax = taxableIncome * 0.24 + 541.84;
+                return weeklyWithheldTax;
+            } else if (
+                amtSubjectToWithholding > 6280 &&
+                amtSubjectToWithholding < 7914
+            ) {
+                let taxableIncome = amtSubjectToWithholding - 6280;
+                weeklyWithheldTax = taxableIncome * 0.32 + 1234.24;
+                return weeklyWithheldTax;
+            } else if (
+                amtSubjectToWithholding > 7914 &&
+                amtSubjectToWithholding < 11761
+            ) {
+                let taxableIncome = amtSubjectToWithholding - 7914;
+                weeklyWithheldTax = taxableIncome * 0.35 + 1757.12;
+                return weeklyWithheldTax;
+            } else if (amtSubjectToWithholding > 11761) {
+                let taxableIncome = amtSubjectToWithholding - 11761;
+                weeklyWithheldTax = taxableIncome * 0.37 + 3103.57;
+                return weeklyWithheldTax;
+            } else {
+                weeklyWithheldTax = 0;
+                return weeklyWithheldTax;
+            }
+        }
+    }
 }
+
+var payCalc = new IncomeAnalyzer(21.83,49.12,1,'married','Weekly');
+
+// payCalc.calcTax();
+// payCalc.calcDeduction(5, 'Before Tax', 9340);
+payCalc.calcSalary();
+payCalc.calcTaxable();
