@@ -1,6 +1,5 @@
 
 var workStatus = "Full Time";
-var maritalStatus = $('input[name="maritalStatus"]:checked').val();
 var allowanceClaimed = $("#allowanceClaimed").val();
 var deductionPoint = $('input[name="beforeAfterTax"]:checked').val();
 
@@ -51,7 +50,9 @@ calcTaxable = (biWeeklyPay, allowanceClaimed) => {
         return amtSubjectToWithholding;          
 };
 
-calcTax = (amtSubjectToWithholding, maritalStatus) => {
+calcTax = (amtSubjectToWithholding) => {
+    var maritalStatus = $('input[name="maritalStatus"]:checked').val();
+
     if (maritalStatus === 'Single') {
         // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Singles
         if (amtSubjectToWithholding > 71 && 
@@ -265,10 +266,10 @@ clearForm = () => {
         $(".deduction").val("");
 };
 
-incomeAnalysis = () =>{
+incomeAnalysis = () => {
     var weeklyPay = calcSalary();
     var amtSubjectToWithholding = calcTaxable(3, weeklyPay);
-    var wwt = calcTax(amtSubjectToWithholding, 'Married');
+    var wwt = calcTax(amtSubjectToWithholding);
     var deductions = calcDeduction(0, weeklyPay);
     console.log('Weekly Pay => ', weeklyPay);
     console.log('Taxable Income => ', amtSubjectToWithholding);
