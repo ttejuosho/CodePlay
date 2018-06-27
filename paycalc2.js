@@ -5,6 +5,7 @@ $(document).ready(function() {
 $("#results").hide();
 $(".alert").hide();
 var incomeData = {};
+var addDeductionForm = $(".addInputBox");
 
 // Set a listener on the calculate button
 $("#magic").on("click", function(){
@@ -336,6 +337,7 @@ renderDeductionInput = () => {
         newInputDiv.append(afterTaxCheckBox);
         newInputDiv.append(removeDeductionButton);
         entryForm.append(newFieldBox);
+        addDeductionForm.hide();
 };
 
 // this function clears the form on submit
@@ -349,7 +351,8 @@ clearForm = () => {
 
 
 
+
 // Add a listener to create the deduction input form
-$(".addInputBox").on("click", renderDeductionInput);
+addDeductionForm.on("click", renderDeductionInput);
 
 });
