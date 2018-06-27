@@ -60,6 +60,8 @@ $("#magic").on("click", function(){
                     biWeeklyFTPay: biWeeklyFTPay,
                     workStatus: workStatus,
                     deduction: deduction,
+                    deductionPoint: deductionPoint,
+                    deductionRate: deductionRate,
                     withheldTax: withheldTax,
                     biWeeklyPayAfterTax: biWeeklyPayAfterTax,
                     annualPay: annualPay,
@@ -94,7 +96,7 @@ validateForm = () => {
 calcSalary = (hourlyRate, hoursWorked, payPeriod) => {
     var weeklyFTPay = hourlyRate * 40;
     if (payPeriod === 'Weekly'){
-        var overtimeHours = hoursWorked - 40;
+        var overtimeHours = (hoursWorked - 40)*2;
     } else if (payPeriod === 'Bi-Weekly'){
         overtimeHours = hoursWorked - 80;
     }      
