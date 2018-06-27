@@ -1,16 +1,80 @@
+$(document).ready(function() {
 
-var workStatus = "Full Time";
-var allowanceClaimed = $("#allowanceClaimed").val();
-var deductionPoint = $('input[name="beforeAfterTax"]:checked').val();
 
 // Hide warnings on load
 $("#results").hide();
 $(".alert").hide();
+var incomeData = {};
+var workStatus = "Full Time";
 
-// set work status in report
-if (hoursWorked < 40) {
-    workStatus = "Part Time";
+    // set work status in report
+    if (hoursWorked < 40) {
+        workStatus = "Part Time";
+    }
+
+// Set a listener on the calculate button
+$("#magic").on("click", function(){
+
+    var hourlyRate = $("#hourlyRate").val();
+    var hoursWorked = $("#hoursWorked").val();
+    var allowanceClaimed = $("#allowanceClaimed").val();
+
+        // Form Validation
+        if (hourlyRate === "") {
+            $("#hourlyRate").toggleClass("animated shake");
+        } else if (hoursWorked === "") {
+            $("#hoursWorked").toggleClass("animated shake");
+        } else if (allowanceClaimed === "") {
+            $("#allowanceClaimed").toggleClass("animated shake");
+        } else {
+            $(".alert").hide();
+            
+    
+    var maritalStatus = $('input[name="maritalStatus"]:checked').val();
+    var payPeriod = $('input[name="payPeriod"]:checked').val();
+    var deductionPoint = $('input[name="beforeAfterTax"]:checked').val();
+    var deductionRate = $(".deduction").val();
+    var salary = calcSalary(hourlyRate, hoursWorked, payPeriod);
+    var biWeeklyPay = salary.biWeeklyPay;
+    var weeklyFTPay = (salary.weeklyFTPay).toFixed(2);
+    var biWeeklyFTPay = (weeklyFTPay*2).toFixed(2);
+    var overtimeHours = (salary.overtimeHours).toFixed(2);
+    var overtimePay = (salary.overtimePay).toFixed(2);
+    var annualPay = (weeklyFTPay*52).toFixed(2);
+    var amtSubjectToWithholding = calcTaxable(biWeeklyPay,allowanceClaimed);
+    var withheldTax = calcTax(amtSubjectToWithholding);
+    var biWeeklyPayAfterTax = biWeeklyPay - withheldTax;
+    var deduction = calcDeduction(deductionRate, deductionPoint, biWeeklyPay, biWeeklyPayAfterTax);
+
+// All data generated from the data collected and the data collected in one object
+    incomeData = {  biWeeklyPay: biWeeklyPay,
+                    weeklyFTPay: weeklyFTPay,
+                    overtimeHours: overtimeHours,
+                    overtimePay: overtimePay,
+                    hourlyRate:hourlyRate,
+                    hoursWorked: hoursWorked,
+                    maritalStatus: maritalStatus,
+                    payPeriod: payPeriod,
+                    allowanceClaimed: allowanceClaimed,
+                    amtSubjectToWithholding: amtSubjectToWithholding,
+                    biWeeklyFTPay: biWeeklyFTPay,
+                    workStatus: workStatus,
+                    deduction: deduction,
+                    withheldTax: withheldTax,
+                    biWeeklyPayAfterTax: biWeeklyPayAfterTax,
+                    annualPay: annualPay,
+                };
+
+                console.log(incomeData);
+
+// Show the results Div, display results on webpage and clear the form
+        $("#results").show();
+        renderResults(incomeData);
+        clearForm();
 }
+});
+
+
 
 validateForm = () => {
     // Form Validation
@@ -20,36 +84,39 @@ validateForm = () => {
         $("#hoursWorked").toggleClass("animated shake");
     } else if (allowanceClaimed === "") {
         $("#allowanceClaimed").toggleClass("animated shake");
-    } else if ((maritalStatus = undefined)) {
-        $(".alert").show();
     } else {
         $(".alert").hide();
         $("#results").show();
     }
 };
 
-calcSalary = () => {
-    let hoursWorked = $("#hoursWorked").val();
-    let hourlyRate = $("#hourlyRate").val();
-    let payPeriod = $('input[name="payPeriod"]:checked').val();
-    let weeklyFTPay = hourlyRate * 40;
+// Calculate Salary
+calcSalary = (hourlyRate, hoursWorked, payPeriod) => {
+    var weeklyFTPay = hourlyRate * 40;
     if (payPeriod === 'Weekly'){
-        let overtimeHours = hoursWorked - 40;
-    } else {
+        var overtimeHours = hoursWorked - 40;
+    } else if (payPeriod === 'Bi-Weekly'){
         overtimeHours = hoursWorked - 80;
     }      
-    let overtimePay = overtimeHours * hourlyRate * 1.5;
-    let weeklyPay = weeklyFTPay + overtimePay;
-    let biWeeklyPay = (weeklyPay*2).toFixed(2);
-    return biWeeklyPay;
+    var overtimePay = overtimeHours * hourlyRate * 1.5;
+    var weeklyPay = weeklyFTPay + overtimePay;
+    var biWeeklyPay = (weeklyPay*2).toFixed(2);
+    
+    return {    biWeeklyPay: biWeeklyPay,
+                weeklyFTPay: weeklyFTPay,
+                overtimeHours: overtimeHours,
+                overtimePay: overtimePay
+        };
 };
 
+// Calculate Taxable Income
 calcTaxable = (biWeeklyPay, allowanceClaimed) => {
     let totalAllowance = (allowanceClaimed * 79.8).toFixed(2);
     let amtSubjectToWithholding = biWeeklyPay - totalAllowance;
         return amtSubjectToWithholding;          
 };
 
+// Calculate Tax to be withheld
 calcTax = (amtSubjectToWithholding) => {
     var maritalStatus = $('input[name="maritalStatus"]:checked').val();
 
@@ -155,13 +222,21 @@ calcTax = (amtSubjectToWithholding) => {
     }
 };
 
-calcDeduction = (weeklyPay) =>{
-    let deductionRate = $(".deduction").val();
-    return weeklyPay * (deductionRate / 100); 
+// This function calculates the deduction
+calcDeduction = (deductionRate, deductionPoint, biWeeklyPay, biWeeklyPayAfterTax) =>{ 
+    if (deductionPoint === "After Tax"){
+        return (biWeeklyPayAfterTax * (deductionRate / 100)); 
+    } else if (deductionPoint === "Before Tax"){
+        return (biWeeklyPay *  (deductionRate / 100));
+    } else {
+        return 0;
+    }
+    
 };
 
+
 // Render result to web page
-renderResults = () => { 
+renderResults = incomeData => { 
 
  $("#results").html(`
  <table class="table table-striped">
@@ -173,43 +248,43 @@ renderResults = () => {
      <tbody>
          <tr>
              <td>Hourly Rate</td>
-             <td>$${hourlyRate}</td>
+             <td>$${incomeData.hourlyRate}</td>
          </tr>
          <tr>
              <td>Hours Worked</td>
-             <td>${hoursWorked}</td>
+             <td>${incomeData.hoursWorked}</td>
          </tr>
          <tr>
              <td>Work Status</td>
-             <td>${workStatus}</td>
+             <td>${incomeData.workStatus}</td>
          </tr>
          <tr>
              <td>Full Time Pay</td>
-             <td>${numeral(biWeeklyFTPay).format("$0,0.00")}</td>
+             <td>${numeral(incomeData.biWeeklyFTPay).format("$0,0.00")}</td>
          </tr>
          <tr>
              <td>Overtime Pay</td>
-             <td>${numeral(overTimePay).format("$0,0.00")}</td>
+             <td>${numeral(incomeData.overtimePay).format("$0,0.00")}</td>
          </tr>
          <tr>
              <td>Gross Pay</td>
-             <td>${numeral(biWeeklyPay).format("$0,0.00")}</td>
+             <td>${numeral(incomeData.biWeeklyPay).format("$0,0.00")}</td>
          </tr>
          <tr>
-             <td>Tax Deductions</td>
-             <td>${numeral(biWeeklyTax).format("$0,0.00")}</td>
+             <td>Withheld Tax</td>
+             <td>${numeral(incomeData.withheldTax).format("$0,0.00")}</td>
          </tr>
          <tr>
              <td>After Tax Pay</td>
-             <td>${numeral(biWeeklyPayAfterTax).format("$0,0.00")}</td>
+             <td>${numeral(incomeData.biWeeklyPayAfterTax).format("$0,0.00")}</td>
          </tr>
          <tr>
              <td>Total Deductions</td>
-             <td>${numeral(biWeeklyDeduction).format("$0,0.00")}</td>
+             <td>${numeral(incomeData.deduction).format("$0,0.00")}</td>
          </tr>
          <tr>
              <td>Annual Income</td>
-             <td>${numeral(annualPay).format("$0,0.00")}</td>
+             <td>${numeral(incomeData.annualPay).format("$0,0.00")}</td>
          </tr>
      </tbody>
  </table>
@@ -258,6 +333,7 @@ renderDeductionInput = () => {
         entryForm.append(newFieldBox);
 };
 
+// this function clears the form on submit
 clearForm = () => {
         // Clear form fields
         $("#hoursWorked").val("");
@@ -266,24 +342,9 @@ clearForm = () => {
         $(".deduction").val("");
 };
 
-incomeAnalysis = () => {
-    var weeklyPay = calcSalary();
-    var amtSubjectToWithholding = calcTaxable(3, weeklyPay);
-    var wwt = calcTax(amtSubjectToWithholding);
-    var deductions = calcDeduction(0, weeklyPay);
-    console.log('Weekly Pay => ', weeklyPay);
-    console.log('Taxable Income => ', amtSubjectToWithholding);
-    console.log('Withheld Amount => ', wwt);
-    console.log('Deduction => ', deductions);
-}
 
 
-
+// Add a listener to create the deduction input form
 $(".addInputBox").on("click", renderDeductionInput);
 
-$("#magic").on("click", function(){
-    validateForm();
-    incomeAnalysis();
-    renderResults();
-    clearForm();
 });
