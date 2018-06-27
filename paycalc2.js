@@ -6,9 +6,6 @@ $("#results").hide();
 $(".alert").hide();
 var incomeData = {};
 
-
-
-
 // Set a listener on the calculate button
 $("#magic").on("click", function(){
 
