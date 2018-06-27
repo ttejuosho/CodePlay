@@ -40,6 +40,7 @@ $("#magic").on("click", function(){
     var biWeeklyFTPay = (weeklyFTPay*2).toFixed(2);
     var overtimeHours = (salary.overtimeHours).toFixed(2);
     var overtimePay = (salary.overtimePay).toFixed(2);
+    var biWeeklyOTPay = (salary.biWeeklyOTPay).toFixed(2);
     var annualPay = (weeklyFTPay*52).toFixed(2);
     var amtSubjectToWithholding = calcTaxable(biWeeklyPay,allowanceClaimed);
     var withheldTax = calcTax(amtSubjectToWithholding);
@@ -49,6 +50,7 @@ $("#magic").on("click", function(){
 // All data generated from the data collected and the data collected in one object
     incomeData = {  biWeeklyPay: biWeeklyPay,
                     weeklyFTPay: weeklyFTPay,
+                    biWeeklyOTPay: biWeeklyOTPay,
                     overtimeHours: overtimeHours,
                     overtimePay: overtimePay,
                     hourlyRate:hourlyRate,
@@ -102,11 +104,13 @@ calcSalary = (hourlyRate, hoursWorked, payPeriod) => {
     var overtimePay = overtimeHours * hourlyRate * 1.5;
     var weeklyPay = weeklyFTPay + overtimePay;
     var biWeeklyPay = (weeklyPay*2).toFixed(2);
+    var biWeeklyOTPay = overtimePay*2;
     
     return {    biWeeklyPay: biWeeklyPay,
                 weeklyFTPay: weeklyFTPay,
                 overtimeHours: overtimeHours,
-                overtimePay: overtimePay
+                overtimePay: overtimePay,
+                biWeeklyOTPay: biWeeklyOTPay
         };
 };
 
@@ -253,7 +257,7 @@ renderResults = incomeData => {
          </tr>
          <tr>
              <td>Hours Worked</td>
-             <td>${incomeData.hoursWorked}</td>
+             <td>${incomeData.hoursWorked} (${incomeData.payPeriod})</td>
          </tr>
          <tr>
              <td>Work Status</td>
@@ -265,7 +269,7 @@ renderResults = incomeData => {
          </tr>
          <tr>
              <td>Overtime Pay</td>
-             <td>${numeral(incomeData.overtimePay).format("$0,0.00")}</td>
+             <td>${numeral(incomeData.biWeeklyOTPay).format("$0,0.00")}</td>
          </tr>
          <tr>
              <td>Gross Pay</td>
