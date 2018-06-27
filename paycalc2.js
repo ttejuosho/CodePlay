@@ -5,12 +5,9 @@ $(document).ready(function() {
 $("#results").hide();
 $(".alert").hide();
 var incomeData = {};
-var workStatus = "Full Time";
 
-    // set work status in report
-    if (hoursWorked < 40) {
-        workStatus = "Part Time";
-    }
+
+
 
 // Set a listener on the calculate button
 $("#magic").on("click", function(){
@@ -29,7 +26,13 @@ $("#magic").on("click", function(){
         } else {
             $(".alert").hide();
             
-    
+        // set work status in report
+        if (hoursWorked < 40) {
+            var workStatus = "Part Time";
+        } else {
+            workStatus = "Full Time";
+        }
+
     var maritalStatus = $('input[name="maritalStatus"]:checked').val();
     var payPeriod = $('input[name="payPeriod"]:checked').val();
     var deductionPoint = $('input[name="beforeAfterTax"]:checked').val();
@@ -75,7 +78,6 @@ $("#magic").on("click", function(){
         clearForm();
 }
 });
-
 
 
 validateForm = () => {
