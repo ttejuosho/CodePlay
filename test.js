@@ -326,52 +326,6 @@ let Big = {
             }
         }
         console.log(min, max);
-    },
-    calculateSalary: function(hourlyRate,hoursWorked){
-        
-        
-
-        // Choose Tax Brackets based on Annual Pay to calculate Taxes
-        if (annualPay < 9325){
-            taxRate = 0.1;
-        } else if (annualPay > 9325 && annualPay < 37950){
-            taxRate = 0.15;
-        } else if (annualPay > 37950 && annualPay < 91900){
-            taxRate = 0.25;
-        } else if (annualPay > 91900 && annualPay < 191650){
-            taxRate = 0.28;
-        } else if (annualPay > 191650 && annualPay < 416700){
-            taxRate = 0.33;
-        }  else if (annualPay > 416700 && annualPay < 418400){
-            taxRate = 0.35;
-        } else {
-            taxRate = 0.396;
-        }
-
-        let annualTax = (taxRate*annualPay).toFixed(2);
-        let biWeeklyTax = (biWeeklyPay*taxRate).toFixed(2);
-        let annualPayAfterTax = (annualPay - annualTax).toFixed(2);
-        let biWeeklyPayAfterTax = (biWeeklyPay - biWeeklyTax).toFixed(2);
-        let taxRatePercent = (taxRate*100).toFixed(2);
-
-        if (hoursWorked >= 40){
-            console.log(`
-    If you earn $${hourlyRate}/hour and you work Full Time,
-    Bi-weekly pay: $${biWeeklyPay}, annual Pay: $${annualPay}
-    At a tax rate of ${taxRatePercent}%, 
-    youll get approximately $${biWeeklyPayAfterTax} every 2 weeks 
-    and youll make $${annualPayAfterTax} yearly.
-                `);
-        }
-        if (hoursWorked < 40){
-            console.log(`
-    If you earn $${hourlyRate}/hour and you work Part Time,
-    Bi-weekly pay: $${biWeeklyPay}, annual Pay: $${annualPay}
-    At a tax rate of ${taxRatePercent}%, 
-    youll get approximately $${biWeeklyPayAfterTax} every 2 weeks 
-    and youll make $${annualPayAfterTax} yearly.
-                `);
-            }
     }
 }
 
@@ -405,126 +359,23 @@ toyota.set('Rav-4', '$36,450');
 // for (let [key, value] of toyota){
 //     console.log(key, " costs ", value);
 // }
+function Person(firstName, lastName, job) {
+    // construct the object using the arguments
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.job = job;
 
-function IncomeAnalyzer (hourlyRate, hoursWorked, allowanceClaimed, maritalStatus, payPeriod) {
-    this.hourlyRate = hourlyRate,
-    this.hoursWorked = hoursWorked,
-    this.allowanceClaimed = allowanceClaimed,
-    this.payPeriod = ['Weekly', 'Bi-Weekly'],
-    this.maritalStatus = ['single', 'married'],
-    this.calcDeduction = (deductionRate, deductionPoint, weeklyPay) =>{
-        if (deductionPoint === undefined) {
-            var deductions = 0;
-        } else{
-            deductions = weeklyPay * (deductionRate / 100);
-        }
-        return deductions;
-    },
-    this.calcTax = function(amtSubjectToWithholding){
-        if (maritalStatus === payCalc.maritalStatus[0]) {
-            // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Singles
-            if (amtSubjectToWithholding > 71 && 
-                amtSubjectToWithholding < 254) {
-                let taxableIncome = amtSubjectToWithholding - 71;
-                weeklyWithheldTax = taxableIncome * 0.1;
-                return weeklyWithheldTax;
-            } else if (
-                amtSubjectToWithholding > 254 &&
-                amtSubjectToWithholding < 815
-            ) {
-                let taxableIncome = amtSubjectToWithholding - 254;
-                weeklyWithheldTax = taxableIncome * 0.12 + 18.3;
-                return weeklyWithheldTax;
-            } else if (
-                amtSubjectToWithholding > 815 &&
-                amtSubjectToWithholding < 1658
-            ) {
-                let taxableIncome = amtSubjectToWithholding - 815;
-                weeklyWithheldTax = taxableIncome * 0.22 + 85.62;
-                return weeklyWithheldTax;
-            } else if (
-                amtSubjectToWithholding > 1658 &&
-                amtSubjectToWithholding < 3100
-            ) {
-                let taxableIncome = amtSubjectToWithholding - 1658;
-                weeklyWithheldTax = taxableIncome * 0.24 + 271.08;
-                return weeklyWithheldTax;
-            } else if (
-                amtSubjectToWithholding > 3100 &&
-                amtSubjectToWithholding < 3917
-            ) {
-                let taxableIncome = amtSubjectToWithholding - 3100;
-                weeklyWithheldTax = taxableIncome * 0.32 + 617.16;
-                return weeklyWithheldTax;
-            } else if (
-                amtSubjectToWithholding > 3917 &&
-                amtSubjectToWithholding < 9687
-            ) {
-                let taxableIncome = amtSubjectToWithholding - 3917;
-                weeklyWithheldTax = taxableIncome * 0.35 + 878.6;
-                return weeklyWithheldTax;
-            } else if (amtSubjectToWithholding > 9687) {
-                let taxableIncome = amtSubjectToWithholding - 9687;
-                weeklyWithheldTax = taxableIncome * 0.37 + 2898.1;
-                return weeklyWithheldTax;
-            } else {
-                weeklyWithheldTax = 0;
-                return weeklyWithheldTax;
-            }
-        } else if (maritalStatus === payCalc.maritalStatus[1]) {
-            // Choose Tax Brackets based on Weekly Pay to calculate Taxes for Married
-            if (amtSubjectToWithholding > 222 && amtSubjectToWithholding < 588) {
-                let taxableIncome = amtSubjectToWithholding - 222;
-                weeklyWithheldTax = taxableIncome * 0.1;
-                return weeklyWithheldTax;
-            } else if (
-                amtSubjectToWithholding > 588 &&
-                amtSubjectToWithholding < 1711
-            ) {
-                let taxableIncome = amtSubjectToWithholding - 588;
-                weeklyWithheldTax = taxableIncome * 0.12 + 36.6;
-                return weeklyWithheldTax;
-            } else if (
-                amtSubjectToWithholding > 1711 &&
-                amtSubjectToWithholding < 3395
-            ) {
-                let taxableIncome = amtSubjectToWithholding - 1711;
-                weeklyWithheldTax = taxableIncome * 0.22 + 171.36;
-                return weeklyWithheldTax;
-            } else if (
-                amtSubjectToWithholding > 3395 &&
-                amtSubjectToWithholding < 6280
-            ) {
-                let taxableIncome = amtSubjectToWithholding - 3395;
-                weeklyWithheldTax = taxableIncome * 0.24 + 541.84;
-                return weeklyWithheldTax;
-            } else if (
-                amtSubjectToWithholding > 6280 &&
-                amtSubjectToWithholding < 7914
-            ) {
-                let taxableIncome = amtSubjectToWithholding - 6280;
-                weeklyWithheldTax = taxableIncome * 0.32 + 1234.24;
-                return weeklyWithheldTax;
-            } else if (
-                amtSubjectToWithholding > 7914 &&
-                amtSubjectToWithholding < 11761
-            ) {
-                let taxableIncome = amtSubjectToWithholding - 7914;
-                weeklyWithheldTax = taxableIncome * 0.35 + 1757.12;
-                return weeklyWithheldTax;
-            } else if (amtSubjectToWithholding > 11761) {
-                let taxableIncome = amtSubjectToWithholding - 11761;
-                weeklyWithheldTax = taxableIncome * 0.37 + 3103.57;
-                return weeklyWithheldTax;
-            } else {
-                weeklyWithheldTax = 0;
-                return weeklyWithheldTax;
-            }
-        }
+    // a method which returns the full name
+    this.fullName = function() {
+        return this.firstName + " " + this.lastName + " is a " + this.job;
     }
 }
 
-// var payCalc = new IncomeAnalyzer(21.83,49.12,1,'married','Weekly');
+var myPerson = new Person("Taiwo", "Tejuosho", "Software Engineer");
+console.log(myPerson.fullName()); 
 
-// payCalc.calcTax();
-// payCalc.calcDeduction(5, 'Before Tax', 9340);
+var hobby = function () {
+    console.log(this.firstName); 
+}
+
+hobby.call(myPerson);

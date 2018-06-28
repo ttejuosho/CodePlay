@@ -1,9 +1,7 @@
 $(document).ready(function() {
 
-
 // Hide warnings on load
 $("#results").hide();
-$(".alert").hide();
 var incomeData = {};
 
 // Set a listener on the calculate button
@@ -21,7 +19,6 @@ $("#magic").on("click", function(){
         } else if (allowanceClaimed === "") {
             $("#allowanceClaimed").toggleClass("animated shake");
         } else {
-            $(".alert").hide();
             
         // set work status in report
         if (hoursWorked < 40) {
