@@ -32,6 +32,7 @@ $("#magic").on("click", function(){
     var deductionPoint = $('input[name="beforeAfterTax"]:checked').val();
     var deductionRate = $(".deduction").val();
     var salary = calcSalary(hourlyRate, hoursWorked, payPeriod);
+    var payforthisperiod = salary.payforthisperiod;
     var biWeeklyPay = salary.biWeeklyPay;
     var weeklyFTPay = (salary.weeklyFTPay).toFixed(2);
     var biWeeklyFTPay = (weeklyFTPay*2).toFixed(2);
@@ -49,6 +50,7 @@ $("#magic").on("click", function(){
                     weeklyFTPay: weeklyFTPay,
                     biWeeklyOTPay: biWeeklyOTPay,
                     overtimeHours: overtimeHours,
+                    payforthisperiod: payforthisperiod,
                     overtimePay: overtimePay,
                     hourlyRate:hourlyRate,
                     hoursWorked: hoursWorked,
@@ -93,11 +95,18 @@ validateForm = () => {
 // Calculate Salary
 calcSalary = (hourlyRate, hoursWorked, payPeriod) => {
     var weeklyFTPay = hourlyRate * 40;
+    
     if (payPeriod === 'Weekly'){
+        var payforthisperiod = hourlyRate*hoursWorked*2;
         var overtimeHours = (hoursWorked - 40)*2;
     } else if (payPeriod === 'Bi-Weekly'){
         overtimeHours = hoursWorked - 80;
-    }      
+        payforthisperiod = hourlyRate*hoursWorked;
+    }
+    if (overtimeHours < 0){
+        overtimeHours = 0;
+    }
+    
     var overtimePay = overtimeHours * hourlyRate * 1.5;
     var weeklyPay = weeklyFTPay + overtimePay;
     var biWeeklyPay = (weeklyPay*2).toFixed(2);
@@ -107,7 +116,8 @@ calcSalary = (hourlyRate, hoursWorked, payPeriod) => {
                 weeklyFTPay: weeklyFTPay,
                 overtimeHours: overtimeHours,
                 overtimePay: overtimePay,
-                biWeeklyOTPay: biWeeklyOTPay
+                biWeeklyOTPay: biWeeklyOTPay,
+                payforthisperiod: payforthisperiod
         };
 };
 
@@ -253,8 +263,12 @@ renderResults = incomeData => {
              <td>$${incomeData.hourlyRate}</td>
          </tr>
          <tr>
-             <td>Hours Worked</td>
-             <td>${incomeData.hoursWorked} (${incomeData.payPeriod})</td>
+            <td>Hours Worked</td>
+            <td>${incomeData.hoursWorked}</td>
+         </tr>
+         <tr>
+             <td>Pay Period</td>
+             <td>${incomeData.payPeriod}</td>
          </tr>
          <tr>
              <td>Work Status</td>
@@ -270,7 +284,7 @@ renderResults = incomeData => {
          </tr>
          <tr>
              <td>Gross Pay</td>
-             <td>${numeral(incomeData.biWeeklyPay).format("$0,0.00")}</td>
+             <td>${numeral(incomeData.payforthisperiod).format("$0,0.00")}</td>
          </tr>
          <tr>
              <td>Withheld Tax</td>
