@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+$('.popover-dismiss').popover({
+    trigger: 'focus'
+    })
+    
 // Hide warnings on load
 $("#results").hide();
 var incomeData = {};
@@ -76,21 +80,6 @@ $("#magic").on("click", function(){
         clearForm();
 }
 });
-
-
-validateForm = () => {
-    // Form Validation
-    if (hourlyRate === "") {
-        $("#hourlyRate").toggleClass("animated shake");
-    } else if (hoursWorked === "") {
-        $("#hoursWorked").toggleClass("animated shake");
-    } else if (allowanceClaimed === "") {
-        $("#allowanceClaimed").toggleClass("animated shake");
-    } else {
-        $(".alert").hide();
-        $("#results").show();
-    }
-};
 
 // Calculate Salary
 calcSalary = (hourlyRate, hoursWorked, payPeriod) => {

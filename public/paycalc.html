@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <title>Pay Calc v2</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link rel="stylesheet" href="animate.css">
-    <link rel="stylesheet" href="paycalc.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/paycalc.css">
 </head>
 
 <body>
@@ -64,16 +63,19 @@
             <div class="row justify-content-center">
                 <button id="magic" type="button" class="btn btn-outline-secondary align-items-center">Calculate</button>
             </div>
-<hr>
+            <hr>
             <div id="results" class="jumbotron animated fadeIn"></div>
-            <h6 id="appName" class="form-text text-muted appInfo">PayCalc v2.0</h6>
+            
+            <h6 id="appName" class="form-text text-muted appInfo"><a tabindex="0" id="info"
+                class="btn btn-sm btn-danger popover-dismiss" role="button" data-toggle="popover" data-trigger="focus" title="PayCalc Info" 
+                data-content="This App was built with jQuery, Numeral Js & Bootstrap. It references IRS Publication 15 (Employers Tax Guide 2018).">i</a> PayCalc v2.0</h6>
             <h6 class="form-text text-muted appInfo">Copyright &copy 2018 Taiwo Tejuosho. All Rights Reserved </h6>
-
+            
         </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
-<script src="paycalc.js"></script>
+<script src="assets/js/paycalc.js"></script>
 </html>
