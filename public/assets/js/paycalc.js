@@ -74,7 +74,7 @@ $("#magic").on("click", function(){
                     overtimeHourlyRate: overtimeHourlyRate
                 };
 
-                console.log(incomeData);
+                // console.log(incomeData);
 
 // Show the results Div, display results on webpage and clear the form
         $("#results").show();
