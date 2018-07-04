@@ -37,6 +37,7 @@ $("#magic").on("click", function(){
     var deductionRate = $(".deduction").val();
     var salary = calcSalary(hourlyRate, hoursWorked, payPeriod);
     var payforthisperiod = salary.payforthisperiod;
+    var overtimeHourlyRate = hourlyRate*1.5;
     var biWeeklyPay = salary.biWeeklyPay;
     var weeklyFTPay = (salary.weeklyFTPay).toFixed(2);
     var biWeeklyFTPay = (weeklyFTPay*2).toFixed(2);
@@ -70,9 +71,10 @@ $("#magic").on("click", function(){
                     withheldTax: withheldTax,
                     biWeeklyPayAfterTax: biWeeklyPayAfterTax,
                     annualPay: annualPay,
+                    overtimeHourlyRate: overtimeHourlyRate
                 };
 
-                console.log(incomeData);
+                // console.log(incomeData);
 
 // Show the results Div, display results on webpage and clear the form
         $("#results").show();
@@ -84,6 +86,7 @@ $("#magic").on("click", function(){
 // Calculate Salary
 calcSalary = (hourlyRate, hoursWorked, payPeriod) => {
     var weeklyFTPay = hourlyRate * 40;
+    var overtimeHourlyRate = hourlyRate*1.5;
     
     if (payPeriod === 'Weekly'){
         var payforthisperiod = hourlyRate*hoursWorked*2;
@@ -96,7 +99,7 @@ calcSalary = (hourlyRate, hoursWorked, payPeriod) => {
         overtimeHours = 0;
     }
     
-    var overtimePay = overtimeHours * hourlyRate * 1.5;
+    var overtimePay = overtimeHours * overtimeHourlyRate;
     var weeklyPay = weeklyFTPay + overtimePay;
     var biWeeklyPay = (weeklyPay*2).toFixed(2);
     var biWeeklyOTPay = overtimePay*2;
@@ -106,7 +109,8 @@ calcSalary = (hourlyRate, hoursWorked, payPeriod) => {
                 overtimeHours: overtimeHours,
                 overtimePay: overtimePay,
                 biWeeklyOTPay: biWeeklyOTPay,
-                payforthisperiod: payforthisperiod
+                payforthisperiod: payforthisperiod,
+                overtimeHourlyRate: overtimeHourlyRate
         };
 };
 
@@ -269,7 +273,7 @@ renderResults = incomeData => {
          </tr>
          <tr>
              <td>Overtime Pay</td>
-             <td>${numeral(incomeData.biWeeklyOTPay).format("$0,0.00")}</td>
+             <td>${numeral(incomeData.overtimePay).format("$0,0.00")}</td>
          </tr>
          <tr>
              <td>Gross Pay</td>
