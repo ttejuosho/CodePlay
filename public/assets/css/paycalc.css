@@ -47,6 +47,15 @@ label{
   margin-top: 3rem !important;
 }
 
+a{
+  color: rgb(255, 255, 255) !important;
+}
+
+.fas{
+  font-size: 2em !important;
+  color: rgb(235, 10, 10) !important;
+}
+
 .table th {
   border-top: none;
 }
