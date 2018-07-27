@@ -46,3 +46,7 @@ label{
 #appName{
   margin-top: 3rem !important;
 }
+
+.table th {
+  border-top: none;
+}
