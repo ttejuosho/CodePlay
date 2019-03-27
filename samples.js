@@ -11,6 +11,17 @@ $(document).ready(() => {
         }
     }).done(function(data) {}).fail(function(res) {}).always(function() {});
 
+    //POST GET
+    fetch('api/GetSomething').then(res => {
+        return res.json();
+    }).then(data => {
+        console.log(data);
+    });
+
+    //POST FETCH
+    fetch('api/PostSomething', { objKey: "objValue" }).then(
+        data => console.log(data)
+    ).catch(error => console.error(error));
 
     //Ajax Call POST
     $.ajax({
