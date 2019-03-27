@@ -1,22 +1,22 @@
-// function Car (make, model, year, mileage, price){
-//     this.make = make;
-//     this.model = model;
-//     this.year = year;
-//     this.mileage = mileage;
-//     this.price = function(mileage,year){
-//        return "$"+ (this.mileage/this.year).toFixed(2);
-//     }
-// }
+function Car (make, model, year, mileage, price){
+    this.make = make;
+    this.model = model;
+    this.year = year;
+    this.mileage = mileage;
+    this.price = function(mileage,year){
+       return "$"+ (this.mileage/this.year).toFixed(2);
+    }
+}
 
-// const blue = new Car ("Chrysler", "Sebring", 2008, 200010);
-// const red = new Car("Toyota", "Solara", 2001, 340871);
-// const budruk = new Car("Infiniti", "QX45", 2010, 120348);
-// const shadow = Object.create(blue);
+const blue = new Car ("Chrysler", "Sebring", 2008, 200010);
+const red = new Car("Toyota", "Solara", 2001, 340871);
+const budruk = new Car("Infiniti", "QX45", 2010, 120348);
+const shadow = Object.create(blue);
 
-// shadow.model = "Maserati";
-// shadow.make = "Fiat Chrysler";
-// shadow.year = 2017;
-// shadow.mileage = 20458;
+shadow.model = "Maserati";
+shadow.make = "Fiat Chrysler";
+shadow.year = 2017;
+shadow.mileage = 20458;
 
 
 // var myCars = [blue, red, budruk, shadow];
@@ -372,10 +372,140 @@ function Person(firstName, lastName, job) {
 }
 
 var myPerson = new Person("Taiwo", "Tejuosho", "Software Engineer");
-console.log(myPerson.fullName()); 
+// console.log(myPerson.fullName()); 
 
 var hobby = function () {
     console.log(this.firstName); 
 }
 
-hobby.call(myPerson);
+// hobby.call(myPerson);
+
+
+let arr5 = [31,36,83,49,49,73,60,40,73,20,91,18,65,60,78,40,68];
+let newArr = [];
+
+function simplify (intArray){
+for ( var i = 0; i < 17; i++){
+    var lowest = Math.min(...intArray);
+    newArr.push(lowest);
+    var index = intArray.indexOf(lowest);
+    if (index > -1) {
+      intArray.splice(index, 1);
+    }
+}
+
+// remove duplicates in newArray to get result Array
+var resultArray = newArr.reduce(function(a,b){
+    if (a.indexOf(b) < 0 ) a.push(b);
+    return a;
+  },[]);
+
+console.log(resultArray);
+}
+
+// simplify(arr5);
+
+var isMomHappy = true;
+
+// Promise
+var willIGetNewPhone = new Promise(
+    function (resolve, reject) {
+        if (isMomHappy) {
+            var phone = {
+                brand: 'Samsung',
+                color: 'black'
+            };
+            resolve(phone); // fulfilled
+        } else {
+            var reason = new Error('mom is not happy');
+            reject(reason); // reject
+        }
+
+    }
+);
+
+var askMom = function () {
+    willIGetNewPhone
+        .then(function (fulfilled) {
+            // yay, you got a new phone
+            console.log(fulfilled);
+         // output: { brand: 'Samsung', color: 'black' }
+        })
+        .catch(function (error) {
+            // oops, mom don't buy it
+            console.log(error.message);
+         // output: 'mom is not happy'
+        });
+};
+
+// askMom();
+
+
+let calculateArea = (shape, values) => {
+    //     set restrictions for values
+        var getShapeAndSides = new Promise ( 
+           function(resolve, reject) {  
+        if (shape.length >= 1 && shape.length <= 2000){
+                shapes = shape[i];
+                values_arr = values[i];
+            resolve(shapes, values_arr);
+        } else {
+            var reason = new Error ('Invalid Input');
+            reject(reason);
+        }
+    })
+}
+    
+    // Complete the generateArea function below.
+    // It returns a Promise which on success, returns an array of areas of all the shapes and on failure, returns [-1].
+    let getAreas = (shapes, values_arr) => {
+        calculateArea.then(function (fulfilled){
+            return Area;
+        }).catch(function (error){
+            return -1;
+        });
+    }
+
+var arrt = "this is a good guy";
+function WordCount(str) { 
+    return str.split(" ").length;
+}
+
+
+function wordSplit(str){
+    var splitArray = str.split(" ");
+    console.log(splitArray);
+    for (var i = 0; i < splitArray.length; i++){
+        console.log(splitArray[i]);
+    }
+}
+
+
+// console.log(WordCount(arrt));
+// wordSplit(arrt);
+
+const arrayToMapOver = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; 
+function timesFive(value) { 
+    return value * 5 
+} 
+//const newArray = arrayToMapOver.map(timesFive);
+
+//console.log(arrayToMapOver);
+
+function ourMap(transformation, inputArray) {
+    // bind an empty array to a variable to hold our transformed 
+    // values 
+    let outputArray = []; 
+    
+    // loop over the input array 
+    for (let value of inputArray) {
+        // apply our transformation here 
+        let transformedValue = transformation(value) 
+        // put the transformed value in our outputArray
+        outputArray.push(transformedValue) 
+    } 
+    return outputArray 
+};
+
+const newArray = ourMap(timesFive, arrayToMapOver);
+console.log(newArray);
