@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VF_Sol</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <form id="greetForm">
+            <center>
+                <div class="col-6">
+                    <h3>Click to Greet</h3>
+                    <small id="error" class="form-text font-weight-bold text-danger"></small>
+                    <div class="col-lg-10 col-sm-12 mb-3">
+                        <input type="text" id="firstName" class="form-control" pattern="[a-zA-Z]*" placeholder="First name">
+                    </div>
+                    <div class="col-lg-10 col-sm-12 mb-3">
+                        <input type="text" id="lastName" class="form-control" pattern="[a-zA-Z]*" placeholder="Last name">
+                    </div>
+                    <div class="col-lg-8 col-sm-12">
+                        <button type="button" id="greet" class="col btn btn-sm btn-dark">Greet</button>
+                    </div>
+                </div>
+                <div id="greeting" class="col-6 mt-5"></div>
+            </center>
+        </form>
+    </div>
+
+</body>
+<script>
+    //Event listener on the Greet button
+    $('#greet').on('click', () => {
+        //Set variables for regex, first name and last name
+        var letters = new RegExp('[0-9]');
+        var firstName = $('#firstName').val();
+        var lastName = $('#lastName').val();
+
+        //Clear greeting currently displayed
+        $('#greeting').empty();
+
+        if (firstName.length < 1 && lastName.length < 1) {
+            //Highlight First Name field as required
+            $('#firstName').css('border-color', 'red');
+            $('#lastName').css('border-color', 'red');
+
+            //Display validation error message for empty First Name field
+            $('#error').text('Error: Please enter your first name or your last name');
+        } else if (letters.test(firstName) || letters.test(lastName)) {
+
+            //Displays error if any number is found in input
+            $('#error').text('Error: Only letters are allowed');
+
+        } else {
+            //Remove errors if any
+            $('#error').empty();
+
+            //remove validation border color
+            $('#firstName').css('border-color', '');
+            $('#lastName').css('border-color', '');
+
+            //Display greeting
+            var html = '<h5> Your name is ' + lastName + '<span class="comma">, </span>' + firstName + '.</h5>';
+            $('#greeting').html(html);
+
+            //Formatting
+            if (!lastName.length < 1 || !firstName.length < 1) {
+                $('.comma').last().remove();
+            }
+
+            //Clear input fields
+            $('#firstName').val('');
+            $('#lastName').val('');
+        }
+
+    });
+</script>
+
+</html>

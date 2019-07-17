@@ -34,11 +34,6 @@ $(document).ready(() => {
         }
     }).done(function(data) {}).fail(function(res) {}).always(function() {});
 
-
-    $(function() {
-        $('.grid-stack').gridstack();
-    });
-
     //Check if CheckBox is Checked
     $('input[type=checkbox]').prop('checked'); //true
     $('input[name=checkbox]').prop('checked'); //true
@@ -183,7 +178,31 @@ $(document).ready(() => {
         showAlert("success", "MET Events copied to Clipboard");
     }
 
+    //FOR EACH LOOP
+    data.forEach(function(d) {
+        console.log(d.Key)
+    })
 
 
+    //JQUERY VALIDATOR
+    $('#FORM-ID').validate({
+        rules: {
+            FieldName: {
+                required: true,
+                minlength: 10,
+                normalizer: function(value) {
+                    return $.trim(value);
+                },
+                digits: true,
+                min: 23,
+                max: 2000,
+                email: true,
+                date: true,
+            }
+        },
+        messages: {
+            FieldName: "FieldName is required"
+        }
+    })
 
 });
