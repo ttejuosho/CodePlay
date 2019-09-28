@@ -39,7 +39,7 @@ $(document).ready(() => {
     $('input[name=checkbox]').prop('checked'); //true
     $('input[id=checkbox]').prop('checked'); //true
 
-    //Change data on datatable
+    //Insert data in datatable
     applicationsTable.row('#' + row.Id).data(newdataObject);
 
     //Update Values in the Datatable Data
