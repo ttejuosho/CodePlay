@@ -225,9 +225,13 @@ $(document).ready(() => {
             character += punctuation.charAt(entity3);
             password = character;
         }
-        password = password.split('').sort(function () { return 0.5 - Math.random() }).join('');
+        password = password.split('').sort(function() { return 0.5 - Math.random() }).join('');
         var generatedPassword = password.substr(0, len);
         console.log(generatedPassword);
         //return generatedPassword;
+    }
+
+    function getFileExtension(fileName) {
+        return fileName.replace(/^.*\./, '');
     }
 });
