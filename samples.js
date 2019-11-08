@@ -234,4 +234,8 @@ $(document).ready(() => {
     function getFileExtension(fileName) {
         return fileName.replace(/^.*\./, '');
     }
+
+    function getFileName(fileName) {
+        return fileName.replace(/\.[^/.]+$/, "");
+    }
 });
