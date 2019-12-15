@@ -508,4 +508,47 @@ function ourMap(transformation, inputArray) {
 };
 
 const newArray = ourMap(timesFive, arrayToMapOver);
-console.log(newArray);
+//console.log(newArray);
+
+var h = "234434664";
+var n = 0;
+for (var i = 0; i < h.length; i++){
+    if (h[i] === h[i+1]){
+        n++;
+    }
+}
+
+
+function findNearest(){
+    var rArray = [];
+    var allLocations = [[1,2],[2,3],[4,5]];
+    var nearest = 0;
+    var farthest = 0;
+
+    for (var i = 0; i < allLocations.length; i++){
+        var temp = Math.sqrt(Math.pow(allLocations[i][0], 2) + Math.pow(allLocations[i][1], 2));
+        console.log(temp);
+        rArray.push(temp);
+    }
+
+}
+
+function fizzBuzz(fizzNum){
+    if (fizzNum % 3 == 0 && fizzNum % 5 == 0){
+        console.log("FizzBuzz");
+        //return "Fizz";
+    } else if (fizzNum % 5 == 0){
+        console.log("Buzz");
+        //return "Buzz";
+    } else if (fizzNum % 3 == 0){
+        console.log("Fizz");
+        //return "FizzBuzz";
+    } else {
+        console.log("FALSE");
+        //return false;
+    }
+}
+
+function priceCalculator(item, qty){
+    
+}
