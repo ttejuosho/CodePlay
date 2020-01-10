@@ -288,4 +288,31 @@ $(document).ready(() => {
     const inputElement = document.getElementById('phoneNumber');
     inputElement.addEventListener('keydown', enforceFormat);
     inputElement.addEventListener('keyup', formatToPhone);
+
+    class SoundEmitter {
+        constructor() {
+            this.sounds = [];
+        }
+        record(sound) {
+            this.record.sounds.push(sound)
+        }
+    }
+
+    class Cat {
+        constructor(soundEmitter) {
+            this.soundEmitter = soundEmitter;
+        }
+        seesSomeone() {
+            this.record("meow");
+        }
+    }
+
+    class Dog {
+        constructor(soundEmitter) {
+            this.soundEmitter = soundEmitter;
+        }
+        seesSomeone() {
+            this.record("bark");
+        }
+    }
 });
