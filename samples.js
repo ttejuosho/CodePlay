@@ -90,6 +90,7 @@ $(document).ready(() => {
         data: ,
         rowId: ,
         stateSave: false,
+        lengthMenu: [ 10, 25, 50, 75, 100 ],
         rowGroup: {
             startRender: function(rows, group) {
                 return $('<tr/>')
