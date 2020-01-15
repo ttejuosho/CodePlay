@@ -90,7 +90,7 @@ $(document).ready(() => {
         data: ,
         rowId: ,
         stateSave: false,
-        lengthMenu: [ 10, 25, 50, 75, 100 ],
+        lengthMenu: [10, 25, 50, 75, 100],
         rowGroup: {
             startRender: function(rows, group) {
                 return $('<tr/>')
@@ -316,4 +316,19 @@ $(document).ready(() => {
             this.record("bark");
         }
     }
+
+    //Implement a function that takes an array of integers and finds two values in the array that add up to a given sum.
+    //E.g.: ([1, 3, 4, 7], 8) -> [1, 7]
+
+    function returnSum(numArr, sum) {
+        for (var i = 0; i < numArr.length; i++) {
+            var temp = numArr[i];
+            for (var j = (i + 1); j < numArr.length; j++) {
+                if (temp + numArr[j] === sum) {
+                    return [temp, numArr[j]];
+                }
+            }
+        }
+    }
+
 });
