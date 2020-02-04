@@ -23,6 +23,20 @@ $(document).ready(() => {
         data => console.log(data)
     ).catch(error => console.error(error));
 
+    fetch(getPathURL() + 'api/foobar/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(res => {
+        return res.json();
+    }).then(data => {
+        Doo(data);
+    }).catch((error) => {
+        console.error('Error:', error);
+    });
+
     //Ajax Call POST
     $.ajax({
         type: 'POST',
@@ -331,4 +345,47 @@ $(document).ready(() => {
         }
     }
 
+
+    ///LEAP INterview COde 01.23.2019
+    var values = [2, 4, 6, 8, 12, 14];
+    var insertedValue = 10;
+    var newArr = [];
+    // loop thru array 
+    // if my insertedValue > i and < i+1
+    // if my insertedVal is < , push insertedVal in the newArr
+
+    // insert insertValue at index i+1 values[i] = insertedValues
+    function insertValue(arr, val) {
+        var flag = false;
+        for (var i = 0; i < arr.length; i++) {
+            if (flag) {
+                newArr.push(arr[i]);
+            }
+            // if my insertedValue is > currentVal , push currentval to newArr
+            if (val > arr[i]) {
+                newArr.push(arr[i]);
+            } else if (val < arr[i] && flag === false) {
+                // insert at current index
+                newArr.push(val);
+                newArr.push(arr[i]);
+                flag = true;
+            }
+        }
+        return newArr;
+    }
+
+    var newSortedArray = insertValue(values, insertedValue);
+    console.log(newSortedArray);
+
+    var values = [45, 56, 76, 34];
+    for (var i = 0; i < values.length; i++) {
+        temp = values[i]
+        if (temp === values[i] || temp < values[i]) {
+
+        }
+    }
+
+    // grab the first value in the array and compare it with the next value
+    // if the same or lower, i will discard the "next value" and compre with the next+1 value 
+    // if bigger, i will set the next value as my running value and discard the current
 });
