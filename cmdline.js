@@ -17,29 +17,28 @@ function buildString(arg1){
     return str;
 }
 
-function printFibonacci(arg1){
-    var output = [];
-    var series = "";
+function printFibonacciSeries(arg1){
+    var series = [];
     for (var i = 0; i < arg1; i++){
         if (i <= 1){
-            output.push(1);
-            series += 1 + ", ";
+            series.push(1);
         } else {
-            output.push(output[output.length - 1] + output[output.length - 2]);
-            if (i == arg1 - 1){
-                series += (output[i - 1]) + (output[i - 2]) + ". ";
-            } else {
-                series += (output[i - 1]) + (output[i - 2]) + ", ";
-            }
+            series.push(series[series.length - 1] + series[series.length - 2]);
         }
     }
-    //console.log(output);
-    console.log(series);
+    console.log("First " + arg1 + " terms in the Fibonacci Series are : ");
+    console.log(series.toString() + ".");
 }
+
+
+function getNextTerm(seriesArray){
+    return seriesArray[seriesArray.length - 1] + seriesArray[seriesArray.length - 2];
+}
+
 
 if (isInteger(arg1)){
     //console.log(buildString(arg1));
-    printFibonacci(arg1)
+    printFibonacciSeries(arg1);
 } else {
     console.log("Invalid Argument Passed");
 }
