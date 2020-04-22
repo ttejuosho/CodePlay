@@ -388,4 +388,133 @@ $(document).ready(() => {
     // grab the first value in the array and compare it with the next value
     // if the same or lower, i will discard the "next value" and compre with the next+1 value 
     // if bigger, i will set the next value as my running value and discard the current
+
+
+    //Selectize
+    $('#Permissions')[0].selectize.clear();
+    $('#ApplicationGroup')[0].selectize.enable();
+    $('#ApplicationSubgroup')[0].selectize.setValue('');
+    permissionSelectize[0].selectize.clearOptions();
+
+    //Ajax Call GET
+    $.ajax({
+        url: '',
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: function() {
+
+        }
+    }).done(function(data) {
+
+        $('#ApplicationGroup').selectize({
+            create: true, 
+            maxItems: 1, 
+            labelField: 'ApplicationGroup', 
+            valueField: 'ApplicationGroup', 
+            sortField: 'ApplicationGroup', 
+            searchField: 'ApplicationGroup', 
+            preload: true,
+            sortField: [{
+                field: 'ApplicationGroup',
+                direction: 'asc'
+            }],
+            options: data,
+            render: {
+                option: function (item, escape) {
+                    return '<div>' + escape(item.ApplicationGroup) + '</div>';
+                }
+            },
+            // render: {
+
+            //     item: function (item, escape) {
+            //         return '<div>' + escape(item.CustomerName) + ' [' + item.CustomerCode + ']</div>';
+            //     },
+            //     option: function (item, escape) {
+            //         return '<div>' + escape(item.CustomerName) + ' [' + item.CustomerCode + ']</div>';
+            //     }
+            // },
+            onChange: function(value){
+                console.log(value);
+            }
+        });
+
+    });
+
+    permissionSelectize[0].selectize.load(function (callback) {
+        $.ajax({
+            url: apiUrl,
+            type: 'GET',
+            error: function () {
+                callback();
+            },
+            beforeSend: function () {
+                processing(true);
+            },
+            success: function (res) {
+                var selectize = $('#Permissions')[0].selectize;
+                selectize.refreshOptions();
+                callback(res);
+                processing(false);
+
+            },
+            always: function () {
+                processing();
+            },
+            complete: function () {
+                if (selectedPermissions && selectedPermissions.length > 0) {
+                    $('#Permissions')[0].selectize.setValue(selectedPermissions);
+                    selectedPermissions = [];
+                }
+            }
+        });
+    });
+
+// DateTimePickers TempuDominus Linked
+$('#FromDate').datetimepicker({
+    format: "MM/DD/YYYY h:mm A",
+    minDate: moment().subtract(1, "day"),
+    defaultDate: moment().hour(15),
+    sideBySide: true,
+    stepping: 15,
+    showTodayButton: true,
+    toolbarPlacement: 'bottom',
+    showClose: true
+});
+
+$('#ToDate').datetimepicker({
+    format: "MM/DD/YYYY h:mm A",
+    minDate: moment().subtract(1, 'day'),
+    defaultDate: moment().hour(18),
+    sideBySide: true,
+    stepping: 15,
+    showTodayButton: true,
+    toolbarPlacement: 'bottom',
+    showClose: true
+});
+
+//datetimepicker onChange, Update the Display Message
+$("#FromDate").on('change.datetimepicker', function (e) {
+    var fromDate = new moment().format("MM/DD/YYYY HH:mm");
+    var toDate = new moment().format("MM/DD/YYYY h:mm A");
+    if ($('#ToDate').data("datetimepicker").date())
+        toDate = $('#ToDate').data("datetimepicker").date().format("MM/DD/YYYY h:mm A");
+    if (e.date) {
+        $("#DisplayMessage").val(message.replace("$FROM", e.date.format("MM/DD/YYYY h:mm A")).replace("$TO", toDate));
+    }
+    var fromDateValue = $('#FromDate').data("datetimepicker").date();
+    if (fromDateValue !== null) {
+        fromDate = $('#FromDate').data("datetimepicker").date().add(3, 'hours').format("MM/DD/YYYY h:mm A");
+        $('#ToDate').data("datetimepicker").minDate(fromDate);
+    }
+
+});
+
+$("#ToDate").on('change.datetimepicker', function (e) {
+    var fromDate = new moment().format("MM/DD/YYYY HH:mm");
+    if ($('#FromDate').data("datetimepicker").date())
+        fromDate = $('#FromDate').data("datetimepicker").date().format("MM/DD/YYYY h:mm A");
+    if (e.date) {
+        $("#DisplayMessage").val(message.replace("$FROM", fromDate).replace("$TO", e.date.format("MM/DD/YYYY h:mm A")));
+    }
+});
 });
