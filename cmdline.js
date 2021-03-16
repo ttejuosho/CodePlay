@@ -106,4 +106,19 @@ if(arg2 === "info"){
 
 }
 
-getProfit(arg1);
+//getProfit(arg1);
+
+const user = {
+    id: 339,
+    name: 'Fred',
+    age: 42
+  };
+  const { name: callSign } = user;
+  //console.log(callSign);
+
+function gogoLake(inputString){
+    return inputString.length;
+  }
+
+  const ggy = gogoLake("inputString");
+  console.log( ggy );
