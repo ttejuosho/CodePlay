@@ -120,5 +120,420 @@ function gogoLake(inputString){
     return inputString.length;
   }
 
-  const ggy = gogoLake("inputString");
-  console.log( ggy );
+  //const ggy = gogoLake("inputString");
+  //console.log( ggy );
+
+  const numArray = [2,3,1,2,4,1,7,8];
+  function maxDifference(numArray){
+    let maxDiff = numArray[1] - numArray[0];
+    let firstElement = numArray[0];
+
+    numArray.forEach((i)=>{
+        if( (i - firstElement) > maxDiff )
+        {
+            maxDiff = i - firstElement;
+        }
+
+        if( i < firstElement )
+        {
+            firstElement = i;
+        }
+    });
+
+    if ( maxDiff === 0 ){
+        return -1;
+    }
+
+    return maxDiff;
+  }
+
+//var maxDiff = maxDifference(numArray);
+//console.log(maxDiff);
+
+var permy = function(wordString, prefix){
+    if(wordString.length == 0){
+        return prefix;
+    }
+
+    for ( var i = 0; i < wordString.length; i++ ){
+        var rem = wordString.substring(0, i) + wordString.substring(i, 1);
+    }
+}
+
+//var recurr = "ABCDAIJHLMNOA";
+function recurringChar(str){
+    var strArr = str.toLowerCase().split("");
+    var strObj = {};
+
+    strArr.forEach((char)=>{
+        if (!strObj[char]){
+            strObj[char] = 1;
+        } else {
+            strObj[char] += 1;
+            console.log(char);
+        }
+    });
+    // for(var i = 0; i < strArr.length; i++){
+    //     if (!strObj[strArr[i]]){
+    //         strObj[strArr[i]] = 1;
+    //     } else {
+    //         var temp = strArr[i];
+    //         console.log(temp);
+    //         strObj[temp] += 1;
+    //     }
+    // }
+    console.log(strObj);
+}
+
+//recurringChar(recurr);
+
+//var revStr = "esrever";
+
+reverseString = (revStr) => {
+    //let strArray = revStr.split("");
+    let newString = "";
+    // strArray.forEach((char) => {
+    //     newArr.unshift(char);
+    // });
+
+    //Method 2 (Decrementing For Loop)
+    // for( var i = strArray.length; i--; ){
+    //     newString += strArray[i];
+    // }
+
+    //Method 3 (CharAt)
+    for ( var i = revStr.length; i--; ) 
+    { 
+        revStr1 += revStr.charAt(i); 
+    }
+
+    console.log(newString);
+}
+
+reverseStringArray = (revStr) => {
+    let newArr = [];
+    revStr.forEach((char) => {
+        newArr.unshift(char);
+    });
+
+    console.log(newArr);
+}
+
+//reverseString(revStr);
+
+function reverseStringRecursion(str) {
+    if (str === "") // This is the terminal case that will end the recursion
+      return "";  
+    else
+      return reverseStringRecursion(str.substr(1)) + str.charAt(0);
+  }
+  
+//var ddc = reverseStringRecursion("hello");
+
+//var a = [23, 44, 55, 43, 82, 78, 12, 34, 50, 20, 21, 54, 66, 81, 40, 64, 91, 74, 12, 67];
+//var b = [21, 54, 66, 81, 40, 64, 91, 74, 12, 67, 23, 44, 55, 43, 82, 78, 12, 34, 50, 20];
+
+function compareTriplets(a, b) {
+    var result = [0, 0];
+    for (var i = 0; i < a.length; i++ ){
+        if (a[i] > b[i]){
+            result[0] += 1;
+        }
+
+        if (a[i] < b[i]){
+            result[1] += 1;
+        }
+    }
+
+    return result;
+}
+
+//var dde = compareTriplets(a, b);
+
+//var ar = [5, 1000000001, 1000000002, 1000000003, 1000000004, 1000000005];
+
+// Complete the aVeryBigSum function below.
+function aVeryBigSum(ar) {
+    var sum = 0;
+    var i = 0;
+    while(ar[i]){
+        sum += ar[i];
+        i++;
+    }
+    return sum;
+}
+
+// 1 2 3 4  [ 1(0) 6(1) 11(2) 16(3) ]
+// 5 6 7 8  [ 4(3) 7(2) 10(1) 13(0) ]
+// 9 0 1 2
+// 3 4 5 6
+
+// var sdc = aVeryBigSum(ar);
+// console.log(sdc);
+// var arr = 
+//         [ 
+//             [1, 2, 3], 
+//             [4, 5, 6], 
+//             [9, 8, -9] 
+//         ];
+function diagonalDifference(arr) {
+    // Write your code here
+    // 3D Array, each of length 3
+    // to Get diagonal indexes 1, 5, 9 => ( i + length + 1 )
+    var diagonalSum1 = 0;
+    var diagonalSum2 = 0;
+    var result;
+    for (var i = 0; i < arr.length; i++){
+        diagonalSum1 += arr[i][i];
+        diagonalSum2 += arr[arr.length - (i + 1)][i];
+    }
+    console.log(diagonalSum1, diagonalSum2);
+    if (diagonalSum1 < diagonalSum2){
+        result = diagonalSum2 - diagonalSum1;
+    } else {
+        result = diagonalSum1 - diagonalSum2;
+    }
+    console.log(result);
+}
+
+// diagonalDifference(arr);
+
+//var arr = [-4, 3, -9, 0, 4, 1];
+
+// Complete the plusMinus function below.
+function plusMinus(arr) {
+    var arrLength = arr.length;
+    var zeroCount = 0;
+    var gtzCount = 0;
+    var ltzCount = 0;
+    for ( var i = 0; i < arrLength; i++ ){
+        if ( arr[i] == 0 ){
+            zeroCount += 1;
+        }
+
+        if ( arr[i] > 0 ){
+            gtzCount += 1;
+        }
+
+        if ( arr[i] < 0 ){
+            ltzCount += 1;
+        }
+    }
+
+    console.log( (gtzCount/arrLength).toFixed(6) );
+    console.log( (ltzCount/arrLength).toFixed(6) );
+    console.log( (zeroCount/arrLength).toFixed(6) );
+}
+
+//plusMinus(arr);
+
+// Complete the staircase function below.
+function staircase(n) {
+var i = 0;
+var outputString = "";
+
+while (i < n){
+    var j = 0;
+    var ashtag = "";
+
+    var k = n - (i + 1);
+    while(k > 0){
+        ashtag += " ";
+        k--;
+    }
+
+    while(j <= i){
+        ashtag += "#";
+        //console.log(ashtag);
+        j++;
+    }
+
+    ashtag += "\n";
+    outputString += ashtag;
+    i++;
+}
+console.log(outputString);
+}
+
+//staircase(4);
+
+//var arr = [6, 3, 4, 5, 2];
+
+// Complete the miniMaxSum function below.
+function miniMaxSum(arr) {
+    arr = arr.sort(function(a, b){return a-b});
+    
+    var i = 0;
+    var j = arr.length - 4;
+    var minSum = 0;
+    var maxSum = 0;
+    while( i < 4 ){
+        minSum += arr[i];
+        i++;
+    }
+    
+    while( j < arr.length ){
+        maxSum += arr[j];
+        j++;
+    }
+
+    console.log(minSum, "--" , maxSum);
+}
+
+//miniMaxSum(arr);
+
+//var candles = [6, 3, 4, 5, 8, 8, 7, 6];
+function birthdayCakeCandles(candles) {
+    // Write your code here
+    var maxNumber = Math.max(...candles);
+    var counter = 0;
+    candles.forEach((i) => {
+        if (i == maxNumber){
+            counter++;
+        }
+    });
+    console.log(counter);
+}
+
+//birthdayCakeCandles(candles);
+
+//var s = "12:05:45AM"
+function timeConversion(s) {
+    /*
+     * Write your code here.
+     */
+    var hour = parseFloat(s[0] + s[1]);
+    var sArr = s.split("");
+    var inputLength = sArr.length;
+    var apm = s[inputLength - 2];
+    if ( hour < 12 && apm === "P"){
+        hour += 12;
+        
+        sArr[0] = hour.toString()[0];
+        sArr[1] = hour.toString()[1];
+    }
+  
+    if ( hour == 12 && apm === "A"){
+        sArr[0] = "0";
+        sArr[1] = "0";
+    }
+    
+    sArr.pop();
+    sArr.pop();
+    console.log(sArr.join(""));
+}
+
+//timeConversion(s);
+
+// Complete the countApplesAndOranges function below.
+function countApplesAndOranges(s, t, a, b, apples, oranges) {
+    var applePos = 0;
+    var orangePos = 0;
+
+    apples.forEach((i) => {
+        if( (i + a) >= s && (i + a) <= t ){
+            applePos += 1;
+        }
+    });
+
+    oranges.forEach((j) => {
+        if( (j + b) >= s && (j + b) <= t ){
+            orangePos += 1;
+        }
+    });
+
+    console.log(applePos, orangePos);
+}
+
+//var s = 7; t = 11; a = 5; b = 15; apples = [-2, 2, 1]; oranges = [5, -6];
+
+//countApplesAndOranges(s, t, a, b, apples, oranges);
+
+//Check for anagrams
+// var stringA = "fairy tales";
+// var stringB = "rail Safety";
+
+checkforAnagrams = (stringA, stringB) => {
+    let charMapA = {};
+    let charMapB = {};
+
+    for( let char of stringA ){
+        charMapA[char] = charMapA[char] + 1 || 1
+    }
+
+    for( let char of stringB ){
+        charMapB[char] = charMapB[char] + 1 || 1
+    }
+
+    for ( let char in charMapA ){
+        if(charMapA[char] !== charMapB[char]){
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// var dd = checkforAnagrams(stringA, stringB);
+// console.log(dd);
+
+//Check if string contains numbers only
+var stringy = "33232a3";
+checkForDigits = (stringy) => {
+    for( let char of stringy ){
+        if( !parseInt(char) ){
+            return false;
+        }
+    }
+    return true;
+}
+
+// var dd = checkForDigits(stringy);
+// console.log(dd);
+
+let string = "abc";
+let findPermutations = (string) => {
+    if (!string || typeof string !== "string"){
+      return "Please enter a string"
+    } else if (string.length < 2 ){
+      return string
+    }
+  
+    let permutationsArray = [] 
+     
+    for (let i = 0; i < string.length; i++){
+      let char = string[i]
+  
+      let remainingChars = string.slice(0, i) + string.slice(i + 1, string.length)
+  
+      for (let permutation of findPermutations(remainingChars)){
+        permutationsArray.push(char + permutation) }
+    }
+    return permutationsArray
+  }
+
+var dd = findPermutations("abc");
+console.log(dd);
+
+function bruteForceTwoSum(array, sum){
+    let nums = []
+    
+    let prevNums = []
+
+    for(let x in array){
+        for(let y in array){
+            if (array[x] + array[y] === sum){
+                if(!!nums.length){ 
+                    if (!prevNums.includes(array[x]) && !prevNums.includes(array[y])) {
+                        prevNums.push(array[x])
+                        nums.push([array[x], array[y]])
+                    } 
+                } else {
+                    nums.push([array[x], array[y]])
+                    prevNums.push(array[x])
+                }
+            }
+        }
+    }
+   return nums;
+}
