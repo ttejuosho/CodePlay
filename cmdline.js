@@ -512,8 +512,8 @@ let findPermutations = (string) => {
     return permutationsArray
   }
 
-var dd = findPermutations("abc");
-console.log(dd);
+//var dd = findPermutations("abc");
+//console.log(dd);
 
 function bruteForceTwoSum(array, sum){
     let nums = []
@@ -537,3 +537,43 @@ function bruteForceTwoSum(array, sum){
     }
    return nums;
 }
+
+function getLetter(s) {
+    let letter;
+    var setA = "aeiou";
+    var setB = "bcdfg";
+    var setC = "hjklm";
+    var setD = "npqrstvwxyz";
+    // Write your code here
+    switch (true){
+        case setA.includes(s[0]): letter = "A";
+            break;
+        case setB.includes(s[0]): letter = "B";
+            break;
+        case setC.includes(s[0]): letter = "C";
+            break;
+        case setD.includes(s[0]): letter = "D";
+            break;
+        default: 
+            letter = "Z";
+    }
+
+    return letter;
+}
+
+var nums = [5,6,9,7,8,7,9,9,10,10,10];
+function getSecondLargest(nums) {
+    // Complete the function
+    var numss = nums.sort(function(a, b){return a-b});
+    var length = numss.length;
+    while(length > 0){
+        if(numss[length - 1] > numss[length - 2]){
+            return numss[length - 2];
+        }
+        length--;
+    }
+}
+
+
+var ssd = getSecondLargest(nums);
+console.log(ssd);
