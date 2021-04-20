@@ -574,6 +574,121 @@ function getSecondLargest(nums) {
     }
 }
 
+//var ssd = getSecondLargest(nums);
+//console.log(ssd);
 
-var ssd = getSecondLargest(nums);
-console.log(ssd);
+//JS CONSTRUCTORS 
+function Person( name, age, gender, interests ){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+    this.interests = interests;
+    this.whatsGood = function (){
+        return this.name + " is alright dude";
+    }
+}
+
+let taiwo = new Person("Taiwo", 33, "male", ["computers", "music"]);
+taiwo.kilowa = function (){
+    console.log("JS CONSTRUCTORS");
+}
+
+//taiwo.kilowa();
+
+class Tejuosho{
+    constructor( name, year, branch, location, interests ){
+        this.name = name;
+        this.year = year;
+        this.branch = branch;
+        this.location = location;
+        this.interests = interests;
+    }
+    getBio(){
+        console.log(`Im ${this.name} and my dad's name is ${this.branch}`);
+    }
+    getLocation(){
+        console.log(`Find me in ${this.location}`);
+    }
+}
+
+Tejuosho.prototype.goHome = function(){
+    console.log('Bus, Train or Flight');
+}
+
+let aliyah = new Tejuosho( "Aliyah", 2016, "Taiwo", "Chicago", [ "singing", "jumping", "playing" ] );
+
+
+class Taiwo extends Tejuosho{
+    constructor( name, year, branch, location, interests, skills, hobbies, wife, names, nickname ){
+        super( name, year, branch, location, interests );
+        this.skills = skills,
+        this.hobbies = hobbies,
+        this.wife = wife,
+        this.names = names,
+        this.nickname = nickname
+    }
+    getNames(){
+        console.log( `My names are ${this.names}` );
+    }
+}
+
+let flowz = new Taiwo( 'Taiwo', 1985, 'Ajao', 'Chicago', [ 'Travelling', 'Photography' ], 
+[ 'Programmer', 'Computer Engineer' ], [ 'Driving', 'Technology', 'Automobiles' ], 'Ashanti', 
+[ 'Mobolaji', 'Adebowale' ], 'Flowz' );
+
+flowz.goHome();
+
+// timeoutFetch wraps the browser "fetch" api to timeout after $timeout ms.
+const timeoutFetch = (url, timeout) => {
+    // Implement here. Don't worry about fetch options.
+    const response = fetch(url);
+    
+    return new Promise((resolve, reject) => {
+        var timer = setTimeout(() => {
+          reject(new Error("timeout"));
+        }, timeout);
+      
+      response.then( data => {
+        clearTimeout(timer);
+        resolve(data);
+      }).catch(error => {
+        clearTimeout(timer);
+        reject(error);
+      });
+      
+    });
+  }
+  
+  // priorityRace accepts a list of $urls ordered by priority and a $timeout in
+  // ms. It immediately fetches all urls, and returns the response from the
+  // highest priority url that succeeds before the $timeout deadline.
+  // @params: $urls: string[], $timeout: number
+  // @returns: Promise
+  const priorityRace = (urls, timeout) => {
+    // Implement here.
+    var urlArray = [];
+    for ( var i = 0; i < urls.length; i++ ){
+        urlArray.push(timeoutFetch(url[i], timeout));
+    }
+    
+    Promise.allSettled(urlArray).then( (results) => {
+      for ( var i = 0; i < results.length; i++ ){
+              if (results[i].status === "fulfilled"){
+                  return result.value;
+              }
+        }
+      });
+  }
+
+  function partition(arr, l, r){
+    let pivot = arr[r];
+    let j = arr[0];
+    let i = arr[l - 1];
+    while( j < (r - 1) ){
+        if (arr[j] < pivot){
+            arr.splice(i, 0, arr[j]);
+            arr.splice(j, 0, arr[i]);
+            i++;
+        }
+    }
+  }
