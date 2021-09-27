@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Algo_Sol</title> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+</head>
+<style>
+.popover{
+  min-width: 600px;
+}
+</style>
+<body>
+
+  <button id="jive-widgetframe-header_1269470" class="ac-category"  data-target="iosWidgets">Everything iOS</button>
+  <button id="jive-widgetframe-header_1269471" class="ac-category"  data-target="macWidgets">Everything macOS</button>
+  <button id="openPopover" onclick='getPopover()'>Open Popover</button>
+
+<div class="container">
+
+<div id="jive-widgetframe_1269476" class="iosWidgets">
+  <h1>Top Issues [iOS]</h1>
+</div>
+<div id="jive-widgetframe_1269478" class="iosWidgets">
+  <h1>Recent Content [iOS]</h1>
+</div>
+
+<div id="jive-widgetframe_1269477" class="macWidgets">
+<h1>Top Issues macOS</h1>
+</div>
+<div id="jive-widgetframe_1269479" class="macWidgets">
+  <h1>Recent Content macOS</h1>
+</div>
+
+</div>
+<div id="result"></div>
+</body>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script>
+
+var xhr = new XMLHttpRequest();
+xhr.timeout = 5000;
+xhr.onreadystatechange = function(e){
+console.log(this);
+if (xhr.readyState === 4){
+    if (xhr.status === 200){
+    $("#result").html(xhr.response);
+    //console.log(xhr.response);
+    } else {
+    console.error("XHR didn't work: ", xhr.status);}
+    }
+}
+xhr.ontimeout = function (){
+console.error("request timedout: ", xhr);
+}
+xhr.open("get", "https://auctiondata.iaai.com/Search?AccessKey=faa3f7d8-932e-42bf-9a61-2b2cf379ad75", /*async*/ true);
+xhr.send();
+
+
+
+
+
+
+var node1 = { val1 : 1, next: null };
+var node2 = { val2 : 2, next: null };
+var node3 = { val3 : 3, next: null };
+var node4 = { val4 : 4, next: null };
+
+node1.next = node2;
+node2.next = node3;
+node3.next = node4;
+
+var h = "23487468237627538388393208273273629864";
+
+
+for (var i = 0; i < h.length; i++){
+  var n = 0;
+  var temp = h[i];
+  for (var j = 0; j < h.length - 1; j++){
+    if (temp === h[j]){
+        n++;
+    }
+  }
+  
+    //onsole.log(h[i], "occurred ", n, "times");
+}
+
+
+function getPopover(){
+  var html = ' ' +
+  '<div id="TechnicianStatus" style="min-width: 300px;">' +
+    '<form id="TechnicianStatusUpdate">' +
+        '<div class="form-row">' +
+          '<label class="requiredstar">Technician:</label>' +
+        '</div>' +
+        '<div class="form-row">' +
+          '<input class="form-control input-sm" id="technician" type="text" value="Taiwo Tejuosho" readonly>' +
+        '</div>' +
+
+        '<div class="row">' +
+            '<div class="col-6">' +
+              '<div class="form-row">' +
+                '<label class="requiredstar">Current Status:</label>' +
+              '</div>' +
+              '<div class="form-row">' +         
+                '<input class="form-control input-sm" id="currentStatus" type="text" value="Available" readonly>' +
+              '</div>' +
+            '</div>' +
+
+            '<div class="col-6">' +
+              '<div class="form-row">' +
+                '<label class="requiredstar">Change Status to:</label>' +
+              '</div>' +
+              '<div class="form-row">' +         
+                  '<select class="form-control required input-sm" name="changeStatusto" id="changeStatusTo" value="Available"><option></option>' +
+                  '<option value="Off">Off</option><option value="Project">Project</option><option value="Sick">Sick</option><option value="Unavailable">Unavailable</option><option value="Vacation">Vacation</option></select>' +
+              '</div>' +
+            '</div>' +
+        '</div>' +
+
+        '<div class="row">' +
+            '<div class="col-6">' +
+              '<div class="form-row">' +
+                '<label id="datetimepicker1-label" class="requiredstar">From:</label>' +
+              '</div>' +
+              '<div class="form-row">' +         
+                '<div class="input-group date" data-target-input="nearest">' +
+                    '<input type="text" id="datetimepicker1" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#datetimepicker1"/> ' +
+                    '<div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">' +
+                        '<div class="input-group-text"><i class="fa fa-calendar"></i></div>' +
+                    '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+
+            '<div class="col-6">' +
+              '<div class="form-row">' +
+                '<label id="datetimepicker2-label" class="requiredstar">To:</label>' +
+              '</div>' +
+              '<div class="form-row">' +         
+                  '<div class="input-group date" data-target-input="nearest">' +
+                    '<input type="text" id="datetimepicker2" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#datetimepicker2"/> ' +
+                    '<div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">' +
+                        '<div class="input-group-text"><i class="fa fa-calendar"></i></div>' +
+                    '</div>' +
+                '</div>' +
+              '</div>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="form-row">' +
+          '<label class="requiredstar">Technician:</label>' +
+        '</div>' +
+        '<div class="form-row">' +
+          '<select class="form-control input-sm" value=""><option></option></select>' +
+        '</div>' +
+
+      '</form>' +
+  '</div>';
+
+
+    var us = $('#openPopover');
+    us.popover({
+      title: "Open Popover",
+      html: true,
+      content: html,
+      placement: 'auto'
+    })
+    us.popover("show");
+
+
+  $('#datetimepicker1').datetimepicker({ sideBySide: false, format: 'MM/DD/YYYY', minDate: moment(), showClose: true, showClear: false, toolbarPlacement: 'bottom', showTodayButton: true, ignoreReadonly: false, useCurrent: false });
+  $('#datetimepicker2').datetimepicker({ sideBySide: false, format: 'MM/DD/YYYY', minDate: moment(), showClose: true, showClear: false, toolbarPlacement: 'bottom', showTodayButton: true, ignoreReadonly: false, useCurrent: false });
+
+  $("#datetimepicker1").on("change", function (e) {
+        var from = e.date;
+        $('#datetimepicker2').data("datetimepicker").minDate(from);
+        if (from > $('#datetimepicker2').data("datetimepicker").date()) {
+            $('#datetimepicker2').data("datetimepicker").date(from);
+        }
+    });
+
+    $('#changeStatusTo').change(function () {
+        if ($('#changeStatusTo').val().toLowerCase() == "available") {
+            $('#datetimepicker1').removeClass("required");
+            $('#datetimepicker1').val('');
+            $('#datetimepicker1').prop('readonly', 'true');
+            $('#datetimepicker2').removeClass("required");
+            $('#datetimepicker2').val('');
+            $('#datetimepicker2').prop('readonly', 'true');
+            $('#datetimepicker1-label').removeClass("requiredstar");
+            $('#datetimepicker2-label').removeClass("requiredstar");
+            //$('#backupTechnician')[0].selectize.disable();
+            //$('#backupTechnician')[0].selectize.clear();
+        } else {
+            $('#datetimepicker1').addClass("required");
+            $('#datetimepicker1').removeProp('readonly');
+            $('#datetimepicker2').addClass("required");
+            $('#datetimepicker2').val('');
+            $('#datetimepicker2').removeProp('readonly');
+            $('#datetimepicker1-label').addClass("requiredstar");
+            $('#datetimepicker1-label').addClass("requiredstar");
+            //$('#backupTechnician')[0].selectize.enable();
+        }
+    });
+}
+
+
+// Hiding all Mac Widgets by default
+$("#jive-widgetframe_1269477").hide();
+$("#jive-widgetframe_1269479").hide();
+
+// Saving the iOS & macOS widget containers in a variable
+let iOSWidgetContainer = $('#jive-widgetframe-header_1269470');
+let macOSWidgetContainer = $('#jive-widgetframe-header_1269471');
+
+
+// these functions shows and hide the approriate widgets by their ID
+
+function showIosWidgets(){
+  var id = $(this).attr("data-target");
+    if (id === "iosWidgets"){
+    $(".iosWidgets").show();
+    $(".macWidgets").hide();
+}}
+
+function showMacWidgets(){
+  var id = $(this).attr("data-target");
+  if (id === "macWidgets"){
+  $(".macWidgets").show();
+  $(".iosWidgets").hide();
+}}
+
+// Setting up a listener on the iOS and MacOS icons to show widgets for whichever is clicked on
+iOSWidgetContainer.on( "click", showIosWidgets);
+macOSWidgetContainer.on( "click", showMacWidgets);
+
+// let showIosWidgets = document.getElementById("kkk");
+// let showMacWidgets = document.getElementById("kkkk");
+// let iosWidgets = document.getElementByClassName("iosWidgets");
+// let macWidgets = document.getElementByClassName("macWidgets");
+
+// showIosWidgets.addEventListener("click", showWidgets);
+// showMacWidgets.addEventListener("click", showWidgets);
+
+
+
+
+
+
+// var queryURL = "http://it-recruitment.mintel.com/testing/test_data.json";
+//     $.ajax({
+//         url: queryURL,
+//         method: "GET"
+//     }).done(function(response) {
+//       console.log(response);
+//     });
+
+// var queryURL = "http://it-recruitment.mintel.com/testing/test_data.json";
+// var my_JSON_object;
+// var http_request = new XMLHttpRequest();
+// http_request.open("GET", queryURL, true);
+// http_request.responseType = "json";
+// http_request.onreadystatechange = function () {
+//   var done = 4, ok = 200;
+//   if (http_request.readyState === done && http_request.status === ok) {
+//     my_JSON_object = http_request.response;
+//   }
+// };
+// http_request.send(null);
+
+
+
+    // =======================================================
+    // console.log("=======================================")
+    
+    // function factorial(num){
+    // //   var pre = Date.now();
+    //   var total = 1;
+    //   for(var i=1; i<=num; i++){
+    //     total = total * i;
+    //   }
+    // //   var post = Date.now();
+    // //   console.log("Time: ", post-pre);
+    //   return total;
+    // }
+    // console.log("function factorial(50)");
+    // console.log(factorial(50));
+    
+    // =======================================================
+    // console.log("=======================================")
+    // var factorialArray = [1];
+    // function fasterFactorial(num){
+    //     var pre = Date.now();
+        
+    //     var post;
+    //     var total = 1;
+    
+    //     if(num < 0){
+    //         console.log("You can only use positive integers");
+    //         return null;
+    //     }    
+    
+    //     for(var i=factorialArray.length; i<=num; i++){
+    //         factorialArray[i] = factorialArray[i-1] * i;
+    //     }
+    //     post = Date.now() - pre;
+       
+    //     console.log("Time: ", post );
+    //     return factorialArray[num];
+    // }
+    // console.log("function fasterFactorial(1)");
+    // console.log(fasterFactorial(-1));
+    // console.log("function fasterFactorial(3)");
+    // console.log(fasterFactorial(3));
+    // console.log("function fasterFactorial(6)");
+    // console.log(fasterFactorial(6));
+    // console.log("function fasterFactorial(9)");
+    // console.log(fasterFactorial(9));
+    // console.log("function fasterFactorial(10)");
+    // console.log(fasterFactorial(10));
+    
+    // // =======================================================
+    // console.log("=======================================")
+    // Arrs2Map
+    // Given two arrays, create an associative array (map) containing keys of the first, and values of the second. For 
+    // arr1 = ["abc", 3, "yo"] and 
+    // arr2 = [42, "wassup", true], 
+    // return {"abc": 42, 3: "wassup", "yo": true}. 
+    
+    // function arrs2Map(arr1, arr2){
+    //     var obj = {};
+    //     for(var i=0; i<arr1.length; i++){
+    //         obj[arr1[i]]=arr2[i];
+    //     }
+    //     return obj;
+    // }
+    // console.log("arrs2Map(['a','b','c'],[1,2,3])");
+    // console.log(arrs2Map(['a','b','c'],[1,2,3]));
+    
+    // // =======================================================
+    // console.log("=======================================")
+    
+    // // InvertHash
+    // // Create invertHash(assocArr) that converts a hash’s keys to values and values to corresponding keys. 
+    // // Example: 
+    // // given {"name": "Zaphod", "numHeads": 2}, 
+    // // return {"Zaphod": "name", 2: "numHeads"}. 
+    // // You will need to learn and use a JavaScript for ... in here!
+    
+    // function invertHash(hash){
+    //     var newHash = {};
+    //     for(key in hash){
+    //         newHash[hash[key]]=key;
+    //     }
+    //     return newHash;
+    // }
+    // console.log("function invertHash({x:1,y:2,z:3});");
+    // console.log(invertHash({x:1,y:2,z:3}));
+    
+    
+    // // =======================================================
+    // console.log("=======================================")
+    
+    // // .myJoin method (arr) => return string
+    // // Given an array of strings, return a string
+    // // Given [‘a’,’b’,’c’]
+    // // Return ‘abc’
+    
+    // function myJoin(arr){
+    //     var str = "";
+    //     for(var i=0; i<arr.length; i++){
+    //         str += arr[i];
+    //     }
+    //     return str;
+    // }
+    // console.log("function myJoin(['a','b','c','d'])");
+    // console.log(myJoin(['a','b','c','d']));
+    // console.log("function myJoin([1,2,3,4])");
+    // console.log(myJoin([1,2,3,4]));
+    
+    
+    // // =======================================================
+    // console.log("=======================================")
+    
+    // // .mySplit method (str) => return array
+    // // Given ‘abc’
+    // // Return [‘a’,’b’,’c’]
+    
+    // function mySplit(str){
+    //     var arr = [];
+    //     for(var i=0; i<str.length; i++){
+    //         arr.push(str[i]);
+    //     }
+    //     return arr;
+    // }
+    // console.log("function mySplit('asdf')");
+    // console.log(mySplit('asdf'));
+    
+    // // =======================================================
+    // console.log("=======================================")
+    
+    // // ReverseString
+    // // Implement a function reverseString(str) that, given a string, will return the string of the same length but with characters reversed. Example: 
+    // // given "creature", 
+    // // return "erutaerc". 
+    // // Do not use the built-in reverse() function! 
+    
+    
+    // function reverseString(str){
+    //     var newStr = '';
+    //     for(var i=str.length-1; i>=0; i--){
+    //         newStr = newStr + str[i]
+    //     }
+    //     return newStr;
+    // }
+    // console.log("function reverseString('abcdefg');");
+    // console.log(reverseString('abcdefg'));
+    
+    // // =======================================================
+    // console.log("=======================================")
+    
+    // // Remove Blanks
+    // // Create a function that, given a string, returns the string, without blanks. 
+    // // Given "  play  that   Funky Music  ",
+    // // returns a string containing "playthatFunkyMusic".
+    
+    // function removeBlanks(str){
+    //     var newStr = '';
+    //     for( var i = 0; i < str.length; i++ ){
+    //         if(str[i]=== " "){
+    //             continue;
+    //         } else {
+    //             newStr = newStr + str[i];
+    //         }
+    //     }
+    //     return newStr;
+    // }
+    // console.log("function removeBlanks('a b c d')")
+    // console.log(removeBlanks('a b c d'))
+    // console.log("function removeBlanks(' a b c d ')")
+    // console.log(removeBlanks(' a b c d '))
+    
+    // // =======================================================
+    // console.log("=======================================")
+    
+    
+    // // Get String Digits
+    // // Create a JavaScript function that given a string, returns the integer made from the string’s digits. 
+    // // Given "0s1a3y5w7h9a2t4?6!8?0", the function should 
+    // // return the number 1,357,924,680.
+    
+    // function stringDigits(str){
+    //     numbers = '';
+    //     for(var i=0; i<str.length; i++){
+    //         if(!isNaN(str[i]) && str[i] != 0){
+    //             numbers = numbers + str[i];
+    //         }
+    //     }
+    //     numbers = Number(numbers);
+    //     return numbers;
+    // }
+    // console.log("stringDigits('0s1a3y5w7h9a2t4?6!8?0')");
+    // console.log(stringDigits("0s1a3y5w7h9a2t4?6!8?0"));
+    
+    // // =======================================================
+    // console.log("=======================================")
+    
+    
+    // // Acronyms
+    // // Create a function that, given a string, returns the string’s acronym (first letters only, capitalized). 
+    // // Given "there's no free lunch  -  gotta pay yer way", 
+    // // return "TNFL-GPYW". 
+    // // Given "Live from New York, it's Saturday Night!", 
+    // // return "LFNYISN".
+    
+    // function acronyms(str){
+    //     var newStr = "";
+        
+    //     if(!str.length){
+    //         return null;
+    //     }
+    //     str = str.toUpperCase();
+    //     var arr = str.split(" ");
+    
+    //     for(var i=0; i<arr.length; i++){
+    //         if(
+    //             (arr[i].charCodeAt(0) >= 65 && 
+    //             arr[i].charCodeAt(0) <= 90) ||
+    //             arr[i].charCodeAt(0) === 45
+    //         ){
+    //             newStr = newStr + String(arr[i][0])
+    //         }
+    //     }
+    //     return newStr;
+    // }
+    // console.log(`acronyms("there's no free lunch  -  gotta pay yer way")`);
+    // console.log(acronyms("there's no free lunch  -  gotta pay yer way"));
+    // console.log(`acronyms("Live from New York, it's Saturday Night!")`);
+    // console.log(acronyms("Live from New York, it's Saturday Night!"));
+    
+    // // =======================================================
+    // console.log("=======================================")
+    
+    // // Parens Valid
+    // // Create a function that, given an input string, returns a boolean whether parentheses in that string are valid. Given input "y(3(p)p(3)r)s", return true. Given "n(0(p)3", return false. Given "n)0(t(0)k", return false. 
+    
+    // function parensValid(str){
+    //     var arr = [];
+    //     for(var i=0; i<str.length; i++){
+    //         switch(str[i]) {
+    //         case "(":
+    //             arr.push(str[i]);   
+    //             break;
+    //         case ")":
+    //             if (arr[arr.length-1] === "("){
+    //                 arr.pop();
+    //             } else {
+    //                 return false;
+    //             }
+    //             break;
+    //         default:
+    //             continue;
+    //         }
+    //     }
+    //     return true;
+    // }
+    // console.log(`parensValid("y(3(p)p(3)r)s")`);
+    // console.log(parensValid("y(3(p)p(3)r)s"));
+    // console.log(`parensValid("n)0(t(0)k")`);
+    // console.log(parensValid("n)0(t(0)k"));
+    
+    
+    
+    // // =======================================================
+    // console.log("=======================================")
+    
+    
+    // // Braces Valid
+    // // Given a string, returns whether the sequence of various parentheses, braces and brackets within it are valid. For example, given the input string "w(a{t}s[o(n{c}o)m]e)h[e{r}e]!", return true. Given "d(i{a}l[t]o)n{e", return false. Given "a(1)s[O(n]0{t)0}k", return false. 
+    
+    // function bracesValid(str){
+    //     var arr = [];
+    //     obj = {
+    //         ")":"(",
+    //         "}":"{",
+    //         "]":"["
+    //     }
+    //     for(var i=0; i<str.length; i++){
+    //         switch(str[i]) {
+    //             case "(": 
+    //             case "{": 
+    //             case "[":
+    //                 arr.push(str[i]);   
+    //                 break;
+    //             case ")": 
+    //             case "}": 
+    //             case "]":
+    //                 if(obj[str[i]] === arr[arr.length-1]){
+    //                     arr.pop();
+    //                 } else {
+    //                     return false;
+    //                 }
+    //                 break;
+    //             default:
+    //                 continue;
+    //         }
+    //     }
+    //     if (arr.length) return false; 
+    //     return true;
+    // }
+    // console.log(`bracesValid("w(a{t}s[o(n{c}o)m]e)h[e{r}e]!")`);
+    // console.log(bracesValid("w(a{t}s[o(n{c}o)m]e)h[e{r}e]!"));
+    // console.log(`bracesValid("d(i{a}l[t]o)n{e")`);
+    // console.log(bracesValid("d(i{a}l[t]o)n{e"));
+    // console.log(`bracesValid("a(1)s[O(n]0{t)0}k")`);
+    // console.log(bracesValid("a(1)s[O(n]0{t)0}k"));
+    
+    
+    // // =======================================================
+    // console.log("=======================================")
+    
+    
+    // // Is Palindrome
+    // // Strings like "Able was I, ere I saw Elba" or "Madam, I'm Adam" could be considered palindromes, because (if we ignore spaces, punctuation and capitalization) the letters are the same from front and back. 
+    // // Create a function that returns a boolean whether the string is a strict palindrome. For "a x a" or "racecar", return true. Do not ignore spaces, punctuation and capitalization: if given "Dud" or "oho!", return false. 
+    
+    // function isPalindrome(str){
+    //     if (!str.length || (str.length % 2 == 0)){ // even
+    //         return false;
+    //     } else { // odd
+    //         var middle = Math.floor(str.length/2);
+    //         for(var i=0; i<str.length/2; i++){
+    //             if(str[middle+i]!==str[middle-i]){
+    //                 return false;
+    //             }
+    //         }
+    //         return true;
+    //     }
+    // }
+    // console.log(`isPalindrome("a x a")`);
+    // console.log(isPalindrome("a x a"));
+    // console.log(`isPalindrome("racecar")`);
+    // console.log(isPalindrome("racecar"));
+    // console.log(`isPalindrome("Dud")`);
+    // console.log(isPalindrome("Dud"));
+    
+    
+    // // =======================================================
+    // console.log("=======================================")
+    
+    // // Longest Palindrome
+    // // For this challenge, we will look not only at the entire string, but also substrings within it. 
+    // // For a string, return the longest palindromic substring. Given "what up, dada?", return "dad". Given "not much", return "n". Include spaces as well (i.e. be strict, as in the “Is Palindrome” challenge): given "My favorite racecar erupted!", return "e racecar e".
+    
+    // function longestPalindrome(str){
+    //     var palindrome = "";
+    //     for(var x=0; x<str.length-1; x++){
+    //         var tempPalindrome = str[x];
+    //         for(var y=1; y<str.length/2; y++){
+    //             if(str[x-y] === str[x+y]){
+    //                 tempPalindrome = str[x-y] + tempPalindrome + str[x+y];
+    //             } else { break; }
+    //         }
+    //         if(tempPalindrome.length > palindrome.length) palindrome = tempPalindrome;
+    //     }
+    //     return palindrome;
+    // }
+    // console.log(`longestPalindrome("racecar")`);
+    // console.log(longestPalindrome("racecar"));
+    // console.log(`longestPalindrome("Dad")`);
+    // console.log(longestPalindrome("Dad"));
+    // console.log(`longestPalindrome("My favorite racecar erupted!")`);
+    // console.log(longestPalindrome("My favorite racecar erupted!"));
+    // console.log(`longestPalindrome("teaet asdfghjkjhgfdsa tyuiuyt vvvvbnmfghjhgfmnbvvvv")`);
+    // console.log(longestPalindrome("teaet asdfghjkjhgfdsa tyuiuyt vvvvbnmfghjhgfmnbvvvv"));
+    
+    // // =======================================================
+    // console.log("=======================================")
+var priceList = {
+    "milk": 2.45,
+    "sugar": 3.78,
+    "eggs": 6.50
+}
+var cart = {};
+
+function getPrice(item){
+    if (priceList[item] !== undefined){
+        return priceList[item];
+    } else {
+        return false;
+    }
+}
+
+function addToCart(item){
+    var price = getPrice(item);
+    cart[item] = price;
+}
+
+
+    </script>

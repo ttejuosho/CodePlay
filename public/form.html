@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BootStrap 4 Form </title>   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+<style>
+.popover{
+    min-width: 500px;
+    padding-bottom: 15px;
+}
+
+button.btn{
+    margin-left: 4px;
+}
+</style>
+<body>
+    <center>
+    <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-html="true" data-placement="left" title="Add New Customer">Open popover</a>
+
+    <div id="popover" class="center">
+
+<input id="select-cities-state" >
+<select class="custom-select" id="select-cities-state">
+    <option selected></option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+</select>
+
+            <form>
+                    <div class="form-group row">
+                        <div class="col-4">
+                      <label for="Customer Code">Customer Code: </label>
+                    </div>
+                      <div class="col-8">
+                      <input type="text" class="form-control" id="customerCode">
+                    </div>
+                    </div>
+
+                    <div class="form-group row">
+                            <div class="col-4">
+                          <label for="Customer Name">Customer Name: </label>
+                        </div>
+                          <div class="col-8">
+                          <input type="text" class="form-control" id="customerName">
+                        </div>
+                        </div>
+                    
+                    <button type="submit" id="submitCustomerInfo" class="btn btn-success float-right">Submit</button>
+                    <input type="button" value="Cancel" class="btn btn-danger float-right">
+                    
+                  
+                  </form>
+    </div>
+</center>
+</body>
+<script>
+
+var xhr;
+var select_state, $select_state;
+var select_city, $select_city;
+
+$select_state = $('#select-cities-state').selectize({
+    onChange: function(value) {
+        if (!value.length) return;
+        select_city.disable();
+        select_city.clearOptions();
+        select_city.load(function(callback) {
+            xhr && xhr.abort();
+            xhr = $.ajax({
+                url: 'https://jsonp.afeld.me/?url=http://api.sba.gov/geodata/primary_city_links_for_state_of/' + value + '.json',
+                success: function(results) {
+                    select_city.enable();
+                    callback(results);
+                },
+                error: function() {
+                    callback();
+                }
+            })
+        });
+    }
+});
+
+$select_city = $('#select-cities-city').selectize({
+    valueField: 'name',
+    labelField: 'name',
+    searchField: ['name']
+});
+
+select_city  = $select_city[0].selectize;
+select_state = $select_state[0].selectize;
+
+select_city.disable();
+
+
+
+$("[data-toggle=popover]").popover({
+    html: true,
+    container: '#popover',
+	content: function() {
+          return $('#popover').html();
+        }
+});
+
+    var customerCode = $('#customerCode');
+    var customerName = $('#customerName');
+
+$('#submitCustomerInfo').on('click', ()=>{
+    customerCode = customerCode.val();
+    console.log(customerCode , customerName);
+})
+   
+</script>
+
+</html>
