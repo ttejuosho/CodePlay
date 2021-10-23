@@ -8,11 +8,11 @@ function isInteger(argNum) {
 
 function buildString(arg1) {
   var str = "";
-  for (var index = 1; index < arg1 + 1; index++) {
-    if (index == arg1) {
-      str += "Number" + " " + index + ".";
+  for (var i = 1; i < arg1 + 1; i++) {
+    if (i == arg1) {
+      str += "Number" + " " + i + ".";
     } else {
-      str += "Number" + " " + index + ", ";
+      str += "Number" + " " + i + ", ";
     }
   }
   return str;
@@ -24,7 +24,7 @@ function printFibonacciSeries(arg1) {
     if (i <= 1) {
       series.push(1);
     } else {
-      series.push(series[series.length - 1] + series[series.length - 2]);
+      series.push(getNextTerm(series));
     }
   }
   console.log("First " + arg1 + " terms in the Fibonacci Series are : ");
@@ -473,10 +473,21 @@ function countApplesAndOranges(s, t, a, b, apples, oranges) {
 //countApplesAndOranges(s, t, a, b, apples, oranges);
 
 //Check for anagrams
-// var stringA = "fairy tales";
-// var stringB = "rail Safety";
+var stringA = "fairy tales";
+var stringB = "rail Safety";
+
+checkStringA = (stringA) => {};
 
 checkforAnagrams = (stringA, stringB) => {
+  //Input Validation
+  if (stringA === undefined || stringA.length < 1) {
+    return "Please Check StringA";
+  }
+
+  if (stringB === undefined || stringB.length < 1) {
+    return "Please Check StringB";
+  }
+
   let charMapA = {};
   let charMapB = {};
 
@@ -497,8 +508,8 @@ checkforAnagrams = (stringA, stringB) => {
   return true;
 };
 
-// var dd = checkforAnagrams(stringA, stringB);
-// console.log(dd);
+var dd = checkforAnagrams(stringA, stringB);
+console.log(dd);
 
 //Check if string contains numbers only
 var stringy = "33232a3";
@@ -755,5 +766,5 @@ function getMinionId(numberDrawn) {
   return longString.substring(numberDrawn, numberDrawn + 5);
 }
 
-console.log(getMinionId(3)); //Returns 71113
-console.log(getMinionId(0)); //Returns 23571
+//console.log(getMinionId(3)); //Returns 71113
+//console.log(getMinionId(0)); //Returns 23571
