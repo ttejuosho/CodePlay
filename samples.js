@@ -517,4 +517,123 @@ $("#ToDate").on('change.datetimepicker', function (e) {
         $("#DisplayMessage").val(message.replace("$FROM", fromDate).replace("$TO", e.date.format("MM/DD/YYYY h:mm A")));
     }
 });
+
+//Shuffle an Array
+const shuffleArray = (arr) => arr.sort(() => 0.5 - Math.random());
+//console.log(shuffleArray([1, 2, 3, 4]));
+// Result: [ 1, 4, 3, 2 ]
+
+///Check if Date is valid
+const isDateValid = (...val) => !Number.isNaN(new Date(...val).valueOf());
+//isDateValid("December 17, 1995 03:24:00");
+// Result: true
+
+//Copy to Clipboard
+const copyToClipboard = (text) => navigator.clipboard.writeText(text);
+//copyToClipboard("Hello World");
+
+//find Day of the year
+const dayOfYear = (date) =>
+  Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+//dayOfYear(new Date());
+// Result: 272
+
+
+//Capitalize a String
+const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)
+//capitalize("follow for more")
+// Result: Follow for more
+
+//Find the number of days between two days
+const dayDif = (date1, date2) => Math.ceil(Math.abs(date1.getTime() - date2.getTime()) / 86400000)
+//dayDif(new Date("2020-10-21"), new Date("2021-10-22"))
+// Result: 366
+
+//Remove duplicates from Array
+const removeDuplicates = (arr) => [...new Set(arr)];
+//console.log(removeDuplicates([1, 2, 3, 3, 4, 4, 5, 5, 6]));
+// Result: [ 1, 2, 3, 4, 5, 6 ]
+
+
+//Generate Random HEX
+const randomHex = () => `#${Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, "0")}`;
+console.log(randomHex());
+// Result: #92b008
+
+
+//Get Query Params from URL
+const getParameters = (URL) => {
+  URL = JSON.parse('{"' + decodeURI(URL.split("?")[1]).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') +'"}');
+  return JSON.stringify(URL);
+};
+//getParameters(window.location)
+// Result: { search : "easy", page : 3 }
+
+
+//Log time from date
+const timeFromDate = date => date.toTimeString().slice(0, 8);
+//console.log(timeFromDate(new Date(2021, 0, 10, 17, 30, 0))); 
+// Result: "17:30:00"
+
+
+//Find Average of numbers
+const average = (...args) => args.reduce((a, b) => a + b) / args.length;
+//average(1, 2, 3, 4);
+// Result: 2.5
+
+//Check if Array is empty
+const isNotEmpty = arr => Array.isArray(arr) && arr.length > 0;
+//isNotEmpty([1, 2, 3]);
+// Result: true
+
+//Get selected text
+const getSelectedText = () => window.getSelection().toString();
+
+
+//Find Specific object in an array of objects
+ let customers = [
+  { id: 0, name: 'paul' },
+  { id: 1, name: 'jeff' },
+  { id: 2, name: 'mary' }
+];
+let customer = customers.find(cust => cust.name === 'jeff');
+//console.log(customer);
+//Result: { id: 1, name: 'jeff' }
+
+
+//Loop over Objects Keys & Values
+let myObject = { one: 1, two: 2, three: 3 };
+Object.keys(myObject).forEach((key, value) => {
+  //...do something
+  //console.log(key, value);
+});
+
+//Filter Array
+let data = [
+  "files/dir1/file",
+  "files/dir1/file2",
+  "files/dir2/file",
+  "files/dir2/file2"
+];
+let filteredData = data.filter(path => path.includes('dir2'));
+console.log(filteredData);
+//Result: [ 'files/dir2/file', 'files/dir2/file2' ]
+
+
+//Destructuring Assigment
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+let a, b, rest;
+[a, b, ...rest] = [10, 20, 30, 40, 50];
+console.log(a);
+// expected output: 10
+
+console.log(b);
+// expected output: 20
+
+[a, b, ...rest] = [10, 20, 30, 40, 50];
+
+console.log(rest);
+// expected output: Array [30,40,50]
+
+
 });
