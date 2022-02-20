@@ -469,14 +469,10 @@ function countApplesAndOranges(s, t, a, b, apples, oranges) {
 }
 
 //var s = 7; t = 11; a = 5; b = 15; apples = [-2, 2, 1]; oranges = [5, -6];
-
 //countApplesAndOranges(s, t, a, b, apples, oranges);
-
 //Check for anagrams
-var stringA = "fairy tales";
-var stringB = "rail Safety";
-
-checkStringA = (stringA) => {};
+var stringA = "rail 45";
+var stringB = "45 rail";
 
 checkforAnagrams = (stringA, stringB) => {
   //Input Validation
@@ -508,22 +504,23 @@ checkforAnagrams = (stringA, stringB) => {
   return true;
 };
 
-var dd = checkforAnagrams(stringA, stringB);
-console.log(dd);
+//var dd = checkforAnagrams(stringA, stringB);
+//console.log(dd);
 
 //Check if string contains numbers only
 var stringy = "33232a3";
 checkForDigits = (stringy) => {
   for (let char of stringy) {
     if (!parseInt(char)) {
+      console.log(char);
       return false;
     }
   }
   return true;
 };
 
-// var dd = checkForDigits(stringy);
-// console.log(dd);
+//var dd = checkForDigits(stringy);
+//console.log(dd);
 
 let string = "abc";
 let findPermutations = (string) => {
@@ -553,7 +550,6 @@ let findPermutations = (string) => {
 
 function bruteForceTwoSum(array, sum) {
   let nums = [];
-
   let prevNums = [];
 
   for (let x in array) {
@@ -768,3 +764,36 @@ function getMinionId(numberDrawn) {
 
 //console.log(getMinionId(3)); //Returns 71113
 //console.log(getMinionId(0)); //Returns 23571
+
+//Versioned Store
+class VersionedStore {
+  constructor() {
+    this.store = [{}];
+    this.version = 0;
+  }
+
+  get(key) {
+    return this.store.at(this.version)[key];
+  }
+
+  set(key, value) {
+    // make copy of last version object
+    // add key and value to copy
+    // push copy onto store array
+    const copy = Object.assign(this.store[this.version], { [key]: value });
+    this.store.push(copy);
+    this.version++;
+  }
+
+  getVersion() {
+    return this.version;
+  }
+
+  getAtVersion(versionId, key) {
+    return this.store.at(versionId)[key];
+  }
+}
+
+const store = new VersionedStore();
+store.set("a", 5);
+console.log(store.get("a")); // should return 5
