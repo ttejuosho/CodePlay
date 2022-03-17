@@ -65,7 +65,8 @@ threeDigitPalindromic = () => {
 
 //console.log(threeDigitPalindromic());
 
-onetwentyDivisible = () => {
+//Problem 5
+oneTwentyDivisible = () => {
   let i = 1;
   while (i > 0) {
     for (j = 1; j < 21; j++) {
@@ -80,4 +81,56 @@ onetwentyDivisible = () => {
   }
 };
 
-console.log(onetwentyDivisible()); //returns 232792560
+//console.log(oneTwentyDivisible()); //returns 232792560
+
+//Problem 6
+//Sum Square Difference
+sumSquareDifference = (nthNaturalNumber) => {
+  let i = 1;
+  let sum = 0;
+  let sumSquare = 0;
+  while (i <= nthNaturalNumber) {
+    sum += i;
+    sumSquare += i * i;
+    i++;
+  }
+  return sum * sum - sumSquare;
+};
+
+//console.log(sumSquareDifference(1000));
+
+//Problem 7
+//10001st Prime Number
+checkIfPrime = (number) => {
+  let prime = true;
+  if (number > 0) {
+    let cutOff = Math.round(number / 2);
+    for (let i = 2; i <= cutOff; i++) {
+      if (number % i == 0) {
+        prime = false;
+        break;
+      }
+    }
+  } else {
+    return "Enter a number more than 0";
+  }
+
+  return prime;
+};
+
+nthPrimeNumber = (count) => {
+  let i = 2;
+  let primeNumberCount = 0;
+  while (i > 0) {
+    var isPrime = checkIfPrime(i);
+    if (isPrime == true) {
+      primeNumberCount++;
+      if (primeNumberCount == count) {
+        return i;
+      }
+    }
+    i++;
+  }
+};
+
+console.log(nthPrimeNumber(10001)); //104743
