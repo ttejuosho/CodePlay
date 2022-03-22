@@ -228,7 +228,34 @@ largestProductGrid = () => {
     grid[theFourIndexes[2]],
     grid[theFourIndexes[3]],
   ]);
-  return [largestProduct];
+  return largestProduct;
 };
 
-console.log(largestProductGrid());
+//console.log(largestProductGrid());
+
+//Problem 12
+//Triangular Number
+fiveHundredDivisors = (divisorCount) => {
+  let i = 1;
+  let sum = 0;
+  while (i > 0) {
+    sum += i;
+    //console.log(sum);
+    let j = i;
+    while (j > 0 && j <= i) {
+      let divisor = divisorCount;
+      if (sum % j == 0) {
+        divisor--;
+        console.log(divisor);
+        if (divisor == 0) {
+          return sum;
+        }
+      }
+      j--;
+    }
+    i++;
+  }
+  return false;
+};
+
+console.log(fiveHundredDivisors(6));
