@@ -235,27 +235,26 @@ largestProductGrid = () => {
 
 //Problem 12
 //Triangular Number
-fiveHundredDivisors = (divisorCount) => {
+fiveHundredDivisors = () => {
   let i = 1;
   let sum = 0;
   while (i > 0) {
     sum += i;
-    //console.log(sum);
-    let j = i;
-    while (j > 0 && j <= i) {
-      let divisor = divisorCount;
+    let divisorCount = 0;
+    let upperLimit = Math.floor(sum / 2) + 2;
+    for (let j = 1; j < upperLimit; j++) {
       if (sum % j == 0) {
-        divisor--;
-        console.log(divisor);
-        if (divisor == 0) {
-          return sum;
-        }
+        divisorCount++;
       }
-      j--;
+    }
+    if (divisorCount > 500) {
+      return [divisorCount, sum];
     }
     i++;
   }
-  return false;
 };
 
-console.log(fiveHundredDivisors(6));
+console.log(fiveHundredDivisors());
+
+//Problem 13
+//First 10 of 150 numbers sum Grid
