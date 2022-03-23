@@ -254,7 +254,45 @@ fiveHundredDivisors = () => {
   }
 };
 
-console.log(fiveHundredDivisors());
+//console.log(fiveHundredDivisors());
 
-//Problem 13
-//First 10 of 150 numbers sum Grid
+//Problem 14
+//Collatz Sequence
+getCollatzSequenceLength = (p) => {
+  let cSeries = [p];
+  let n = p;
+
+  while (n > 1) {
+    if (n % 2 == 0) {
+      n = n / 2;
+      cSeries.push(n);
+    } else {
+      n = 3 * n + 1;
+      cSeries.push(n);
+    }
+
+    if (n == 1) {
+      return cSeries.length;
+    }
+  }
+};
+
+longestCollatzSeries = () => {
+  let seriesStartingNumber = 0;
+  let startingNumber = 0;
+  let seriesLength = 0;
+  while (seriesStartingNumber < 1000000) {
+    let iterationSeriesLength = getCollatzSequenceLength(seriesStartingNumber);
+    if (iterationSeriesLength > seriesLength) {
+      startingNumber = seriesStartingNumber;
+      seriesLength = iterationSeriesLength;
+    }
+    seriesStartingNumber++;
+  }
+  return {
+    "Starting Number": startingNumber,
+    "Series Length": seriesLength,
+  };
+};
+
+console.log(longestCollatzSeries());
