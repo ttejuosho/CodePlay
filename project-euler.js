@@ -1,4 +1,7 @@
 //console.log("This is Project Euler.");
+
+const path = require("path");
+
 //Find the sum of all the multiples of 3 or 5 below 1000.
 findMultiples = (belowNumber) => {
   let sum = 0;
@@ -295,4 +298,187 @@ longestCollatzSeries = () => {
   };
 };
 
-console.log(longestCollatzSeries());
+//console.log(longestCollatzSeries());
+
+//Problem 16
+//Power Digit Sum
+powerDigitSum = () => {
+  let bigNumber = BigInt(Math.pow(2, 1000));
+  let bigNumberArray = bigNumber.toString().split("");
+  let sum = 0;
+  for (let i = 0; i < bigNumberArray.length; i++) {
+    sum += parseInt(bigNumberArray[i]);
+  }
+  return sum;
+};
+
+//console.log(powerDigitSum()); 1366
+
+//Problem 17
+//Number Letter Count
+var ones = [
+  "",
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+  "nine",
+];
+var tens = [
+  "",
+  "",
+  "twenty",
+  "thirty",
+  "forty",
+  "fifty",
+  "sixty",
+  "seventy",
+  "eighty",
+  "ninety",
+];
+var teens = [
+  "ten",
+  "eleven",
+  "twelve",
+  "thirteen",
+  "fourteen",
+  "fifteen",
+  "sixteen",
+  "seventeen",
+  "eighteen",
+  "nineteen",
+];
+
+function convert_billions(num) {
+  if (num >= 1000000000) {
+    return (
+      convert_billions(Math.floor(num / 1000000000)) +
+      " billion " +
+      (num % 1000000000 === 0 ? "" : "and ") +
+      convert_millions(num % 1000000000)
+    );
+  } else {
+    return convert_millions(num);
+  }
+}
+
+function convert_millions(num) {
+  if (num >= 1000000) {
+    return (
+      convert_millions(Math.floor(num / 1000000)) +
+      " million " +
+      (num % 1000000 === 0 ? "" : "and ") +
+      convert_thousands(num % 1000000)
+    );
+  } else {
+    return convert_thousands(num);
+  }
+}
+
+function convert_thousands(num) {
+  if (num >= 1000) {
+    return (
+      convert_hundreds(Math.floor(num / 1000)) +
+      " thousand " +
+      (num % 1000 === 0 ? "" : "and ") +
+      convert_hundreds(num % 1000)
+    );
+  } else {
+    return convert_hundreds(num);
+  }
+}
+
+function convert_hundreds(num) {
+  if (num > 99) {
+    return (
+      ones[Math.floor(num / 100)] +
+      " hundred " +
+      (num % 100 === 0 ? "" : "and ") +
+      convert_tens(num % 100)
+    );
+  } else {
+    return convert_tens(num);
+  }
+}
+
+function convert_tens(num) {
+  if (num < 10) return ones[num];
+  else if (num >= 10 && num < 20) return teens[num - 10];
+  else {
+    return tens[Math.floor(num / 10)] + " " + ones[num % 10];
+  }
+}
+
+function convert(num) {
+  if (num == 0) return "zero";
+  else return convert_billions(num);
+}
+
+//end of conversion code
+
+function main() {
+  var cases = [
+    0, 1, 2, 7, 10, 11, 12, 13, 15, 19, 20, 21, 25, 29, 30, 35, 50, 55, 69, 70,
+    99, 100, 101, 119, 510, 900, 1000, 5001, 5019, 5555, 10000, 11000, 100000,
+    199001, 1000000, 1111111, 190000009, 1454739521,
+  ];
+  for (var i = 0; i < cases.length; i++) {
+    console.log(cases[i] + ": " + convert(cases[i]));
+  }
+}
+
+//main();
+numberLetterCounts = () => {
+  let i = 1;
+  let letterCount = 0;
+  while (i <= 1000) {
+    let words = convert_billions(i);
+    letterCount += words.length;
+    i++;
+  }
+  console.log(letterCount);
+};
+
+//numberLetterCounts(); 24617
+
+//Problem 18
+//Maximum Path Sum I
+
+maximumPathSum = () => {
+  let maximumSumPathArray = [
+    [75],
+    [95, 64],
+    [17, 47, 82],
+    [18, 35, 87, 10],
+    [20, 04, 82, 47, 65],
+    [19, 01, 23, 75, 03, 34],
+    [88, 02, 77, 73, 07, 63, 67],
+    [99, 65, 04, 28, 06, 16, 70, 92],
+    [41, 41, 26, 56, 83, 40, 80, 70, 33],
+    [41, 48, 72, 33, 47, 32, 37, 16, 94, 29],
+    [53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14],
+    [70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57],
+    [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48],
+    [63, 66, 04, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
+    [04, 62, 98, 27, 23, 09, 70, 98, 73, 93, 38, 53, 60, 04, 23],
+  ];
+  let pathNumbers = [];
+  let sum = 0;
+  let i = 0;
+  let lineCount = maximumSumPathArray.length;
+
+  while (i < lineCount) {
+    let largestNumber = maximumSumPathArray[i].sort().pop();
+    sum += largestNumber;
+    pathNumbers.push(largestNumber);
+    i++;
+  }
+  console.log(sum);
+  console.log(pathNumbers);
+};
+
+maximumPathSum();
