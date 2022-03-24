@@ -481,4 +481,26 @@ maximumPathSum = () => {
   console.log(pathNumbers);
 };
 
-maximumPathSum();
+//maximumPathSum(); 1313
+
+//Problem 20
+//Factorial Digit Sum
+factorialDigitSum = (n) => {
+  let i = n;
+  let product = 1;
+  while (i >= 1) {
+    product = product * i;
+    i--;
+  }
+  console.log(BigInt(product));
+  let productSum = 0;
+  let productArray = BigInt(product).toString().split("");
+  let j = 0;
+  while (j < productArray.length) {
+    productSum += parseInt(productArray[j]);
+    j++;
+  }
+  console.log(productSum);
+};
+
+factorialDigitSum(100);
