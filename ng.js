@@ -122,3 +122,40 @@ while (!foundCorrectNumber) {
     console.log("\nYou didn't provide a number !!");
   }
 }
+
+function getMinimumUniqueSumDone(arr) {
+  // Write your code here
+  arr.sort((a, b) => a - b);
+  let totalSum = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] <= arr[i - 1]) {
+      arr[i] = arr[i - 1] + 1;
+    }
+    totalSum += arr[i];
+  }
+  return totalSum;
+}
+
+function getMinimumUniqueSum(arr) {
+  // Write your code here
+  const frequency = new Map();
+  const usedElements = new Set();
+  let totalSum = 0;
+
+  for (let num of arr) {
+    frequency.set(num, (frequency.get(num) || 0) + 1);
+  }
+
+  for (let num of arr) {
+    let currentNumber = num;
+
+    while (usedElements.has(currentNumber)) {
+      currentNumber++;
+    }
+
+    usedElements.add(currentNumber);
+    totalSum += currentNumber;
+  }
+
+  return totalSum;
+}
