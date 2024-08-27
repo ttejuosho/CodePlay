@@ -5763,4 +5763,24 @@ nameScores = () => {
   console.log(nameScoreSum);
 };
 
-nameScores(); //870,873,746
+//nameScores(); //870,873,746
+
+doSomething = () => {
+  let sum = 3;
+  let firstTerm = 1;
+  let secondTerm = 2;
+  let fibo = [1, 2];
+  let nextTerm = 0;
+  while (nextTerm < 4000001) {
+    nextTerm = firstTerm + secondTerm;
+    fibo.push(nextTerm);
+    sum += nextTerm;
+    firstTerm = secondTerm;
+    secondTerm = nextTerm;
+  }
+
+  console.log(sum);
+  console.log(fibo);
+};
+
+doSomething();

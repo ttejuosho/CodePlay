@@ -13,21 +13,24 @@ function shouldIExit(number) {
 }
 
 function getDownPayment(listPrice, loanType) {
+  if (loanType == 0) {
+    loanTypeDescription = "VA or 0% Down at ";
+  }
   if (loanType == 1) {
     loanTypeDescription = "FHA with 3.5% Down payment at ";
     return listPrice * 0.035;
   }
   if (loanType == 2) {
-    loanTypeDescription = "VA or 0% Down at ";
-    return listPrice * 0;
+    loanTypeDescription = "Conventional with 5% Down payment at ";
+    return listPrice * 0.05;
   }
   if (loanType == 3) {
     loanTypeDescription = "Conventional with 10% Down Payment at ";
-    return listPrice * 0.05;
+    return listPrice * 0.1;
   }
   if (loanType == 4) {
     loanTypeDescription = "Conventional with 20% Down Payment at ";
-    return listPrice * 0.1;
+    return listPrice * 0.2;
   }
   if (loanType == 5) {
     loanTypeDescription = "Conventional with 25% Down Payment at ";
@@ -35,6 +38,8 @@ function getDownPayment(listPrice, loanType) {
   }
   return 0;
 }
+
+function getEstimatedPMI() {}
 
 function calculateMortgage(principal, annualInterestRate, loanTermYears) {
   const monthlyInterestRate = annualInterestRate / 100 / 12;
@@ -71,18 +76,34 @@ function calculateMortgage(principal, annualInterestRate, loanTermYears) {
   };
 }
 
-function getAnnualIncome(totalEstimatedRent, garageIncome, coinLaundryIncome) {
-  return (
-    parseInt(totalEstimatedRent) * 12 +
+function getAnnualIncome(totalMonthlyRent, garageIncome, coinLaundryIncome) {
+  let annualRent = totalMonthlyRent * 12;
+  let vacancyDeduction = parseFloat(annualRent) * 0.05;
+  let estimatedRentIncome = parseFloat(annualRent) - vacancyDeduction;
+  var totalAnnualIncome =
+    parseInt(estimatedRentIncome) +
     parseInt(garageIncome) +
-    parseInt(coinLaundryIncome)
-  );
+    parseInt(coinLaundryIncome);
+
+  return totalAnnualIncome;
 }
 
 function getEstimatedCashToClose(listPrice, loanType) {
   let dp = getDownPayment(listPrice, loanType);
-  let closingCosts = (Number(listPrice) - dp) * 0.05;
-  return closingCosts + dp;
+  let lowClosingCosts = (Number(listPrice) - dp) * 0.03 + dp;
+  let highClosingCosts = (Number(listPrice) - dp) * 0.05 + dp;
+  return { lowerLimit: lowClosingCosts, upperLimit: highClosingCosts };
+}
+
+function formatAsMoney(amount) {
+  let formattedAmount = amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+
+  // If the decimal part is ".00", remove it
+  if (formattedAmount.endsWith(".00")) {
+    formattedAmount = formattedAmount.slice(0, -3);
+  }
+
+  return `$${formattedAmount}`;
 }
 
 function getYesNoOptions() {
@@ -90,22 +111,23 @@ function getYesNoOptions() {
   console.log("Enter 2 for No: ");
 }
 
-console.log("\x1b[33m", "\n************************************");
+console.log("\x1b[33m", "\n*****************************************");
 console.log("WELCOME TO THE MULTI UNIT DEAL ANALYZER");
-console.log("************************************");
+console.log("*****************************************");
 console.log("\nPlease Select Loan Type");
+console.log("Enter 0 for VA or 0 Down");
 console.log("Enter 1 for FHA 3.5% Down");
-console.log("Enter 2 for VA or 0 Down");
-console.log("Enter 3 for Conventional 5% Down");
-console.log("Enter 4 for Conventional 10% Down");
+console.log("Enter 2 for Conventional 5% Down");
+console.log("Enter 3 for Conventional 10% Down");
+console.log("Enter 4 for Conventional 20% Down");
 console.log("Enter 5 for Conventional 25% Down\n");
 console.log("Enter 99 to exit at anytime\n", "\x1b[0m", "\x1b[0m");
 
 let loanType = prompt("Enter value for Loan Type: ");
 
-while (!Number(loanType) || loanType < 1 || loanType > 5) {
+while (!Number(loanType) || loanType < 0 || loanType > 5) {
   shouldIExit(Number(loanType));
-  console.log("\x1b[31m", "\nPlease enter 1, 2, 3, 4 or 5", "\x1b[0m");
+  console.log("\x1b[31m", "\nPlease enter 0, 1, 2, 3, 4 or 5", "\x1b[0m");
   loanType = prompt("Enter value for Loan Type: ");
 }
 
@@ -117,7 +139,7 @@ let loanTermYears = prompt("Please enter the loan term (5, 15 or 30yrs): ");
 let loanAmount = listPrice - downPayment;
 
 let totalEstimatedRent = prompt(
-  "Please enter the total rent amount for all the units: "
+  "Please enter the total monthly rent amount for all the units: "
 );
 
 getYesNoOptions();
@@ -144,7 +166,7 @@ annualIncome = getAnnualIncome(
 
 const mortgageDetails = calculateMortgage(
   loanAmount,
-  interestRate,
+  parseFloat(interestRate).toFixed(1),
   loanTermYears
 );
 
@@ -167,28 +189,118 @@ let maintenanceCost = prompt(
   "Please a value for your estimated maintenance cost: "
 );
 
-let expenses =
-  parseInt(propertyTaxes) +
-  parseInt(waterBill) +
-  parseInt(insuranceCost) +
-  parseInt(maintenanceCost);
-let estimatedClosingCosts = getEstimatedCashToClose(listPrice, loanType);
-let noi = annualIncome - expenses;
-let capRate = (noi / listPrice).toFixed(2);
-let annualCashFlow = noi - totalFirstYearPayment;
-let cocReturn = (annualCashFlow / downPayment).toFixed(2);
+let monthlyPropertyTaxes = propertyTaxes / 12;
+let monthlyInsuranceCost = insuranceCost / 12;
+let totalMonthlyPayment =
+  parseFloat(mortgageDetails.monthlyPayment) +
+  parseFloat(monthlyPropertyTaxes) +
+  parseFloat(monthlyInsuranceCost);
 
-console.log("Annual Income: ", annualIncome);
-console.log("Annual Expenses: ", expenses);
+let monthlyWaterBill = parseFloat(waterBill) / 12;
+let monthlyMaintenanceCost = parseFloat(maintenanceCost) / 12;
+let totalMonthlyExpenses =
+  totalMonthlyPayment + monthlyWaterBill + monthlyMaintenanceCost;
+let annualRent = totalEstimatedRent * 12;
+let vacancyDeduction = parseFloat(annualRent) * 0.05;
+
+let expenses =
+  parseFloat(propertyTaxes) +
+  parseFloat(waterBill) +
+  parseFloat(insuranceCost) +
+  parseFloat(maintenanceCost) +
+  parseFloat(vacancyDeduction);
+
+let estimatedClosingCosts = getEstimatedCashToClose(listPrice, loanType);
+
+let noi = annualIncome - expenses;
+let capRate = ((noi / listPrice) * 100).toFixed(2);
+let annualCashFlow = noi - totalFirstYearPayment;
+let cocReturn = ((annualCashFlow / downPayment) * 100).toFixed(2);
 
 console.log("\x1b[33m", "\n************************************");
 console.log("        Deal Analysis Report");
 console.log("************************************");
 console.log("Loan Details: " + loanTypeDescription + interestRate + "%");
-console.log("Down Payment: $" + downPayment);
-console.log("Estimated Cash to Close: $" + estimatedClosingCosts);
-console.log("Net Operating Income (NOI): $" + noi);
+console.log("Annual Income: " + formatAsMoney(annualIncome));
+console.log("Annual Expenses: " + formatAsMoney(expenses));
+console.log("Property List Price: " + formatAsMoney(Number(listPrice)));
+console.log("Down Payment: " + formatAsMoney(downPayment));
+console.log(
+  "Estimated Cash to Close: " +
+    formatAsMoney(estimatedClosingCosts.lowerLimit) +
+    " - " +
+    formatAsMoney(estimatedClosingCosts.upperLimit)
+);
+console.log(
+  "Estimated Monthly Mortgage Payment (PITI): " +
+    formatAsMoney(totalMonthlyPayment)
+);
+console.log(
+  "Estimated Monthly Expenses: " + formatAsMoney(totalMonthlyExpenses)
+);
+console.log("Net Operating Income (NOI): " + formatAsMoney(noi));
 console.log("Capitalization Rate: " + capRate + "%");
-console.log("Annual Cash Flow: $" + annualCashFlow.toFixed(2));
-console.log("Monthly Cash Flow: $" + (annualCashFlow / 12).toFixed(2));
+console.log("Annual Cash Flow: " + formatAsMoney(annualCashFlow));
+console.log("Monthly Cash Flow: " + formatAsMoney(annualCashFlow / 12));
 console.log("Cash On Cash Return: " + cocReturn + "%");
+console.log("****************************************");
+console.log("****************************************");
+
+let message = prompt("Message: ");
+runQuestionModels(message);
+
+function runQuestionModels(message) {
+  if (message.includes("monthly payment") || message.includes("piti")) {
+    console.log(
+      `Your estimated monthly payment will be about ${formatAsMoney(
+        totalMonthlyPayment
+      )}. This includes the Principal & Interest (${formatAsMoney(
+        mortgageDetails.monthlyPayment
+      )}), taxes (${formatAsMoney(
+        monthlyPropertyTaxes
+      )}), insurance (${formatAsMoney(monthlyInsuranceCost)})`
+    );
+  }
+
+  if (
+    message.includes("closing costs") ||
+    message.includes("needed to close")
+  ) {
+    console.log(
+      "Estimated cash required to close this deal is between 3% and 5% of the loan amount. This equates to between " +
+        formatAsMoney(estimatedClosingCosts.lowerLimit) +
+        " and " +
+        formatAsMoney(estimatedClosingCosts.upperLimit) +
+        ". This includes the down payment of " +
+        formatAsMoney(downPayment) +
+        "."
+    );
+  }
+  if (message.includes("net operating income") || message.includes("noi")) {
+    console.log("The Net Operating Income (NOI) is " + formatAsMoney(noi));
+  }
+  if (message.includes("cash on cash return")) {
+    console.log(
+      "Cash On Cash Return for this deal will be about " + cocReturn + "%"
+    );
+  }
+
+  if (message.includes("cash flow")) {
+    console.log(
+      "The monthly cash flow for this deal will be about " +
+        formatAsMoney(annualCashFlow / 12) +
+        ". Resulting in an annual cash flow of " +
+        formatAsMoney(annualCashFlow) +
+        "."
+    );
+  }
+
+  if (message.includes("capitalization rate") || message.includes("cap rate")) {
+    console.log("The capitalization rate for this deal is " + capRate + "%");
+  }
+}
+
+while (message != "99") {
+  message = prompt("Message: ");
+  runQuestionModels(message);
+}
