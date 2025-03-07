@@ -796,4 +796,44 @@ class VersionedStore {
 
 const store = new VersionedStore();
 store.set("a", 5);
-console.log(store.get("a")); // should return 5
+//console.log(store.get("a")); // should return 5
+
+let bioData = {};
+bioData["Name"] = "Taiwo";
+bioData.Age = 90;
+//console.log(bioData);
+
+//Problem: Given an array nums and a target target, return indices of two numbers that add up to target.
+let numbersArray = [2, 5, 7, 9, 6, 11, 14, 3];
+function twoSum(numbersArray, target) {
+  let indices = [];
+  let mapper = new Map();
+  for (let i = 0; i < numbersArray.length; i++) {
+    let diff = target - numbersArray[i];
+    mapper.set(numbersArray[i], i);
+    if (mapper.has(diff)) {
+      indices.push([mapper.get(diff) + 1, i + 1]);
+    }
+  }
+  return indices;
+}
+
+//console.log(twoSum(numbersArray, 17));
+
+fizzBuzz = (n) => {
+  let res = [];
+  for (let i = 1; i < n; i++) {
+    if ((i % 3 === 0) & (i % 5 === 0)) {
+      res.push("FizzBuzz");
+    } else if (i % 5 === 0) {
+      res.push("Buzz");
+    } else if (i % 3 === 0) {
+      res.push("Fizz");
+    } else {
+      res.push(i);
+    }
+  }
+  console.log(res.join(","));
+};
+
+fizzBuzz(20);

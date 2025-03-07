@@ -115,7 +115,7 @@ console.log("\x1b[33m", "\n*****************************************");
 console.log("WELCOME TO THE MULTI UNIT DEAL ANALYZER");
 console.log("*****************************************");
 console.log("\nPlease Select Loan Type");
-console.log("Enter 0 for VA or 0 Down");
+console.log("Enter 0 for VA or 0% Down");
 console.log("Enter 1 for FHA 3.5% Down");
 console.log("Enter 2 for Conventional 5% Down");
 console.log("Enter 3 for Conventional 10% Down");
