@@ -796,7 +796,7 @@ class VersionedStore {
 
 const store = new VersionedStore();
 store.set("a", 5);
-//console.log(store.get("a")); // should return 5
+////console.log(store.get("a")); // should return 5
 
 let bioData = {};
 bioData["Name"] = "Taiwo";
@@ -837,3 +837,71 @@ fizzBuzz = (n) => {
 };
 
 fizzBuzz(20);
+
+function shiftString(str, leftShifts, rightShifts) {
+  let shiftyString = str.split("");
+
+  for (var i = 0; i < leftShifts; i++) {
+    let shiftChar = shiftyString.shift();
+    shiftyString.push(shiftChar);
+  }
+
+  for (var j = 0; j < rightShifts; j++) {
+    let shiftCharr = shiftyString.pop();
+    shiftyString.unshift(shiftCharr);
+  }
+
+  return shiftyString.join("");
+}
+
+function shiftStrings(str, leftShifts, rightShifts) {
+  // Normalize shifts to avoid unnecessary full rotations
+  const netShifts = (leftShifts - rightShifts) % str.length;
+  console.log(netShifts);
+
+  // If netShifts is 0, no need to shift
+  if (netShifts === 0) {
+    return str;
+  }
+
+  // For positive netShifts, perform left shift
+  if (netShifts > 0) {
+    return str.slice(netShifts) + str.slice(0, netShifts);
+  }
+
+  // For negative netShifts, perform right shift
+  const positiveShifts = Math.abs(netShifts);
+  return str.slice(-positiveShifts) + str.slice(0, -positiveShifts);
+}
+
+//console.log(shiftString("abcdefg", 3, 4));
+//console.log(shiftStrings("abcdefg", 1, 4));
+
+function getTargetSumIndices(numberArray, target) {
+  let targetSumIndices = []; // Array to store index pairs
+
+  // Return empty array if input array is empty
+  if (numberArray.length < 1) {
+    return targetSumIndices;
+  }
+
+  let numberMap = new Map(); // HashMap to store numbers and their indices
+
+  for (let i = 0; i < numberArray.length; i++) {
+    let complement = target - numberArray[i]; // Find the complement value needed to reach the target
+
+    // Check if the complement exists in the map
+    if (numberMap.has(complement)) {
+      // Push the 1-based indices of the complement and the current number
+      targetSumIndices.push([numberMap.get(complement) + 1, i + 1]);
+    }
+
+    // Store the current number and its index in the map
+    numberMap.set(numberArray[i], i);
+  }
+
+  return targetSumIndices; // Return all found index pairs
+}
+
+console.log(getTargetSumIndices([1, 7, 5, 12, 14, 21, 3, 22, 4], 26)); // Returns [ [ 4, 5 ], [ 3, 6 ], [ 8, 9 ] ]
+console.log(getTargetSumIndices([10, 4, 6, 15, 8, 2, 12, 20, 5], 22)); // Returns [ [ 1, 7 ], [ 6, 8 ] ]
