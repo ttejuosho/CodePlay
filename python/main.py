@@ -47,5 +47,33 @@ def reverseString(stringInput):
 
     print("".join(reversed(stringInput)))
 
-reverseString("OWIAT")
+#reverseString("OWIAT")
 
+def findMinMax(interList):
+    if len(interList) == 0:
+        print("Empty list")
+        return
+    
+    currMin = interList[0]
+    currMax = interList[0]
+    for i in interList:
+        if currMax < i:
+            currMax = i
+        if currMin > i:
+            currMin = i
+    print(currMin, currMax)
+
+# def longSec(intList):
+#     if len(intList) == 0:
+#         print("Empty List")
+#         return
+#     intList.sort()
+#     tempList = []
+#     for i in range(1, len(intList)):
+#         if intList[i-1] == intList[i] + 1:
+
+dd = []
+dd.remove()
+
+print(set(dd))
+#print(dd)
