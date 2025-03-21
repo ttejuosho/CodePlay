@@ -836,4 +836,28 @@ fizzBuzz = (n) => {
   console.log(res.join(","));
 };
 
-fizzBuzz(20);
+//fizzBuzz(20);
+
+function displaySub(a, b) {
+  sub = a - b;
+  console.log(sub);
+}
+
+// displaySub(8, 2);
+
+function displayRandom(a, b, x) {
+  for (let r = 0; r < a; r++) {
+    line = "";
+    xLine = "";
+    for (let c = 0; c < b; c++) {
+      line += "!";
+      if (!x) {
+        xLine += "X";
+      }
+    }
+    console.log(xLine);
+    console.log(line);
+  }
+}
+
+//displayRandom(2, 3);
