@@ -928,5 +928,27 @@ function getTargetSumIndices(numberArray, target) {
   return targetSumIndices; // Return all found index pairs
 }
 
-console.log(getTargetSumIndices([1, 7, 5, 12, 14, 21, 3, 22, 4], 26)); // Returns [ [ 4, 5 ], [ 3, 6 ], [ 8, 9 ] ]
-console.log(getTargetSumIndices([10, 4, 6, 15, 8, 2, 12, 20, 5], 22)); // Returns [ [ 1, 7 ], [ 6, 8 ] ]
+//console.log(getTargetSumIndices([1, 7, 5, 12, 14, 21, 3, 22, 4], 26)); // Returns [ [ 4, 5 ], [ 3, 6 ], [ 8, 9 ] ]
+//console.log(getTargetSumIndices([10, 4, 6, 15, 8, 2, 12, 20, 5], 22)); // Returns [ [ 1, 7 ], [ 6, 8 ] ]
+
+let numbersToProcess = [1, 2, 5, 7];
+let processedValue = [];
+
+function processNumbers(numbers) {
+  if (!Array.isArray(numbers) || numbers.length === 0) {
+    throw new Error("Input must be a non-empty array");
+  }
+
+  if (!numbers.every((num) => Number.isInteger(num))) {
+    throw new Error("All elements must be integers");
+  }
+
+  return numbers;
+}
+
+try {
+  processedValue = processNumbers(numbersToProcess);
+  console.log(processedValue);
+} catch (exception) {
+  console.log(exception);
+}
